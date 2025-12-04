@@ -1,0 +1,238 @@
+/* src/pages/Dashboard.css */
+
+.dashboard {
+  padding: 24px;
+}
+
+.dashboard-title {
+  color: #2c3e50;
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Stat Card */
+.stat-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.stat-card-content {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-card-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card-title {
+  color: #666;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0 8px 0;
+}
+
+.stat-card-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.stat-card-value.warning {
+  color: #FFA000;
+}
+
+.stat-card-value.error {
+  color: #D32F2F;
+}
+
+.stat-card-value.success {
+  color: #388E3C;
+}
+
+.stat-card-icon {
+  color: #2c3e50;
+  opacity: 0.8;
+}
+
+.stat-card-icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+.stat-card-icon.warning {
+  color: #FFA000;
+}
+
+.stat-card-icon.error {
+  color: #D32F2F;
+}
+
+.stat-card-icon.success {
+  color: #388E3C;
+}
+
+/* Content Grid */
+.content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Paper */
+.paper {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+}
+
+/* Section Title */
+.section-title {
+  color: #2c3e50;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Icons */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.icon.warning {
+  color: #FFA000;
+}
+
+.icon.error {
+  color: #D32F2F;
+}
+
+.icon.success {
+  color: #388E3C;
+}
+
+.icon.gold {
+  color: #FFD700;
+}
+
+/* License List */
+.license-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.license-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  gap: 16px;
+}
+
+.license-item.divider {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.license-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.license-name {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.license-details {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.license-status {
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+
+.license-status.warning {
+  color: #FFA000;
+}
+
+.license-status.error {
+  color: #D32F2F;
+}
+
+/* Action List */
+.action-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 8px;
+}
+
+.action-item:last-child {
+  margin-bottom: 0;
+}
+
+.action-item:hover {
+  background-color: #f5f5f5;
+}
+
+.action-item span:last-child {
+  color: #2c3e50;
+  font-weight: 500;
+}

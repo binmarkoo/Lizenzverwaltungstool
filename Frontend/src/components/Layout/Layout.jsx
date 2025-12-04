@@ -1,26 +1,18 @@
+// src/components/Layout/Layout.jsx
 import React from 'react';
-import { Box } from '@mui/material';
 import Header from './Header';
 import Sidebar from './Sidebar';
+import '../../stylesheets/Layout.css';
 
 const Layout = ({ children }) => {
   return (
-    <Box sx={{ display: 'flex' }}>
+    <div className="app-layout">
       <Header />
       <Sidebar />
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          marginTop: '64px', // Höhe des Headers
-          minHeight: 'calc(100vh - 64px)',
-          backgroundColor: '#f5f5f5'
-        }}
-      >
+      <main className="app-main">
         {children}
-      </Box>
-    </Box>
+      </main>
+    </div>
   );
 };
 

@@ -1,0 +1,352 @@
+/* src/components/Layout/Header.css */
+
+/* App Header */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background-color: #2c3e50;
+  color: white;
+  z-index: 1100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 24px;
+}
+
+.header-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Icon Button */
+.icon-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.icon-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Badge */
+.badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background-color: #f44336;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* User Menu Container */
+.user-menu-container {
+  position: relative;
+}
+
+/* User Menu Dropdown */
+.user-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 250px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-menu-header {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+}
+
+.user-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.user-email {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.user-menu-divider {
+  height: 1px;
+  background-color: #e0e0e0;
+}
+
+.user-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  color: #333;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: left;
+}
+
+.user-menu-item:hover {
+  background-color: #f5f5f5;
+}
+
+.user-menu-item svg {
+  color: #666;
+}
+
+/* Dialog Overlay */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  padding: 24px;
+}
+
+/* Dialog */
+.dialog {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: dialogFadeIn 0.2s ease;
+}
+
+@keyframes dialogFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.dialog-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dialog-title-group svg {
+  color: #2c3e50;
+}
+
+.dialog-title-group h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Icon Button in Dialog */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  color: #666;
+}
+
+.icon-btn:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Chip */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.chip-warning {
+  background-color: #ff9800;
+  color: white;
+}
+
+/* Notification List */
+.notification-list {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 24px;
+  transition: opacity 0.2s ease;
+}
+
+.notification-item:hover {
+  opacity: 0.9;
+}
+
+.notification-item.divider {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Notification Type Backgrounds */
+.notification-item.warning {
+  background-color: #FFF3E0;
+}
+
+.notification-item.error {
+  background-color: #FFEBEE;
+}
+
+.notification-item.success {
+  background-color: #E8F5E9;
+}
+
+.notification-item.info {
+  background-color: #E3F2FD;
+}
+
+/* Notification Icon */
+.notification-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.notification-icon.warning {
+  color: #FFA726;
+}
+
+.notification-icon.error {
+  color: #EF5350;
+}
+
+.notification-icon.success {
+  color: #66BB6A;
+}
+
+.notification-icon.info {
+  color: #42A5F5;
+}
+
+/* Notification Content */
+.notification-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.notification-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.notification-message {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.notification-time {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .header-toolbar {
+    padding: 0 16px;
+  }
+
+  .header-title {
+    font-size: 1rem;
+  }
+
+  .dialog {
+    margin: 16px;
+    max-height: calc(100vh - 32px);
+  }
+
+  .notification-item {
+    padding: 12px 16px;
+  }
+}
