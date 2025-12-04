@@ -151,7 +151,7 @@ const Login = ({ onLogin }) => {
 
           {/* Footer */}
           <div className="login-footer">
-            <p>© 2024 Liebherr - HTL Saalfelden Diplomarbeit</p>
+            <p>© 2025 Liebherr - HTL Saalfelden Diplomarbeit</p>
           </div>
         </div>
       </div>
