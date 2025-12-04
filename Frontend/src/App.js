@@ -1,5 +1,5 @@
 // src/App.js
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import Login from './pages/Login';
@@ -13,26 +13,40 @@ import Settings from './pages/Settings';
 import './App.css';
 
 function App() {
-  // Temporär: Immer eingeloggt für Entwicklung
-  const isAuthenticated = true;
+  // Prüfe ob Benutzer eingeloggt ist (aus localStorage)
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user).isAuthenticated : false;
+  });
 
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  };
+
+  // Wenn nicht eingeloggt, zeige nur Login
+  if (!isAuthenticated) {
+    return (
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
+      </Router>
+    );
+  }
+
+  // Wenn eingeloggt, zeige alle Seiten
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        
-        {/* Geschützte Routen mit Layout */}
-        {isAuthenticated ? (
-          <Route path="/" element={<Layout><Dashboard /></Layout>} />
-        ) : (
-          <Route path="/" element={<Navigate to="/login" />} />
-        )}
-        
-        <Route path="/licenses" element={<Layout><Licenses /></Layout>} />
-        <Route path="/users" element={<Layout><Users /></Layout>} />
-        <Route path="/settings" element={<Layout><Settings /></Layout>} />
-
-        {/* Fallback Route */}
+        <Route path="/" element={<Layout onLogout={handleLogout}><Dashboard /></Layout>} />
+        <Route path="/licenses" element={<Layout onLogout={handleLogout}><Licenses /></Layout>} />
+        <Route path="/users" element={<Layout onLogout={handleLogout}><Users /></Layout>} />
+        <Route path="/settings" element={<Layout onLogout={handleLogout}><Settings /></Layout>} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

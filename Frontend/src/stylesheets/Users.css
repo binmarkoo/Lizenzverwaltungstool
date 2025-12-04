@@ -100,10 +100,97 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Search Bar */
-.search-bar {
-  padding: 16px;
+/* Filter Bar */
+.filter-bar {
+  padding: 20px;
   margin-bottom: 24px;
+}
+
+.filter-grid-users {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 16px;
+  align-items: end;
+}
+
+@media (max-width: 900px) {
+  .filter-grid-users {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .filter-grid-users {
+    grid-template-columns: 1fr;
+  }
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-field label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filter-field select {
+  height: 44px;
+  padding: 0 36px 0 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%23666'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.filter-field select:focus {
+  outline: none;
+  border-color: #FFD700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+.filter-footer {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+.filter-info {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-reset {
+  background: none;
+  border: none;
+  color: #1976d2;
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.btn-reset:hover {
+  background-color: rgba(25, 118, 210, 0.08);
+  text-decoration: underline;
 }
 
 .search-field {
@@ -122,16 +209,19 @@
 
 .search-field input {
   width: 100%;
-  padding: 12px 12px 12px 44px;
+  height: 44px;
+  padding: 0 12px 0 44px;
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 0.875rem;
   transition: border-color 0.2s ease;
+  background-color: #fff;
 }
 
 .search-field input:focus {
   outline: none;
-  border-color: #1976d2;
+  border-color: #FFD700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
 }
 
 /* Roles Grid */
@@ -161,22 +251,49 @@
   padding: 20px;
   border: 2px solid #e0e0e0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.role-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.role-card.active {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .role-card-error {
   border-color: #EF5350;
 }
 
+.role-card-error.active {
+  background-color: #FFEBEE;
+}
+
 .role-card-primary {
   border-color: #42A5F5;
+}
+
+.role-card-primary.active {
+  background-color: #E3F2FD;
 }
 
 .role-card-success {
   border-color: #66BB6A;
 }
 
+.role-card-success.active {
+  background-color: #E8F5E9;
+}
+
 .role-card-default {
   border-color: #e0e0e0;
+}
+
+.role-card-default.active {
+  background-color: #F5F5F5;
 }
 
 .role-card-header {
@@ -184,6 +301,16 @@
   align-items: center;
   gap: 12px;
   margin-bottom: 8px;
+}
+
+.role-card-count {
+  margin-left: auto;
+  background-color: #f0f0f0;
+  color: #666;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
 }
 
 .role-icon-wrapper {
@@ -271,15 +398,56 @@
   gap: 4px;
 }
 
-.table-footer {
-  padding: 16px;
-  border-top: 1px solid #e0e0e0;
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px !important;
 }
 
-.table-footer p {
-  margin: 0;
-  font-size: 0.875rem;
+.empty-state-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #999;
+}
+
+.empty-state-content svg {
+  width: 48px;
+  height: 48px;
+  opacity: 0.5;
+}
+
+.empty-state-content p {
+  font-size: 1.125rem;
+  font-weight: 600;
   color: #666;
+  margin: 0;
+}
+
+.empty-state-content span {
+  font-size: 0.875rem;
+  color: #999;
+}
+
+.empty-state-content .btn {
+  margin-top: 8px;
+}
+
+.btn-outlined {
+  background: transparent;
+  border: 1px solid #ddd;
+  color: #666;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outlined:hover {
+  border-color: #999;
+  background-color: #f5f5f5;
 }
 
 /* Chips */

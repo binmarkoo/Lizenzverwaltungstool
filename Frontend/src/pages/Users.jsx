@@ -1,5 +1,5 @@
 // src/pages/Users.jsx
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import '../stylesheets/Users.css';
 
 // Icons als SVG-Komponenten
@@ -60,6 +60,8 @@ const PersonIcon = () => (
 
 const Users = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [filterRole, setFilterRole] = useState('Alle Rollen');
+  const [filterDepartment, setFilterDepartment] = useState('Alle Abteilungen');
   const [addDialogOpen, setAddDialogOpen] = useState(false);
 
   const [newUser, setNewUser] = useState({
@@ -113,6 +115,8 @@ const Users = () => {
   ];
 
   const departments = ['IT', 'LIS', 'ITM'];
+  const departmentFilters = ['Alle Abteilungen', 'IT', 'LIS', 'ITM'];
+  const roleFilters = ['Alle Rollen', 'Admin', 'Editor', 'Viewer', 'Lizenzuser'];
 
   const handleAddUser = () => {
     console.log('Neuer Benutzer:', newUser);
@@ -164,6 +168,47 @@ const Users = () => {
     }
   };
 
+  // Filtering and Search Logic
+  const filteredUsers = useMemo(() => {
+    return users.filter(user => {
+      // Search filter - check multiple fields
+      const searchLower = searchTerm.toLowerCase().trim();
+      const matchesSearch = searchTerm === '' || 
+        user.name.toLowerCase().includes(searchLower) ||
+        user.email.toLowerCase().includes(searchLower) ||
+        user.department.toLowerCase().includes(searchLower) ||
+        user.role.toLowerCase().includes(searchLower) ||
+        user.id.toLowerCase().includes(searchLower);
+
+      // Role filter
+      const matchesRole = filterRole === 'Alle Rollen' || 
+        user.role === filterRole;
+
+      // Department filter
+      const matchesDepartment = filterDepartment === 'Alle Abteilungen' || 
+        user.department === filterDepartment;
+
+      return matchesSearch && matchesRole && matchesDepartment;
+    });
+  }, [users, searchTerm, filterRole, filterDepartment]);
+
+  // Reset all filters
+  const resetFilters = () => {
+    setSearchTerm('');
+    setFilterRole('Alle Rollen');
+    setFilterDepartment('Alle Abteilungen');
+  };
+
+  // Check if any filter is active
+  const hasActiveFilters = searchTerm !== '' || 
+    filterRole !== 'Alle Rollen' || 
+    filterDepartment !== 'Alle Abteilungen';
+
+  // Count users per role
+  const getUserCountByRole = (roleValue) => {
+    return users.filter(user => user.role === roleValue).length;
+  };
+
   return (
     <div className="users">
       {/* Header */}
@@ -178,28 +223,67 @@ const Users = () => {
         </button>
       </div>
 
-      {/* Suchleiste */}
-      <div className="paper search-bar">
-        <div className="search-field">
-          <span className="search-icon"><SearchIcon /></span>
-          <input
-            type="text"
-            placeholder="Suche nach Name, E-Mail, Abteilung oder Rolle..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+      {/* Such- und Filter-Leiste */}
+      <div className="paper filter-bar">
+        <div className="filter-grid-users">
+          <div className="search-field">
+            <span className="search-icon"><SearchIcon /></span>
+            <input
+              type="text"
+              placeholder="Suche nach Name, E-Mail, Abteilung oder Rolle..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+          <div className="filter-field">
+            <label>Rolle</label>
+            <select
+              value={filterRole}
+              onChange={(e) => setFilterRole(e.target.value)}
+            >
+              {roleFilters.map(role => (
+                <option key={role} value={role}>{role}</option>
+              ))}
+            </select>
+          </div>
+          <div className="filter-field">
+            <label>Abteilung</label>
+            <select
+              value={filterDepartment}
+              onChange={(e) => setFilterDepartment(e.target.value)}
+            >
+              {departmentFilters.map(dept => (
+                <option key={dept} value={dept}>{dept}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="filter-footer">
+          <p className="filter-info">
+            {filteredUsers.length} von {users.length} Benutzer angezeigt
+            {hasActiveFilters && (
+              <button className="btn-reset" onClick={resetFilters}>
+                Filter zurücksetzen
+              </button>
+            )}
+          </p>
         </div>
       </div>
 
       {/* Rollen-Übersicht Karten */}
       <div className="roles-grid">
         {roles.map((role) => (
-          <div key={role.value} className={`role-card ${getRoleCardClass(role.value)}`}>
+          <div 
+            key={role.value} 
+            className={`role-card ${getRoleCardClass(role.value)} ${filterRole === role.value ? 'active' : ''}`}
+            onClick={() => setFilterRole(filterRole === role.value ? 'Alle Rollen' : role.value)}
+          >
             <div className="role-card-header">
               <div className={`role-icon-wrapper ${getRoleCardClass(role.value)}`}>
                 {role.icon}
               </div>
               <h3 className="role-card-title">{role.value}</h3>
+              <span className="role-card-count">{getUserCountByRole(role.value)}</span>
             </div>
             <p className="role-card-description">
               {role.label.split(' - ')[1]}
@@ -223,42 +307,56 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>
-                  <span className="user-name">{user.name}</span>
-                </td>
-                <td>
-                  <span className="user-email">{user.email}</span>
-                </td>
-                <td>
-                  <span className={`chip chip-with-icon ${getRoleClass(user.role)}`}>
-                    {getRoleIcon(user.role)}
-                    {user.role}
-                  </span>
-                </td>
-                <td>
-                  <span className="chip chip-outlined">{user.department}</span>
-                </td>
-                <td>{user.lastActive}</td>
-                <td>
-                  <div className="action-buttons">
-                    <button className="icon-btn icon-btn-primary">
-                      <EditIcon />
-                    </button>
-                    <button className="icon-btn icon-btn-error">
-                      <DeleteIcon />
-                    </button>
+            {filteredUsers.length > 0 ? (
+              filteredUsers.map((user) => (
+                <tr key={user.id}>
+                  <td>{user.id}</td>
+                  <td>
+                    <span className="user-name">{user.name}</span>
+                  </td>
+                  <td>
+                    <span className="user-email">{user.email}</span>
+                  </td>
+                  <td>
+                    <span className={`chip chip-with-icon ${getRoleClass(user.role)}`}>
+                      {getRoleIcon(user.role)}
+                      {user.role}
+                    </span>
+                  </td>
+                  <td>
+                    <span className="chip chip-outlined">{user.department}</span>
+                  </td>
+                  <td>{user.lastActive}</td>
+                  <td>
+                    <div className="action-buttons">
+                      <button className="icon-btn icon-btn-primary">
+                        <EditIcon />
+                      </button>
+                      <button className="icon-btn icon-btn-error">
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="7" className="empty-state">
+                  <div className="empty-state-content">
+                    <SearchIcon />
+                    <p>Keine Benutzer gefunden</p>
+                    <span>Versuchen Sie andere Suchbegriffe oder Filter</span>
+                    {hasActiveFilters && (
+                      <button className="btn btn-outlined" onClick={resetFilters}>
+                        Filter zurücksetzen
+                      </button>
+                    )}
                   </div>
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
-        <div className="table-footer">
-          <p>4 von 4 Benutzer angezeigt</p>
-        </div>
       </div>
 
       {/* Neuer Benutzer Dialog */}

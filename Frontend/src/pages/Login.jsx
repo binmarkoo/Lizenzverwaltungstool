@@ -1,5 +1,6 @@
 // src/pages/Login.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../stylesheets/Login.css';
 
 // Icons als SVG-Komponenten
@@ -34,17 +35,41 @@ const VisibilityOffIcon = () => (
   </svg>
 );
 
-const Login = () => {
+const Login = ({ onLogin }) => {
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('Login attempt:', credentials);
-    alert(`Login für: ${credentials.username}`);
+    setError('');
+
+    // Validierung
+    if (!credentials.username.trim() || !credentials.password.trim()) {
+      setError('Bitte füllen Sie alle Felder aus.');
+      return;
+    }
+
+    // Simulierter Login - speichere in localStorage
+    const userData = {
+      username: credentials.username,
+      isAuthenticated: true,
+      loginTime: new Date().toISOString()
+    };
+    
+    localStorage.setItem('user', JSON.stringify(userData));
+    
+    // Callback aufrufen falls vorhanden
+    if (onLogin) {
+      onLogin(userData);
+    }
+    
+    // Zum Dashboard navigieren
+    navigate('/');
   };
 
   const handleClickShowPassword = () => {
@@ -74,6 +99,12 @@ const Login = () => {
           </div>
 
           <form onSubmit={handleLogin} className="login-form">
+            {error && (
+              <div className="error-message">
+                {error}
+              </div>
+            )}
+            
             <div className="input-group">
               <span className="input-icon"><PersonIcon /></span>
               <input

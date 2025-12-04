@@ -1,5 +1,6 @@
 // src/pages/Licenses.jsx
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import '../stylesheets/Licenses.css';
 
 // Icons als SVG-Komponenten
@@ -40,12 +41,22 @@ const CloseIcon = () => (
 );
 
 const Licenses = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState('');
   const [filterDepartment, setFilterDepartment] = useState('Alle Abteilungen');
   const [filterType, setFilterType] = useState('Alle Typen');
   const [filterStatus, setFilterStatus] = useState('Alle Status');
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
+
+  // Öffne Dialog wenn ?action=new in URL
+  useEffect(() => {
+    if (searchParams.get('action') === 'new') {
+      setAddDialogOpen(true);
+      // Entferne den Parameter aus der URL
+      setSearchParams({});
+    }
+  }, [searchParams, setSearchParams]);
 
   const [newLicense, setNewLicense] = useState({
     name: '',
@@ -175,6 +186,49 @@ const Licenses = () => {
     }
   };
 
+  // Filtering and Search Logic
+  const filteredLicenses = useMemo(() => {
+    return licenses.filter(license => {
+      // Search filter - check multiple fields
+      const searchLower = searchTerm.toLowerCase().trim();
+      const matchesSearch = searchTerm === '' || 
+        license.name.toLowerCase().includes(searchLower) ||
+        license.department.toLowerCase().includes(searchLower) ||
+        license.file.toLowerCase().includes(searchLower) ||
+        license.searchTerm.toLowerCase().includes(searchLower) ||
+        license.id.toLowerCase().includes(searchLower) ||
+        license.description.toLowerCase().includes(searchLower);
+
+      // Department filter
+      const matchesDepartment = filterDepartment === 'Alle Abteilungen' || 
+        license.department === filterDepartment;
+
+      // Type filter
+      const matchesType = filterType === 'Alle Typen' || 
+        license.type === filterType;
+
+      // Status filter
+      const matchesStatus = filterStatus === 'Alle Status' || 
+        license.status === filterStatus;
+
+      return matchesSearch && matchesDepartment && matchesType && matchesStatus;
+    });
+  }, [licenses, searchTerm, filterDepartment, filterType, filterStatus]);
+
+  // Reset all filters
+  const resetFilters = () => {
+    setSearchTerm('');
+    setFilterDepartment('Alle Abteilungen');
+    setFilterType('Alle Typen');
+    setFilterStatus('Alle Status');
+  };
+
+  // Check if any filter is active
+  const hasActiveFilters = searchTerm !== '' || 
+    filterDepartment !== 'Alle Abteilungen' || 
+    filterType !== 'Alle Typen' || 
+    filterStatus !== 'Alle Status';
+
   return (
     <div className="licenses">
       {/* Header */}
@@ -232,7 +286,16 @@ const Licenses = () => {
             </select>
           </div>
         </div>
-        <p className="filter-info">6 von 6 Lizenzen angezeigt</p>
+        <div className="filter-footer">
+          <p className="filter-info">
+            {filteredLicenses.length} von {licenses.length} Lizenzen angezeigt
+            {hasActiveFilters && (
+              <button className="btn-reset" onClick={resetFilters}>
+                Filter zurücksetzen
+              </button>
+            )}
+          </p>
+        </div>
       </div>
 
       {/* Tabelle */}
@@ -256,53 +319,70 @@ const Licenses = () => {
             </tr>
           </thead>
           <tbody>
-            {licenses.map((license) => (
-              <tr key={license.id}>
-                <td>{license.id}</td>
-                <td>
-                  <span className="license-name">{license.name}</span>
-                </td>
-                <td>{license.count}</td>
-                <td>
-                  <span className="chip chip-outlined">{license.department}</span>
-                </td>
-                <td>{license.purchaseDate}</td>
-                <td>{license.duration}</td>
-                <td>
-                  <span className={`chip ${license.type === 'Subscription' ? 'chip-primary' : 'chip-default'}`}>
-                    {license.type}
-                  </span>
-                </td>
-                <td>
-                  <span className={`chip ${getStatusClass(license.status)}`}>
-                    {license.status}
-                  </span>
-                </td>
-                <td>
-                  <code className="file-name">{license.file}</code>
-                </td>
-                <td>{license.searchTerm}</td>
-                <td>
-                  <button className="btn btn-text btn-small">
-                    <FileUploadIcon />
-                    Hochladen
-                  </button>
-                </td>
-                <td>
-                  <button className="btn btn-text btn-small">Anzeigen</button>
-                </td>
-                <td>
-                  <div className="action-buttons">
-                    <button className="icon-btn icon-btn-primary">
-                      <EditIcon />
+            {filteredLicenses.length > 0 ? (
+              filteredLicenses.map((license) => (
+                <tr key={license.id}>
+                  <td>{license.id}</td>
+                  <td>
+                    <span className="license-name">{license.name}</span>
+                  </td>
+                  <td>{license.count}</td>
+                  <td>
+                    <span className="chip chip-outlined">{license.department}</span>
+                  </td>
+                  <td>{license.purchaseDate}</td>
+                  <td>{license.duration}</td>
+                  <td>
+                    <span className={`chip ${license.type === 'Subscription' ? 'chip-primary' : 'chip-default'}`}>
+                      {license.type}
+                    </span>
+                  </td>
+                  <td>
+                    <span className={`chip ${getStatusClass(license.status)}`}>
+                      {license.status}
+                    </span>
+                  </td>
+                  <td>
+                    <code className="file-name">{license.file}</code>
+                  </td>
+                  <td>{license.searchTerm}</td>
+                  <td>
+                    <button className="btn btn-text btn-small">
+                      <FileUploadIcon />
+                      Hochladen
                     </button>
-                    <button className="icon-btn icon-btn-error">
-                      <DeleteIcon />
-                    </button>
+                  </td>
+                  <td>
+                    <button className="btn btn-text btn-small">Anzeigen</button>
+                  </td>
+                  <td>
+                    <div className="action-buttons">
+                      <button className="icon-btn icon-btn-primary">
+                        <EditIcon />
+                      </button>
+                      <button className="icon-btn icon-btn-error">
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="13" className="empty-state">
+                  <div className="empty-state-content">
+                    <SearchIcon />
+                    <p>Keine Lizenzen gefunden</p>
+                    <span>Versuchen Sie andere Suchbegriffe oder Filter</span>
+                    {hasActiveFilters && (
+                      <button className="btn btn-outlined" onClick={resetFilters}>
+                        Filter zurücksetzen
+                      </button>
+                    )}
                   </div>
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
@@ -403,7 +483,7 @@ const Licenses = () => {
                 <label>Beschreibung *</label>
                 <textarea
                   placeholder="Kurze Beschreibung der Lizenz..."
-                  rows={3}
+                  rows={2}
                   value={newLicense.description}
                   onChange={(e) => setNewLicense({...newLicense, description: e.target.value})}
                 />

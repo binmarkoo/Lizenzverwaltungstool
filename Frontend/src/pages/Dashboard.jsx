@@ -1,5 +1,6 @@
 // src/pages/Dashboard.jsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../stylesheets/Dashboard.css';
 
 // Icons als SVG-Komponenten
@@ -48,6 +49,8 @@ const StatCard = ({ title, value, icon, colorClass = '' }) => (
 );
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
   // Mock-Daten für die Statistik-Karten
   const stats = {
     totalLicenses: 145,
@@ -130,15 +133,15 @@ const Dashboard = () => {
         <div className="paper quick-actions">
           <h2 className="section-title">Schnellzugriff</h2>
           <ul className="action-list">
-            <li className="action-item">
+            <li className="action-item" onClick={() => navigate('/licenses?action=new')}>
               <span className="icon gold"><LicenseIcon /></span>
               <span>Neue Lizenz hinzufügen</span>
             </li>
-            <li className="action-item">
+            <li className="action-item" onClick={() => navigate('/users')}>
               <span className="icon gold"><GroupIcon /></span>
               <span>Benutzer verwalten</span>
             </li>
-            <li className="action-item">
+            <li className="action-item" onClick={() => navigate('/licenses')}>
               <span className="icon gold"><CheckCircleIcon /></span>
               <span>Lizenzbericht erstellen</span>
             </li>

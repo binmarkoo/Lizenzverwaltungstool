@@ -1,5 +1,6 @@
 // src/components/Layout/Header.jsx
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../stylesheets/Header.css';
 
 // Icons als SVG-Komponenten
@@ -51,10 +52,15 @@ const CloseIcon = () => (
   </svg>
 );
 
-const Header = () => {
+const Header = ({ onLogout }) => {
+  const navigate = useNavigate();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [notificationDialogOpen, setNotificationDialogOpen] = useState(false);
   const userMenuRef = useRef(null);
+
+  // Hole Benutzerdaten aus localStorage
+  const userData = JSON.parse(localStorage.getItem('user') || '{}');
+  const username = userData.username || 'Benutzer';
 
   const notifications = [
     {
@@ -116,7 +122,17 @@ const Header = () => {
 
   const handleLogout = () => {
     setUserMenuOpen(false);
-    // Logout-Logik hier
+    
+    // Lösche Benutzerdaten aus localStorage
+    localStorage.removeItem('user');
+    
+    // Callback aufrufen falls vorhanden
+    if (onLogout) {
+      onLogout();
+    }
+    
+    // Zur Login-Seite navigieren
+    navigate('/login');
   };
 
   const getNotificationIcon = (type) => {
@@ -163,8 +179,8 @@ const Header = () => {
               {userMenuOpen && (
                 <div className="user-menu">
                   <div className="user-menu-header">
-                    <span className="user-name">Max Mustermann</span>
-                    <span className="user-email">max.mustermann@liebherr.com</span>
+                    <span className="user-name">{username}</span>
+                    <span className="user-email">{username.toLowerCase().replace(' ', '.')}@liebherr.com</span>
                   </div>
                   <div className="user-menu-divider"></div>
                   <button className="user-menu-item" onClick={handleLogout}>
