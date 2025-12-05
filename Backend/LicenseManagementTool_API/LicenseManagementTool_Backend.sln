@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LicenseManagementTool_API", "LicenseManagementTool_API\LicenseManagementTool_API.csproj", "{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B99A55AE-6C5A-4212-AA11-3161DBB70CB1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{29EA9142-D800-47B9-A770-E807B3E24EDE}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12D026A0-898E-4E54-A44D-11A7050CDBED}
+	EndGlobalSection
+EndGlobal
