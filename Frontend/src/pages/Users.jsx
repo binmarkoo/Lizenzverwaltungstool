@@ -1,4 +1,3 @@
-// src/pages/Users.jsx
 import React, { useState, useMemo } from 'react';
 import '../stylesheets/Users.css';
 
@@ -71,7 +70,7 @@ const Users = () => {
     department: ''
   });
 
-  // Mock-Daten
+  // Test-Daten
   const users = [
     {
       id: 'USER-001',
@@ -217,6 +216,7 @@ const Users = () => {
           <h1 className="users-title">Benutzerverwaltung</h1>
           <p className="users-subtitle">Verwalten Sie Benutzer und deren Berechtigungen</p>
         </div>
+
         <button className="btn btn-primary" onClick={() => setAddDialogOpen(true)}>
           <AddIcon />
           Neuer Benutzer
@@ -226,6 +226,7 @@ const Users = () => {
       {/* Such- und Filter-Leiste */}
       <div className="paper filter-bar">
         <div className="filter-grid-users">
+
           <div className="search-field">
             <span className="search-icon"><SearchIcon /></span>
             <input
@@ -235,6 +236,7 @@ const Users = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
+
           <div className="filter-field">
             <label>Rolle</label>
             <select
@@ -246,6 +248,7 @@ const Users = () => {
               ))}
             </select>
           </div>
+
           <div className="filter-field">
             <label>Abteilung</label>
             <select
@@ -295,6 +298,7 @@ const Users = () => {
       {/* Benutzer Tabelle */}
       <div className="paper table-container">
         <table className="users-table">
+
           <thead>
             <tr>
               <th>ID</th>
@@ -306,6 +310,7 @@ const Users = () => {
               <th>Aktionen</th>
             </tr>
           </thead>
+
           <tbody>
             {filteredUsers.length > 0 ? (
               filteredUsers.map((user) => (
@@ -369,6 +374,7 @@ const Users = () => {
                 <CloseIcon />
               </button>
             </div>
+
             <div className="dialog-content">
               <div className="form-group">
                 <label>Name *</label>
@@ -379,6 +385,7 @@ const Users = () => {
                   onChange={(e) => setNewUser({...newUser, name: e.target.value})}
                 />
               </div>
+
               <div className="form-group">
                 <label>E-Mail *</label>
                 <input
@@ -388,6 +395,7 @@ const Users = () => {
                   onChange={(e) => setNewUser({...newUser, email: e.target.value})}
                 />
               </div>
+
               <div className="form-group">
                 <label>Rolle *</label>
                 <select
@@ -402,6 +410,7 @@ const Users = () => {
                 </select>
                 <span className="form-hint">Nur Anzeige und Suche</span>
               </div>
+
               <div className="form-group">
                 <label>Abteilung *</label>
                 <select
@@ -415,10 +424,12 @@ const Users = () => {
                 </select>
               </div>
             </div>
+
             <div className="dialog-actions">
               <button className="btn btn-text" onClick={() => setAddDialogOpen(false)}>
                 Abbrechen
               </button>
+              
               <button className="btn btn-primary" onClick={handleAddUser}>
                 Hinzufügen
               </button>

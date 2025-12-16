@@ -1,6 +1,6 @@
 /* src/components/Layout/Header.css */
 
-/* App Header */
+/* App Header - z-index auf 1100 gesetzt, Dialog hat 1300 */
 .app-header {
   position: fixed;
   top: 0;
@@ -9,7 +9,7 @@
   height: 64px;
   background-color: #2c3e50;
   color: white;
-  z-index: 1100;
+  z-index: 1100;  /* Niedriger als Dialog (1300) */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -77,7 +77,7 @@
   position: relative;
 }
 
-/* User Menu Dropdown */
+/* User Menu Dropdown - z-index niedriger als Dialog */
 .user-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -88,6 +88,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   animation: fadeIn 0.15s ease;
+  z-index: 1150;  /* Zwischen Header und Dialog */
 }
 
 @keyframes fadeIn {
@@ -146,7 +147,8 @@
   color: #666;
 }
 
-/* Dialog Overlay */
+/* Dialog Overlay - Diese Styles sind jetzt in Licenses.css, 
+   aber Header-Notification-Dialog braucht auch höheren z-index */
 .dialog-overlay {
   position: fixed;
   top: 0;
@@ -155,10 +157,12 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  z-index: 1200;
+  z-index: 1300;  /* Höher als Header! */
   padding: 24px;
+  padding-top: 84px;
+  overflow-y: auto;
 }
 
 /* Dialog */
@@ -167,7 +171,7 @@
   border-radius: 12px;
   width: 100%;
   max-width: 560px;
-  max-height: 90vh;
+  max-height: calc(100vh - 104px);
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   animation: dialogFadeIn 0.2s ease;

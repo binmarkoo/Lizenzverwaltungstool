@@ -1,4 +1,3 @@
-// src/pages/Settings.jsx
 import React, { useState } from 'react';
 import '../stylesheets/Settings.css';
 
@@ -74,6 +73,7 @@ const Settings = () => {
                 <button className="icon-btn icon-btn-primary">
                   <EditIcon />
                 </button>
+                
                 <button className="icon-btn icon-btn-error">
                   <DeleteIcon />
                 </button>
@@ -93,6 +93,7 @@ const Settings = () => {
                 <CloseIcon />
               </button>
             </div>
+
             <div className="dialog-content">
               <div className="form-group">
                 <label>Abteilungsname *</label>
@@ -108,6 +109,7 @@ const Settings = () => {
               <button className="btn btn-text" onClick={() => setAddDialogOpen(false)}>
                 Abbrechen
               </button>
+
               <button className="btn btn-primary" onClick={handleAddDepartment}>
                 Hinzufügen
               </button>

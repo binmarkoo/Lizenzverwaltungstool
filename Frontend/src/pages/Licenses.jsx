@@ -1,6 +1,6 @@
-// src/pages/Licenses.jsx
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import licenseService from '../services/licenseService';
 import '../stylesheets/Licenses.css';
 
 // Icons als SVG-Komponenten
@@ -48,6 +48,43 @@ const Licenses = () => {
   const [filterStatus, setFilterStatus] = useState('Alle Status');
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
+  
+  // State für Daten vom Service
+  const [licenses, setLicenses] = useState([]);
+  const [filterOptions, setFilterOptions] = useState({
+    departments: ['Alle Abteilungen'],
+    types: ['Alle Typen'],
+    statuses: ['Alle Status'],
+    renewalTypes: ['Normal']
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Lade Lizenzen beim Mount
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        // Lade Lizenzen und Filter-Optionen parallel
+        const [licensesData, filterOptionsData] = await Promise.all([
+          licenseService.getAllLicenses(),
+          licenseService.getFilterOptions()
+        ]);
+        
+        setLicenses(licensesData);
+        setFilterOptions(filterOptionsData);
+      } catch (err) {
+        console.error('Fehler beim Laden der Lizenzen:', err);
+        setError('Fehler beim Laden der Lizenzen. Bitte versuchen Sie es erneut.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // Öffne Dialog wenn ?action=new in URL
   useEffect(() => {
@@ -76,96 +113,50 @@ const Licenses = () => {
     includeProofs: false
   });
 
-  // Test-Data
-  const licenses = [
-    {
-      id: 'LIC-001',
-      name: 'Adobe Creative Cloud',
-      count: 25,
-      department: 'IT',
-      purchaseDate: '1.11.2024',
-      duration: '365',
-      type: 'Subscription',
-      status: 'Abgelaufen',
-      file: 'photoshop.exe',
-      searchTerm: 'Photoshop',
-      description: 'Adobe Creative Cloud Vollversion für Marketing...'
-    },
-    {
-      id: 'LIC-002',
-      name: 'Microsoft Office 365',
-      count: 100,
-      department: 'IT',
-      purchaseDate: '1.2.2024',
-      duration: '365',
-      type: 'Subscription',
-      status: 'Abgelaufen',
-      file: 'excel.exe',
-      searchTerm: 'Excel',
-      description: 'Office 365 Enterprise Lizenz für alle Mitarbeiter'
-    },
-    {
-      id: 'LIC-003',
-      name: 'AutoCAD 2024',
-      count: 15,
-      department: 'LIS',
-      purchaseDate: '10.3.2024',
-      duration: '365',
-      type: 'Normal',
-      status: 'Abgelaufen',
-      file: 'acad.exe',
-      searchTerm: 'AutoCAD',
-      description: 'AutoCAD 2024 für Engineering-Abteilung'
-    },
-    {
-      id: 'LIC-004',
-      name: 'SolidWorks Premium',
-      count: 10,
-      department: 'LIS',
-      purchaseDate: '5.4.2024',
-      duration: '365',
-      type: 'Subscription',
-      status: 'Abgelaufen',
-      file: 'sldworks.exe',
-      searchTerm: 'SolidWorks',
-      description: 'SolidWorks Premium für 3D-Modellierung'
-    },
-    {
-      id: 'LIC-005',
-      name: 'Slack Enterprise',
-      count: 50,
-      department: 'IT',
-      purchaseDate: '20.5.2023',
-      duration: '365',
-      type: 'Subscription',
-      status: 'Abgelaufen',
-      file: 'slack.exe',
-      searchTerm: 'Slack',
-      description: 'Slack Enterprise für interne Kommunikation'
-    },
-    {
-      id: 'LIC-006',
-      name: 'Figma Professional',
-      count: 20,
-      department: 'ITM',
-      purchaseDate: '20.11.2024',
-      duration: '365',
-      type: 'Subscription',
-      status: 'Abgelaufen',
-      file: 'figma.exe',
-      searchTerm: 'Figma',
-      description: 'Figma Professional für Design-Team'
+  const handleAddLicense = async () => {
+    try {
+      const createdLicense = await licenseService.createLicense({
+        ...newLicense,
+        type: newLicense.renewalType,
+        status: 'Aktiv'
+      });
+      
+      // Aktualisiere die lokale Liste
+      setLicenses(prev => [...prev, createdLicense]);
+      
+      // Reset Form und schließe Dialog
+      setNewLicense({
+        name: '',
+        count: '',
+        department: '',
+        purchaseDate: '',
+        duration: '',
+        renewalType: 'Normal',
+        file: '',
+        searchTerm: '',
+        description: ''
+      });
+      setAddDialogOpen(false);
+    } catch (err) {
+      console.error('Fehler beim Erstellen der Lizenz:', err);
+      alert('Fehler beim Erstellen der Lizenz');
     }
-  ];
+  };
 
-  const departments = ['Alle Abteilungen', 'IT', 'LIS', 'ITM'];
-  const types = ['Alle Typen', 'Subscription', 'Normal'];
-  const statuses = ['Alle Status', 'Abgelaufen', 'Aktiv', 'Bald erneuern'];
-  const renewalTypes = ['Normal', 'Subscription', 'Automatisch', 'Manuell'];
-
-  const handleAddLicense = () => {
-    console.log('Neue Lizenz:', newLicense);
-    setAddDialogOpen(false);
+  const handleDeleteLicense = async (id) => {
+    if (!window.confirm('Möchten Sie diese Lizenz wirklich löschen?')) {
+      return;
+    }
+    
+    try {
+      const success = await licenseService.deleteLicense(id);
+      if (success) {
+        setLicenses(prev => prev.filter(l => l.id !== id));
+      }
+    } catch (err) {
+      console.error('Fehler beim Löschen der Lizenz:', err);
+      alert('Fehler beim Löschen der Lizenz');
+    }
   };
 
   const handleGenerateReport = () => {
@@ -229,6 +220,37 @@ const Licenses = () => {
     filterType !== 'Alle Typen' || 
     filterStatus !== 'Alle Status';
 
+  // Loading State
+  if (loading) {
+    return (
+      <div className="licenses">
+        <div className="licenses-header">
+          <h1 className="licenses-title">Lizenzen</h1>
+        </div>
+        <div className="paper" style={{ padding: '40px', textAlign: 'center' }}>
+          <p>Laden...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error State
+  if (error) {
+    return (
+      <div className="licenses">
+        <div className="licenses-header">
+          <h1 className="licenses-title">Lizenzen</h1>
+        </div>
+        <div className="paper" style={{ padding: '40px', textAlign: 'center', color: '#d32f2f' }}>
+          <p>{error}</p>
+          <button className="btn btn-primary" onClick={() => window.location.reload()}>
+            Erneut versuchen
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="licenses">
       {/* Header */}
@@ -258,7 +280,7 @@ const Licenses = () => {
               value={filterDepartment}
               onChange={(e) => setFilterDepartment(e.target.value)}
             >
-              {departments.map(dept => (
+              {filterOptions.departments.map(dept => (
                 <option key={dept} value={dept}>{dept}</option>
               ))}
             </select>
@@ -269,7 +291,7 @@ const Licenses = () => {
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
             >
-              {types.map(type => (
+              {filterOptions.types.map(type => (
                 <option key={type} value={type}>{type}</option>
               ))}
             </select>
@@ -280,7 +302,7 @@ const Licenses = () => {
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
             >
-              {statuses.map(status => (
+              {filterOptions.statuses.map(status => (
                 <option key={status} value={status}>{status}</option>
               ))}
             </select>
@@ -360,7 +382,10 @@ const Licenses = () => {
                       <button className="icon-btn icon-btn-primary">
                         <EditIcon />
                       </button>
-                      <button className="icon-btn icon-btn-error">
+                      <button 
+                        className="icon-btn icon-btn-error"
+                        onClick={() => handleDeleteLicense(license.id)}
+                      >
                         <DeleteIcon />
                       </button>
                     </div>
@@ -423,9 +448,12 @@ const Licenses = () => {
                     onChange={(e) => setNewLicense({...newLicense, department: e.target.value})}
                   >
                     <option value="">Auswählen...</option>
-                    <option value="IT">IT</option>
-                    <option value="LIS">LIS</option>
-                    <option value="ITM">ITM</option>
+                    {filterOptions.departments
+                      .filter(d => d !== 'Alle Abteilungen')
+                      .map(dept => (
+                        <option key={dept} value={dept}>{dept}</option>
+                      ))
+                    }
                   </select>
                 </div>
               </div>
@@ -454,7 +482,7 @@ const Licenses = () => {
                   value={newLicense.renewalType}
                   onChange={(e) => setNewLicense({...newLicense, renewalType: e.target.value})}
                 >
-                  {renewalTypes.map(type => (
+                  {filterOptions.renewalTypes.map(type => (
                     <option key={type} value={type}>{type}</option>
                   ))}
                 </select>
@@ -553,7 +581,7 @@ const Licenses = () => {
                   </label>
                 </div>
               </div>
-              <p className="info-text">6 Lizenzen werden in den Bericht aufgenommen</p>
+              <p className="info-text">{licenses.length} Lizenzen werden in den Bericht aufgenommen</p>
             </div>
             <div className="dialog-actions">
               <button className="btn btn-text" onClick={() => setReportDialogOpen(false)}>
