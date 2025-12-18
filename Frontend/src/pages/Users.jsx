@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import userService from '../services/userService';
 import '../stylesheets/Users.css';
 
 // Icons als SVG-Komponenten
@@ -62,6 +63,43 @@ const Users = () => {
   const [filterRole, setFilterRole] = useState('Alle Rollen');
   const [filterDepartment, setFilterDepartment] = useState('Alle Abteilungen');
   const [addDialogOpen, setAddDialogOpen] = useState(false);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+
+  // State für Daten vom Service
+  const [users, setUsers] = useState([]);
+  const [filterOptions, setFilterOptions] = useState({
+    roles: [],
+    departments: [],
+    roleFilters: ['Alle Rollen'],
+    departmentFilters: ['Alle Abteilungen']
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Lade Benutzer beim Mount
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        const [usersData, filterOptionsData] = await Promise.all([
+          userService.getAllUsers(),
+          userService.getFilterOptions()
+        ]);
+        
+        setUsers(usersData);
+        setFilterOptions(filterOptionsData);
+      } catch (err) {
+        console.error('Fehler beim Laden der Benutzer:', err);
+        setError('Fehler beim Laden der Benutzer. Bitte versuchen Sie es erneut.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const [newUser, setNewUser] = useState({
     name: '',
@@ -70,56 +108,71 @@ const Users = () => {
     department: ''
   });
 
-  // Test-Daten
-  const users = [
-    {
-      id: 'USER-001',
-      name: 'Max Mustermann',
-      email: 'max.mustermann@liebherr.com',
-      role: 'Admin',
-      department: 'IT',
-      lastActive: '3.12.2024'
-    },
-    {
-      id: 'USER-002',
-      name: 'Anna Schmidt',
-      email: 'anna.schmidt@liebherr.com',
-      role: 'Editor',
-      department: 'LIS',
-      lastActive: '2.12.2024'
-    },
-    {
-      id: 'USER-003',
-      name: 'Thomas Weber',
-      email: 'thomas.weber@liebherr.com',
-      role: 'Viewer',
-      department: 'ITM',
-      lastActive: '1.12.2024'
-    },
-    {
-      id: 'USER-004',
-      name: 'Maria Müller',
-      email: 'maria.mueller@liebherr.com',
-      role: 'Lizenzuser',
-      department: 'IT',
-      lastActive: '30.11.2024'
+  const [editUser, setEditUser] = useState({
+    id: '',
+    name: '',
+    email: '',
+    role: 'Viewer',
+    department: '',
+    lastActive: ''
+  });
+
+  const handleAddUser = async () => {
+    try {
+      const createdUser = await userService.createUser(newUser);
+      setUsers(prev => [...prev, createdUser]);
+      setNewUser({
+        name: '',
+        email: '',
+        role: 'Viewer',
+        department: ''
+      });
+      setAddDialogOpen(false);
+    } catch (err) {
+      console.error('Fehler beim Erstellen des Benutzers:', err);
+      alert('Fehler beim Erstellen des Benutzers');
     }
-  ];
+  };
 
-  const roles = [
-    { value: 'Admin', label: 'Admin - Volle Verwaltung aller Bereiche', icon: <AdminIcon />, color: 'error' },
-    { value: 'Editor', label: 'Editor - Kann Lizenzen bearbeiten', icon: <EditorIcon />, color: 'primary' },
-    { value: 'Viewer', label: 'Viewer - Nur Anzeige und Suche', icon: <ViewerIcon />, color: 'default' },
-    { value: 'Lizenzuser', label: 'Lizenzuser - Lizenznutzer', icon: <PersonIcon />, color: 'success' }
-  ];
+  const handleEditClick = (user) => {
+    setEditUser({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      department: user.department,
+      lastActive: user.lastActive
+    });
+    setEditDialogOpen(true);
+  };
 
-  const departments = ['IT', 'LIS', 'ITM'];
-  const departmentFilters = ['Alle Abteilungen', 'IT', 'LIS', 'ITM'];
-  const roleFilters = ['Alle Rollen', 'Admin', 'Editor', 'Viewer', 'Lizenzuser'];
+  const handleUpdateUser = async () => {
+    try {
+      const updatedUser = await userService.updateUser(editUser.id, editUser);
+      if (updatedUser) {
+        setUsers(prev => prev.map(u => u.id === editUser.id ? updatedUser : u));
+        setEditDialogOpen(false);
+      }
+    } catch (err) {
+      console.error('Fehler beim Aktualisieren des Benutzers:', err);
+      alert('Fehler beim Aktualisieren des Benutzers');
+    }
+  };
 
-  const handleAddUser = () => {
-    console.log('Neuer Benutzer:', newUser);
-    setAddDialogOpen(false);
+  const handleDeleteUser = async (id) => {
+    if (!window.confirm('Möchten Sie diesen Benutzer wirklich löschen?')) {
+      return;
+    }
+    
+    try {
+      const success = await userService.deleteUser(id);
+      if (success) {
+        setUsers(prev => prev.filter(u => u.id !== id));
+      }
+    } catch (err) {
+      console.error('Fehler beim Löschen des Benutzers:', err);
+      alert('Fehler beim Löschen des Benutzers');
+    }
   };
 
   const getRoleClass = (role) => {
@@ -170,7 +223,6 @@ const Users = () => {
   // Filtering and Search Logic
   const filteredUsers = useMemo(() => {
     return users.filter(user => {
-      // Search filter - check multiple fields
       const searchLower = searchTerm.toLowerCase().trim();
       const matchesSearch = searchTerm === '' || 
         user.name.toLowerCase().includes(searchLower) ||
@@ -179,11 +231,9 @@ const Users = () => {
         user.role.toLowerCase().includes(searchLower) ||
         user.id.toLowerCase().includes(searchLower);
 
-      // Role filter
       const matchesRole = filterRole === 'Alle Rollen' || 
         user.role === filterRole;
 
-      // Department filter
       const matchesDepartment = filterDepartment === 'Alle Abteilungen' || 
         user.department === filterDepartment;
 
@@ -191,22 +241,50 @@ const Users = () => {
     });
   }, [users, searchTerm, filterRole, filterDepartment]);
 
-  // Reset all filters
   const resetFilters = () => {
     setSearchTerm('');
     setFilterRole('Alle Rollen');
     setFilterDepartment('Alle Abteilungen');
   };
 
-  // Check if any filter is active
   const hasActiveFilters = searchTerm !== '' || 
     filterRole !== 'Alle Rollen' || 
     filterDepartment !== 'Alle Abteilungen';
 
-  // Count users per role
   const getUserCountByRole = (roleValue) => {
     return users.filter(user => user.role === roleValue).length;
   };
+
+  // Loading State
+  if (loading) {
+    return (
+      <div className="users">
+        <div className="users-header">
+          <h1 className="users-title">Benutzerverwaltung</h1>
+        </div>
+        <div className="paper" style={{ padding: '40px', textAlign: 'center' }}>
+          <p>Laden...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error State
+  if (error) {
+    return (
+      <div className="users">
+        <div className="users-header">
+          <h1 className="users-title">Benutzerverwaltung</h1>
+        </div>
+        <div className="paper" style={{ padding: '40px', textAlign: 'center', color: '#d32f2f' }}>
+          <p>{error}</p>
+          <button className="btn btn-primary" onClick={() => window.location.reload()}>
+            Erneut versuchen
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="users">
@@ -216,7 +294,6 @@ const Users = () => {
           <h1 className="users-title">Benutzerverwaltung</h1>
           <p className="users-subtitle">Verwalten Sie Benutzer und deren Berechtigungen</p>
         </div>
-
         <button className="btn btn-primary" onClick={() => setAddDialogOpen(true)}>
           <AddIcon />
           Neuer Benutzer
@@ -226,7 +303,6 @@ const Users = () => {
       {/* Such- und Filter-Leiste */}
       <div className="paper filter-bar">
         <div className="filter-grid-users">
-
           <div className="search-field">
             <span className="search-icon"><SearchIcon /></span>
             <input
@@ -236,26 +312,24 @@ const Users = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-
           <div className="filter-field">
             <label>Rolle</label>
             <select
               value={filterRole}
               onChange={(e) => setFilterRole(e.target.value)}
             >
-              {roleFilters.map(role => (
+              {filterOptions.roleFilters.map(role => (
                 <option key={role} value={role}>{role}</option>
               ))}
             </select>
           </div>
-
           <div className="filter-field">
             <label>Abteilung</label>
             <select
               value={filterDepartment}
               onChange={(e) => setFilterDepartment(e.target.value)}
             >
-              {departmentFilters.map(dept => (
+              {filterOptions.departmentFilters.map(dept => (
                 <option key={dept} value={dept}>{dept}</option>
               ))}
             </select>
@@ -275,7 +349,7 @@ const Users = () => {
 
       {/* Rollen-Übersicht Karten */}
       <div className="roles-grid">
-        {roles.map((role) => (
+        {filterOptions.roles.map((role) => (
           <div 
             key={role.value} 
             className={`role-card ${getRoleCardClass(role.value)} ${filterRole === role.value ? 'active' : ''}`}
@@ -283,7 +357,7 @@ const Users = () => {
           >
             <div className="role-card-header">
               <div className={`role-icon-wrapper ${getRoleCardClass(role.value)}`}>
-                {role.icon}
+                {getRoleIcon(role.value)}
               </div>
               <h3 className="role-card-title">{role.value}</h3>
               <span className="role-card-count">{getUserCountByRole(role.value)}</span>
@@ -298,7 +372,6 @@ const Users = () => {
       {/* Benutzer Tabelle */}
       <div className="paper table-container">
         <table className="users-table">
-
           <thead>
             <tr>
               <th>ID</th>
@@ -310,7 +383,6 @@ const Users = () => {
               <th>Aktionen</th>
             </tr>
           </thead>
-
           <tbody>
             {filteredUsers.length > 0 ? (
               filteredUsers.map((user) => (
@@ -334,10 +406,18 @@ const Users = () => {
                   <td>{user.lastActive}</td>
                   <td>
                     <div className="action-buttons">
-                      <button className="icon-btn icon-btn-primary">
+                      <button 
+                        className="icon-btn icon-btn-primary"
+                        onClick={() => handleEditClick(user)}
+                        title="Bearbeiten"
+                      >
                         <EditIcon />
                       </button>
-                      <button className="icon-btn icon-btn-error">
+                      <button 
+                        className="icon-btn icon-btn-error"
+                        onClick={() => handleDeleteUser(user.id)}
+                        title="Löschen"
+                      >
                         <DeleteIcon />
                       </button>
                     </div>
@@ -374,7 +454,6 @@ const Users = () => {
                 <CloseIcon />
               </button>
             </div>
-
             <div className="dialog-content">
               <div className="form-group">
                 <label>Name *</label>
@@ -385,7 +464,6 @@ const Users = () => {
                   onChange={(e) => setNewUser({...newUser, name: e.target.value})}
                 />
               </div>
-
               <div className="form-group">
                 <label>E-Mail *</label>
                 <input
@@ -395,22 +473,22 @@ const Users = () => {
                   onChange={(e) => setNewUser({...newUser, email: e.target.value})}
                 />
               </div>
-
               <div className="form-group">
                 <label>Rolle *</label>
                 <select
                   value={newUser.role}
                   onChange={(e) => setNewUser({...newUser, role: e.target.value})}
                 >
-                  {roles.map((role) => (
+                  {filterOptions.roles.map((role) => (
                     <option key={role.value} value={role.value}>
                       {role.label}
                     </option>
                   ))}
                 </select>
-                <span className="form-hint">Nur Anzeige und Suche</span>
+                <span className="form-hint">
+                  {filterOptions.roles.find(r => r.value === newUser.role)?.label.split(' - ')[1] || ''}
+                </span>
               </div>
-
               <div className="form-group">
                 <label>Abteilung *</label>
                 <select
@@ -418,20 +496,106 @@ const Users = () => {
                   onChange={(e) => setNewUser({...newUser, department: e.target.value})}
                 >
                   <option value="">Auswählen...</option>
-                  {departments.map((dept) => (
+                  {filterOptions.departments.map((dept) => (
                     <option key={dept} value={dept}>{dept}</option>
                   ))}
                 </select>
               </div>
             </div>
-
             <div className="dialog-actions">
               <button className="btn btn-text" onClick={() => setAddDialogOpen(false)}>
                 Abbrechen
               </button>
-              
               <button className="btn btn-primary" onClick={handleAddUser}>
                 Hinzufügen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Benutzer bearbeiten Dialog */}
+      {editDialogOpen && (
+        <div className="dialog-overlay" onClick={() => setEditDialogOpen(false)}>
+          <div className="dialog" onClick={(e) => e.stopPropagation()}>
+            <div className="dialog-header">
+              <h2>Benutzer bearbeiten</h2>
+              <button className="icon-btn" onClick={() => setEditDialogOpen(false)}>
+                <CloseIcon />
+              </button>
+            </div>
+            <div className="dialog-content">
+              <div className="form-group">
+                <label>ID</label>
+                <input
+                  type="text"
+                  value={editUser.id}
+                  disabled
+                  style={{ backgroundColor: '#f0f0f0', cursor: 'not-allowed' }}
+                />
+              </div>
+              <div className="form-group">
+                <label>Name *</label>
+                <input
+                  type="text"
+                  placeholder="z.B. Max Mustermann"
+                  value={editUser.name}
+                  onChange={(e) => setEditUser({...editUser, name: e.target.value})}
+                />
+              </div>
+              <div className="form-group">
+                <label>E-Mail *</label>
+                <input
+                  type="email"
+                  placeholder="z.B. max.mustermann@example.com"
+                  value={editUser.email}
+                  onChange={(e) => setEditUser({...editUser, email: e.target.value})}
+                />
+              </div>
+              <div className="form-group">
+                <label>Rolle *</label>
+                <select
+                  value={editUser.role}
+                  onChange={(e) => setEditUser({...editUser, role: e.target.value})}
+                >
+                  {filterOptions.roles.map((role) => (
+                    <option key={role.value} value={role.value}>
+                      {role.label}
+                    </option>
+                  ))}
+                </select>
+                <span className="form-hint">
+                  {filterOptions.roles.find(r => r.value === editUser.role)?.label.split(' - ')[1] || ''}
+                </span>
+              </div>
+              <div className="form-group">
+                <label>Abteilung *</label>
+                <select
+                  value={editUser.department}
+                  onChange={(e) => setEditUser({...editUser, department: e.target.value})}
+                >
+                  <option value="">Auswählen...</option>
+                  {filterOptions.departments.map((dept) => (
+                    <option key={dept} value={dept}>{dept}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="form-group">
+                <label>Zuletzt aktiv</label>
+                <input
+                  type="text"
+                  value={editUser.lastActive}
+                  disabled
+                  style={{ backgroundColor: '#f0f0f0', cursor: 'not-allowed' }}
+                />
+              </div>
+            </div>
+            <div className="dialog-actions">
+              <button className="btn btn-text" onClick={() => setEditDialogOpen(false)}>
+                Abbrechen
+              </button>
+              <button className="btn btn-primary" onClick={handleUpdateUser}>
+                Speichern
               </button>
             </div>
           </div>

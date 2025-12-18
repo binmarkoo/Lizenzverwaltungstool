@@ -1,4 +1,4 @@
-// Mock-Daten - Diese werden später durch echte API-Aufrufe ersetzt
+// Test-Daten - Diese werden später durch echte API-Aufrufe ersetzt
 const mockLicenses = [
   {
     id: 'LIC-001',
@@ -57,10 +57,10 @@ const mockLicenses = [
     name: 'Slack Enterprise',
     count: 50,
     department: 'IT',
-    purchaseDate: '24.12.2024',
+    purchaseDate: '20.5.2023',
     duration: '365',
     type: 'Subscription',
-    status: 'Bald erneuern',
+    status: 'Abgelaufen',
     file: 'slack.exe',
     searchTerm: 'Slack',
     description: 'Slack Enterprise für interne Kommunikation'
@@ -70,10 +70,10 @@ const mockLicenses = [
     name: 'Figma Professional',
     count: 20,
     department: 'ITM',
-    purchaseDate: '20.11.2025',
+    purchaseDate: '20.11.2024',
     duration: '365',
     type: 'Subscription',
-    status: 'Aktiv',
+    status: 'Abgelaufen',
     file: 'figma.exe',
     searchTerm: 'Figma',
     description: 'Figma Professional für Design-Team'

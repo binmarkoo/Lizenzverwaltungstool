@@ -47,6 +47,7 @@ const Licenses = () => {
   const [filterType, setFilterType] = useState('Alle Typen');
   const [filterStatus, setFilterStatus] = useState('Alle Status');
   const [addDialogOpen, setAddDialogOpen] = useState(false);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   
   // State für Daten vom Service
@@ -107,6 +108,20 @@ const Licenses = () => {
     description: ''
   });
 
+  const [editLicense, setEditLicense] = useState({
+    id: '',
+    name: '',
+    count: '',
+    department: '',
+    purchaseDate: '',
+    duration: '',
+    type: 'Normal',
+    status: 'Aktiv',
+    file: '',
+    searchTerm: '',
+    description: ''
+  });
+
   const [reportOptions, setReportOptions] = useState({
     reportType: 'Alle Lizenzen',
     includeDescriptions: true,
@@ -140,6 +155,38 @@ const Licenses = () => {
     } catch (err) {
       console.error('Fehler beim Erstellen der Lizenz:', err);
       alert('Fehler beim Erstellen der Lizenz');
+    }
+  };
+
+  const handleEditClick = (license) => {
+    setEditLicense({
+      id: license.id,
+      name: license.name,
+      count: license.count,
+      department: license.department,
+      purchaseDate: license.purchaseDate,
+      duration: license.duration,
+      type: license.type,
+      status: license.status,
+      file: license.file,
+      searchTerm: license.searchTerm,
+      description: license.description
+    });
+    setEditDialogOpen(true);
+  };
+
+  const handleUpdateLicense = async () => {
+    try {
+      const updatedLicense = await licenseService.updateLicense(editLicense.id, editLicense);
+      
+      if (updatedLicense) {
+        // Aktualisiere die lokale Liste
+        setLicenses(prev => prev.map(l => l.id === editLicense.id ? updatedLicense : l));
+        setEditDialogOpen(false);
+      }
+    } catch (err) {
+      console.error('Fehler beim Aktualisieren der Lizenz:', err);
+      alert('Fehler beim Aktualisieren der Lizenz');
     }
   };
 
@@ -379,12 +426,17 @@ const Licenses = () => {
                   </td>
                   <td>
                     <div className="action-buttons">
-                      <button className="icon-btn icon-btn-primary">
+                      <button 
+                        className="icon-btn icon-btn-primary"
+                        onClick={() => handleEditClick(license)}
+                        title="Bearbeiten"
+                      >
                         <EditIcon />
                       </button>
                       <button 
                         className="icon-btn icon-btn-error"
                         onClick={() => handleDeleteLicense(license.id)}
+                        title="Löschen"
                       >
                         <DeleteIcon />
                       </button>
@@ -532,6 +584,148 @@ const Licenses = () => {
               </button>
               <button className="btn btn-primary" onClick={handleAddLicense}>
                 Hinzufügen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Lizenz bearbeiten Dialog */}
+      {editDialogOpen && (
+        <div className="dialog-overlay" onClick={() => setEditDialogOpen(false)}>
+          <div className="dialog" onClick={(e) => e.stopPropagation()}>
+            <div className="dialog-header">
+              <h2>Lizenz bearbeiten</h2>
+              <button className="icon-btn" onClick={() => setEditDialogOpen(false)}>
+                <CloseIcon />
+              </button>
+            </div>
+            <div className="dialog-content">
+              <div className="form-group">
+                <label>ID</label>
+                <input
+                  type="text"
+                  value={editLicense.id}
+                  disabled
+                  style={{ backgroundColor: '#f0f0f0', cursor: 'not-allowed' }}
+                />
+              </div>
+              <div className="form-group">
+                <label>Name *</label>
+                <input
+                  type="text"
+                  placeholder="z.B. Adobe Creative Cloud"
+                  value={editLicense.name}
+                  onChange={(e) => setEditLicense({...editLicense, name: e.target.value})}
+                />
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Anzahl *</label>
+                  <input
+                    type="number"
+                    value={editLicense.count}
+                    onChange={(e) => setEditLicense({...editLicense, count: e.target.value})}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Abteilung *</label>
+                  <select
+                    value={editLicense.department}
+                    onChange={(e) => setEditLicense({...editLicense, department: e.target.value})}
+                  >
+                    <option value="">Auswählen...</option>
+                    {filterOptions.departments
+                      .filter(d => d !== 'Alle Abteilungen')
+                      .map(dept => (
+                        <option key={dept} value={dept}>{dept}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Kaufdatum *</label>
+                  <input
+                    type="text"
+                    value={editLicense.purchaseDate}
+                    onChange={(e) => setEditLicense({...editLicense, purchaseDate: e.target.value})}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Dauer (Tage) *</label>
+                  <input
+                    type="number"
+                    placeholder="365"
+                    value={editLicense.duration}
+                    onChange={(e) => setEditLicense({...editLicense, duration: e.target.value})}
+                  />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Typ *</label>
+                  <select
+                    value={editLicense.type}
+                    onChange={(e) => setEditLicense({...editLicense, type: e.target.value})}
+                  >
+                    {filterOptions.renewalTypes.map(type => (
+                      <option key={type} value={type}>{type}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label>Status *</label>
+                  <select
+                    value={editLicense.status}
+                    onChange={(e) => setEditLicense({...editLicense, status: e.target.value})}
+                  >
+                    {filterOptions.statuses
+                      .filter(s => s !== 'Alle Status')
+                      .map(status => (
+                        <option key={status} value={status}>{status}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Datei *</label>
+                  <input
+                    type="text"
+                    placeholder="z.B. photoshop.exe"
+                    value={editLicense.file}
+                    onChange={(e) => setEditLicense({...editLicense, file: e.target.value})}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Suchbegriff *</label>
+                  <input
+                    type="text"
+                    placeholder="z.B. Photoshop"
+                    value={editLicense.searchTerm}
+                    onChange={(e) => setEditLicense({...editLicense, searchTerm: e.target.value})}
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <label>Beschreibung *</label>
+                <textarea
+                  placeholder="Kurze Beschreibung der Lizenz..."
+                  rows={2}
+                  value={editLicense.description}
+                  onChange={(e) => setEditLicense({...editLicense, description: e.target.value})}
+                />
+              </div>
+            </div>
+            <div className="dialog-actions">
+              <button className="btn btn-text" onClick={() => setEditDialogOpen(false)}>
+                Abbrechen
+              </button>
+              <button className="btn btn-primary" onClick={handleUpdateLicense}>
+                Speichern
               </button>
             </div>
           </div>
