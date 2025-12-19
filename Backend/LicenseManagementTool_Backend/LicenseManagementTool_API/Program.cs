@@ -1,5 +1,6 @@
-
+using LicenseManagementTool_API.Services;
 using LicenseManagementTool_API.Data;
+using LicenseManagementTool_API.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace LicenseManagementTool_API
@@ -13,6 +14,10 @@ namespace LicenseManagementTool_API
             // Add services to the container.
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            // Dependency Injection
+            builder.Services.AddScoped<ILicenseRepository, LicenseRepository>();
+            builder.Services.AddScoped<ILicenseService, LicenseService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

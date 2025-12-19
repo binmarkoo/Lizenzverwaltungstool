@@ -3709,11 +3709,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_API\\LicenseManagementTool_API\\LicenseManagementTool_API.csproj",
+      "projectUniqueName": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\LicenseManagementTool_API.csproj",
       "projectName": "LicenseManagementTool_API",
-      "projectPath": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_API\\LicenseManagementTool_API\\LicenseManagementTool_API.csproj",
+      "projectPath": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\LicenseManagementTool_API.csproj",
       "packagesPath": "C:\\Users\\kingl\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_API\\LicenseManagementTool_API\\obj\\",
+      "outputPath": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

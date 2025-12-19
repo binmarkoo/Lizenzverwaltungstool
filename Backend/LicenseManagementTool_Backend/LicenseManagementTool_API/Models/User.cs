@@ -13,16 +13,12 @@ namespace LicenseManagementTool_API.Models
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
 
+        [MaxLength(100)]
+        //[Required]
+        public string? Username { get; set; }
+
         [Required]
         public string PasswordHash { get; set; } = string.Empty;
-
-        [Required]
-        [MaxLength(100)]
-        public string FirstName { get; set; } = string.Empty;
-
-        [Required]
-        [MaxLength(100)]
-        public string LastName { get; set; } = string.Empty;
 
         [Required]
         public int RoleId { get; set; }
@@ -41,5 +37,9 @@ namespace LicenseManagementTool_API.Models
 
         // Navigation Properties
         public ICollection<License> CreatedLicenses { get; set; } = new List<License>();
+
+        // Berechnete Property für DisplayName (Email oder Username)
+        [NotMapped]
+        public string DisplayName => !string.IsNullOrEmpty(Username) ? Username : Email;
     }
 }

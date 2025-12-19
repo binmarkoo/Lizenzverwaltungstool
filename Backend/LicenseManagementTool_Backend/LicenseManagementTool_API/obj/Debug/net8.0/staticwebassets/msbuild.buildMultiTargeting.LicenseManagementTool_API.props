@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\LicenseManagementTool_API.props" />
+</Project>

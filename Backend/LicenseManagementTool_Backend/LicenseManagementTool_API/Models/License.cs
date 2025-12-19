@@ -60,7 +60,7 @@ namespace LicenseManagementTool_API.Models
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation Properties
-        //public ICollection<LicenseDocument> Documents { get; set; } = new List<LicenseDocument>();
+        public ICollection<LicenseDocument> Documents { get; set; } = new List<LicenseDocument>();
         //public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
     }
 }

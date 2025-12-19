@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xpSspEZ80m0=",
+  "dgSpecHash": "Fv6Dv4FcaJc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_API\\LicenseManagementTool_API\\LicenseManagementTool_API.csproj",
+  "projectFilePath": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\LicenseManagementTool_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kingl\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\kingl\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

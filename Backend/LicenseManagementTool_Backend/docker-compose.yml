@@ -1,16 +1,20 @@
-version: '3.8'
 services:
   postgres:
     image: postgres:15
     container_name: license_management_db
     environment:
-      POSTGRES_DB: LicenseManagementDb
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: LiebherrLicenseManagementTool123!
+      POSTGRES_DB: testdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      POSTGRES_HOST_AUTH_METHOD: md5
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    command: >
+      postgres 
+      -c listen_addresses='*'
+      -c password_encryption=scram-sha-256
 
 volumes:
   postgres_data:
