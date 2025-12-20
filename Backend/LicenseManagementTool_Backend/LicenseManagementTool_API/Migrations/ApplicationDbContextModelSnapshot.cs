@@ -208,7 +208,7 @@ namespace LicenseManagementTool_API.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("DepartmentId")
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Email")
@@ -219,16 +219,18 @@ namespace LicenseManagementTool_API.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("PasswordHash")
+                    b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("integer");
-
-                    b.Property<string>("Username")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
 
                     b.HasKey("Id");
 
@@ -242,13 +244,13 @@ namespace LicenseManagementTool_API.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2025, 12, 20, 14, 24, 14, 844, DateTimeKind.Utc).AddTicks(6480),
                             DepartmentId = 1,
                             Email = "admin@liebherr.com",
                             IsActive = true,
-                            PasswordHash = "$2a$11$5xKxq3yJZQ8gZJZGX8YxLORjqmJ3HJMJvC7hX7GZ7fKqwXMJXQZWS",
-                            RoleId = 1,
-                            Username = "admin"
+                            Name = "Administrator",
+                            Password = "Admin123!",
+                            RoleId = 1
                         });
                 });
 
@@ -286,7 +288,9 @@ namespace LicenseManagementTool_API.Migrations
                 {
                     b.HasOne("LicenseManagementTool_API.Models.Department", "Department")
                         .WithMany("Users")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("LicenseManagementTool_API.Models.Role", "Role")
                         .WithMany("Users")

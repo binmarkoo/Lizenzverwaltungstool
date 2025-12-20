@@ -31,17 +31,17 @@ namespace LicenseManagementTool_API.Data
                 new Department { Id = 3, Name = "ITM" }
             );
 
-            // Seed Admin User - mit Username
+            // Seed Admin User
             modelBuilder.Entity<User>().HasData(
                 new User
                 {
                     Id = 1,
+                    Name = "Administrator",
                     Email = "admin@liebherr.com",
-                    Username = "admin",
-                    PasswordHash = "$2a$11$5xKxq3yJZQ8gZJZGX8YxLORjqmJ3HJMJvC7hX7GZ7fKqwXMJXQZWS", // Admin123!
+                    Password = "Admin123!", // Plain for now
                     RoleId = 1,
                     DepartmentId = 1,
-                    CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                    CreatedAt = DateTime.UtcNow,
                     IsActive = true
                 }
             );

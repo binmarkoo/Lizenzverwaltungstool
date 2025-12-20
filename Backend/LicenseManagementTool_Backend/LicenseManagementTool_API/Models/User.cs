@@ -9,16 +9,17 @@ namespace LicenseManagementTool_API.Models
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(100)]
+        public string Name { get; set; } = string.Empty; // Username
+
+        [Required]
         [MaxLength(200)]
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
 
-        [MaxLength(100)]
-        //[Required]
-        public string? Username { get; set; }
-
         [Required]
-        public string PasswordHash { get; set; } = string.Empty;
+        [MaxLength(100)]
+        public string Password { get; set; } = string.Empty;
 
         [Required]
         public int RoleId { get; set; }
@@ -26,10 +27,11 @@ namespace LicenseManagementTool_API.Models
         [ForeignKey(nameof(RoleId))]
         public Role Role { get; set; } = null!;
 
-        public int? DepartmentId { get; set; }
+        [Required]
+        public int DepartmentId { get; set; }
 
         [ForeignKey(nameof(DepartmentId))]
-        public Department? Department { get; set; }
+        public Department Department { get; set; } = null!;
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
@@ -37,9 +39,5 @@ namespace LicenseManagementTool_API.Models
 
         // Navigation Properties
         public ICollection<License> CreatedLicenses { get; set; } = new List<License>();
-
-        // Berechnete Property für DisplayName (Email oder Username)
-        [NotMapped]
-        public string DisplayName => !string.IsNullOrEmpty(Username) ? Username : Email;
     }
 }

@@ -46,11 +46,11 @@ namespace LicenseManagementTool_API.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    Username = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    PasswordHash = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     RoleId = table.Column<int>(type: "integer", nullable: false),
-                    DepartmentId = table.Column<int>(type: "integer", nullable: true),
+                    DepartmentId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -61,7 +61,8 @@ namespace LicenseManagementTool_API.Migrations
                         name: "FK_Users_Departments_DepartmentId",
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Users_Roles_RoleId",
                         column: x => x.RoleId,
@@ -154,8 +155,8 @@ namespace LicenseManagementTool_API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CreatedAt", "DepartmentId", "Email", "IsActive", "PasswordHash", "RoleId", "Username" },
-                values: new object[] { 1, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), 1, "admin@liebherr.com", true, "$2a$11$5xKxq3yJZQ8gZJZGX8YxLORjqmJ3HJMJvC7hX7GZ7fKqwXMJXQZWS", 1, "admin" });
+                columns: new[] { "Id", "CreatedAt", "DepartmentId", "Email", "IsActive", "Name", "Password", "RoleId" },
+                values: new object[] { 1, new DateTime(2025, 12, 20, 14, 24, 14, 844, DateTimeKind.Utc).AddTicks(6480), 1, "admin@liebherr.com", true, "Administrator", "Admin123!", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_LicenseDocuments_LicenseId",
