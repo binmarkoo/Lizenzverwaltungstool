@@ -1,164 +1,177 @@
-// Test-Daten - Diese werden später durch echte API-Aufrufe ersetzt
-const mockUsers = [
-  {
-    id: 'USER-001',
-    name: 'Max Mustermann',
-    email: 'max.mustermann@liebherr.com',
-    role: 'Admin',
-    department: 'IT',
-    lastActive: '3.12.2024'
-  },
-  {
-    id: 'USER-002',
-    name: 'Anna Schmidt',
-    email: 'anna.schmidt@liebherr.com',
-    role: 'Editor',
-    department: 'LIS',
-    lastActive: '2.12.2024'
-  },
-  {
-    id: 'USER-003',
-    name: 'Thomas Weber',
-    email: 'thomas.weber@liebherr.com',
-    role: 'Viewer',
-    department: 'ITM',
-    lastActive: '1.12.2024'
-  },
-  {
-    id: 'USER-004',
-    name: 'Maria Müller',
-    email: 'maria.mueller@liebherr.com',
-    role: 'Lizenzuser',
-    department: 'IT',
-    lastActive: '30.11.2024'
-  }
-];
+import axios from 'axios';
 
-/**
- * Holt alle Benutzer
- * @returns {Promise<Array>} Array mit allen Benutzern
- */
+const API_BASE_URL = 'https://localhost:7023/api/';
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  timeout: 10000,
+});
+
+
 export const getAllUsers = async () => {
-  // TODO: Ersetze dies durch den echten API-Aufruf
-  // Beispiel: return await axios.get('/api/users').then(res => res.data);
-  
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([...mockUsers]);
-    }, 100);
-  });
+  try {
+    const response = await api.get('/users');
+    return mapUsersFromApi(response.data);
+  } catch (error) {
+    console.error('Fehler beim Laden der Benutzer:', error);
+    throw error;
+  }
 };
 
-/**
- * Holt einen einzelnen Benutzer anhand der ID
- * @param {string} id - Die Benutzer-ID
- * @returns {Promise<Object|null>} Der Benutzer oder null
- */
 export const getUserById = async (id) => {
-  // TODO: Ersetze dies durch den echten API-Aufruf
-  // Beispiel: return await axios.get(`/api/users/${id}`).then(res => res.data);
-  
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const user = mockUsers.find(u => u.id === id);
-      resolve(user || null);
-    }, 100);
-  });
+  try {
+    const response = await api.get(`/users/${id}`);
+    return mapUserFromApi(response.data);
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return null;
+    }
+    console.error('Fehler beim Laden des Benutzers:', error);
+    throw error;
+  }
 };
 
-/**
- * Erstellt einen neuen Benutzer
- * @param {Object} userData - Die Benutzerdaten
- * @returns {Promise<Object>} Der erstellte Benutzer
- */
 export const createUser = async (userData) => {
-  // TODO: Ersetze dies durch den echten API-Aufruf
-  // Beispiel: return await axios.post('/api/users', userData).then(res => res.data);
-  
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const today = new Date();
-      const formattedDate = `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
-      
-      const newUser = {
-        ...userData,
-        id: `USER-${String(mockUsers.length + 1).padStart(3, '0')}`,
-        lastActive: formattedDate
-      };
-      mockUsers.push(newUser);
-      resolve(newUser);
-    }, 100);
-  });
+  try {
+    const apiData = mapUserToApi(userData);
+    const response = await api.post('/users', apiData);
+    return mapUserFromApi(response.data);
+  } catch (error) {
+    console.error('Fehler beim Erstellen des Benutzers:', error);
+    throw error;
+  }
 };
 
-/**
- * Aktualisiert einen bestehenden Benutzer
- * @param {string} id - Die Benutzer-ID
- * @param {Object} userData - Die aktualisierten Benutzerdaten
- * @returns {Promise<Object|null>} Der aktualisierte Benutzer oder null
- */
 export const updateUser = async (id, userData) => {
-  // TODO: Ersetze dies durch den echten API-Aufruf
-  // Beispiel: return await axios.put(`/api/users/${id}`, userData).then(res => res.data);
-  
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const index = mockUsers.findIndex(u => u.id === id);
-      if (index !== -1) {
-        mockUsers[index] = { ...mockUsers[index], ...userData };
-        resolve(mockUsers[index]);
-      } else {
-        resolve(null);
-      }
-    }, 100);
-  });
+  try {
+    const apiData = mapUserToApi(userData);
+    const response = await api.put(`/users/${id}`, apiData);
+    return mapUserFromApi(response.data);
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return null;
+    }
+    console.error('Fehler beim Aktualisieren des Benutzers:', error);
+    throw error;
+  }
 };
 
-/**
- * Löscht einen Benutzer
- * @param {string} id - Die Benutzer-ID
- * @returns {Promise<boolean>} true wenn erfolgreich gelöscht
- */
 export const deleteUser = async (id) => {
-  // TODO: Ersetze dies durch den echten API-Aufruf
-  // Beispiel: return await axios.delete(`/api/users/${id}`).then(() => true);
-  
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const index = mockUsers.findIndex(u => u.id === id);
-      if (index !== -1) {
-        mockUsers.splice(index, 1);
-        resolve(true);
-      } else {
-        resolve(false);
-      }
-    }, 100);
-  });
+  try {
+    await api.delete(`/users/${id}`);
+    return true;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return false;
+    }
+    console.error('Fehler beim Löschen des Benutzers:', error);
+    throw error;
+  }
 };
 
-/**
- * Holt die verfügbaren Filter-Optionen
- * @returns {Promise<Object>} Objekt mit roles, departments, etc.
- */
 export const getFilterOptions = async () => {
-  // TODO: Ersetze dies durch den echten API-Aufruf falls dynamisch
-  // Beispiel: return await axios.get('/api/users/filter-options').then(res => res.data);
+  // Kann auch als API-Request implementiert werden, falls dynamisch
+  return {
+    roles: [
+      { value: 'Admin', label: 'Admin - Volle Verwaltung aller Bereiche', color: 'error' },
+      { value: 'Editor', label: 'Editor - Kann Lizenzen bearbeiten', color: 'primary' },
+      { value: 'Viewer', label: 'Viewer - Nur Anzeige und Suche', color: 'default' },
+      { value: 'Lizenzuser', label: 'Lizenzuser - Lizenznutzer', color: 'success' }
+    ],
+    departments: ['IT', 'LIS', 'ITM'],
+    roleFilters: ['Alle Rollen', 'Admin', 'Editor', 'Viewer', 'Lizenzuser'],
+    departmentFilters: ['Alle Abteilungen', 'IT', 'LIS', 'ITM']
+  };
+};
+
+const mapUserFromApi = (apiUser) => {
+  const roleName = apiUser.role?.name || reverseRoleMapping[apiUser.roleId] || '';
+  const departmentName = apiUser.department?.name || reverseDepartmentMapping[apiUser.departmentId] || '';
+  const createdAt = formatDateFromApi(apiUser.createdAt);
   
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        roles: [
-          { value: 'Admin', label: 'Admin - Volle Verwaltung aller Bereiche', color: 'error' },
-          { value: 'Editor', label: 'Editor - Kann Lizenzen bearbeiten', color: 'primary' },
-          { value: 'Viewer', label: 'Viewer - Nur Anzeige und Suche', color: 'default' },
-          { value: 'Lizenzuser', label: 'Lizenzuser - Lizenznutzer', color: 'success' }
-        ],
-        departments: ['IT', 'LIS', 'ITM'],
-        roleFilters: ['Alle Rollen', 'Admin', 'Editor', 'Viewer', 'Lizenzuser'],
-        departmentFilters: ['Alle Abteilungen', 'IT', 'LIS', 'ITM']
-      });
-    }, 50);
-  });
+  return {
+    id: apiUser.id?.toString() || '',
+    name: apiUser.name || '',
+    email: apiUser.email || '',
+    role: roleName,
+    roleId: apiUser.roleId || null,
+    department: departmentName,
+    departmentId: apiUser.departmentId || null,
+  };
+};
+
+const mapUsersFromApi = (apiUsers) => {
+  if (!Array.isArray(apiUsers)) return [];
+  return apiUsers.map(mapUserFromApi);
+};
+
+const mapUserToApi = (frontendUser, isUpdate = false) => {
+  const apiData = {
+    name: frontendUser.name,
+    email: frontendUser.email,
+    roleId: roleMapping[frontendUser.role] || 1,
+    departmentId: departmentMapping[frontendUser.department] || 1
+  };
+  
+
+  if (!isUpdate) {
+    apiData.password = frontendUser.password || 'InitialPassword123!';
+  }
+  
+  return apiData;
+};
+
+const formatDateFromApi = (isoDate) => {
+  if (!isoDate) return '';
+  
+  const date = new Date(isoDate);
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  
+  return `${day}.${month}.${year}`;
+};
+
+const formatDateToApi = (dateString) => {
+  if (!dateString) return new Date().toISOString();
+  
+  if (dateString.includes('.')) {
+    const [day, month, year] = dateString.split('.');
+    return new Date(year, month - 1, day).toISOString();
+  } else if (dateString.includes('-')) {
+    return new Date(dateString).toISOString();
+  }
+  
+  return new Date(dateString).toISOString();
+};
+
+const roleMapping = {
+  'Admin': 1,
+  'Editor': 2,
+  'Viewer': 3,
+  'Lizenzuser': 4
+};
+
+const reverseRoleMapping = {
+  1: 'Admin',
+  2: 'Editor',
+  3: 'Viewer',
+  4: 'Lizenzuser'
+};
+
+const departmentMapping = {
+  'IT': 1,
+  'LIS': 2,
+  'ITM': 3
+};
+
+const reverseDepartmentMapping = {
+  1: 'IT',
+  2: 'LIS',
+  3: 'ITM'
 };
 
 // Default export für einfachen Import
