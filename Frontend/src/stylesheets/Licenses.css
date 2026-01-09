@@ -2,6 +2,8 @@
 
 .licenses {
   padding: 24px;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 /* Header */
@@ -10,6 +12,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .licenses-title {
@@ -110,6 +114,11 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.paper.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* Filter Bar */
 .filter-bar {
   padding: 20px;
@@ -120,7 +129,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 16px;
-  align-items: end; /* Align items to bottom */
+  align-items: end;
 }
 
 @media (max-width: 1200px) {
@@ -210,6 +219,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .filter-footer {
@@ -273,12 +283,14 @@
 /* Table */
 .table-container {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .licenses-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
+  min-width: 1200px;
 }
 
 .licenses-table th,
@@ -286,6 +298,7 @@
   padding: 12px 16px;
   text-align: left;
   border-bottom: 1px solid #e0e0e0;
+  white-space: nowrap;
 }
 
 .licenses-table th {
@@ -324,6 +337,7 @@
   border-radius: 16px;
   font-size: 0.75rem;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .chip-outlined {
@@ -357,7 +371,7 @@
   color: #fff;
 }
 
-/* Dialog - FIXED: höherer z-index als Header (1100) und padding-top für Header-Höhe */
+/* Dialog */
 .dialog-overlay {
   position: fixed;
   top: 0;
@@ -366,13 +380,13 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: flex-start;  /* Changed from center to flex-start */
+  align-items: flex-start;
   justify-content: center;
-  z-index: 1300;  /* Höher als Header (1100) */
+  z-index: 9999 !important;
   padding: 20px;
-  padding-top: 84px;  /* 64px Header-Höhe + 20px Abstand */
+  padding-top: 84px;
   animation: fadeIn 0.2s ease;
-  overflow-y: auto;  /* Ermöglicht Scrollen wenn Dialog zu groß */
+  overflow-y: auto;
 }
 
 @keyframes fadeIn {
@@ -385,12 +399,12 @@
   border-radius: 12px;
   width: 100%;
   max-width: 520px;
-  max-height: calc(100vh - 104px);  /* Viewport minus Header und Padding */
+  max-height: calc(100vh - 104px);
   display: flex;
   flex-direction: column;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   animation: slideUp 0.3s ease;
-  margin-bottom: 20px;  /* Abstand unten */
+  margin-bottom: 20px;
 }
 
 @keyframes slideUp {
@@ -593,8 +607,86 @@
   margin: 0;
 }
 
-/* Force Dialog über alles */
-.dialog-overlay {
-  position: fixed !important;
-  z-index: 9999 !important;
+/* Responsive */
+@media (max-width: 768px) {
+  .licenses {
+    padding: 16px;
+  }
+
+  .licenses-header {
+    margin-bottom: 16px;
+  }
+
+  .licenses-title {
+    font-size: 1.25rem;
+  }
+
+  .filter-bar {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .dialog-overlay {
+    padding: 12px;
+    padding-top: 76px;
+  }
+
+  .dialog {
+    max-height: calc(100vh - 88px);
+  }
+
+  .dialog-header {
+    padding: 16px 20px;
+  }
+
+  .dialog-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .dialog-content {
+    padding: 16px 20px;
+  }
+
+  .dialog-actions {
+    padding: 12px 20px;
+    flex-direction: column;
+  }
+
+  .dialog-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .licenses {
+    padding: 12px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 0.8125rem;
+  }
+
+  .filter-bar {
+    padding: 12px;
+  }
+
+  .search-field input {
+    height: 40px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .filter-field select {
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .empty-state {
+    padding: 40px 16px !important;
+  }
+
+  .empty-state-content p {
+    font-size: 1rem;
+  }
 }

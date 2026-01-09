@@ -28,6 +28,7 @@
 @media (max-width: 600px) {
   .stats-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
 
@@ -181,11 +182,15 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
 }
 
 .license-name {
   font-weight: 500;
   color: #2c3e50;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .license-details {
@@ -196,6 +201,7 @@
 .license-status {
   font-size: 0.875rem;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .license-status.warning {
@@ -235,4 +241,70 @@
 .action-item span:last-child {
   color: #2c3e50;
   font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 16px;
+  }
+
+  .dashboard-title {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+
+  .paper {
+    padding: 16px;
+  }
+
+  .stat-card-content {
+    padding: 16px;
+  }
+
+  .stat-card-value {
+    font-size: 1.5rem;
+  }
+
+  .stat-card-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+  }
+
+  .license-item {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .license-status {
+    width: 100%;
+    text-align: right;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard {
+    padding: 12px;
+  }
+
+  .stat-card-title {
+    font-size: 0.875rem;
+  }
+
+  .stat-card-value {
+    font-size: 1.25rem;
+  }
+
+  .action-item {
+    padding: 10px 12px;
+    gap: 12px;
+  }
+
+  .action-item span:last-child {
+    font-size: 0.875rem;
+  }
 }

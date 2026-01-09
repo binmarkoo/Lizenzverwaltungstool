@@ -10,6 +10,8 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .users-title {
@@ -175,6 +177,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .btn-reset {
@@ -241,6 +244,7 @@
 @media (max-width: 600px) {
   .roles-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
 
@@ -358,12 +362,14 @@
 /* Table */
 .table-container {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .users-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
+  min-width: 700px;
 }
 
 .users-table th,
@@ -459,6 +465,7 @@
   border-radius: 16px;
   font-size: 0.75rem;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .chip-with-icon {
@@ -505,10 +512,12 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  z-index: 1000;
+  z-index: 9999;
   padding: 24px;
+  padding-top: 84px;
+  overflow-y: auto;
 }
 
 .dialog {
@@ -516,7 +525,7 @@
   border-radius: 12px;
   width: 100%;
   max-width: 560px;
-  max-height: 90vh;
+  max-height: calc(100vh - 104px);
   overflow-y: auto;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
@@ -581,4 +590,104 @@
 .form-hint {
   font-size: 0.75rem;
   color: #999;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .users {
+    padding: 16px;
+  }
+
+  .users-header {
+    margin-bottom: 16px;
+  }
+
+  .users-title {
+    font-size: 1.25rem;
+  }
+
+  .filter-bar {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .role-card {
+    padding: 16px;
+  }
+
+  .role-card-title {
+    font-size: 1rem;
+  }
+
+  .role-card-description {
+    font-size: 0.8125rem;
+  }
+
+  .dialog-overlay {
+    padding: 12px;
+    padding-top: 76px;
+  }
+
+  .dialog {
+    max-height: calc(100vh - 88px);
+  }
+
+  .dialog-header {
+    padding: 16px 20px;
+  }
+
+  .dialog-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .dialog-content {
+    padding: 16px 20px;
+  }
+
+  .dialog-actions {
+    padding: 12px 20px;
+    flex-direction: column;
+  }
+
+  .dialog-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .users {
+    padding: 12px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 0.8125rem;
+  }
+
+  .filter-bar {
+    padding: 12px;
+  }
+
+  .search-field input {
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .filter-field select {
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .role-card-header {
+    flex-wrap: wrap;
+  }
+
+  .role-card-count {
+    margin-left: 0;
+  }
+
+  .empty-state {
+    padding: 40px 16px !important;
+  }
 }
