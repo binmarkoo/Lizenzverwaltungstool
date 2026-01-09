@@ -1,5 +1,5 @@
-// src/pages/Settings.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import departmentService from '../services/departmentService';
 import '../stylesheets/Settings.css';
 
 // Icons als SVG-Komponenten
@@ -29,20 +29,117 @@ const CloseIcon = () => (
 
 const Settings = () => {
   const [addDialogOpen, setAddDialogOpen] = useState(false);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [newDepartment, setNewDepartment] = useState('');
+  const [editDepartment, setEditDepartment] = useState({ id: null, name: '' });
 
-  // Mock-Daten
-  const departments = [
-    { id: 1, name: 'LIS' },
-    { id: 2, name: 'IT' },
-    { id: 3, name: 'ITM' }
-  ];
+  // State für Daten vom Service
+  const [departments, setDepartments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const handleAddDepartment = () => {
-    console.log('Neue Abteilung:', newDepartment);
-    setAddDialogOpen(false);
-    setNewDepartment('');
+  // Lade Abteilungen beim Mount
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await departmentService.getAllDepartments();
+        setDepartments(data);
+      } catch (err) {
+        console.error('Fehler beim Laden der Abteilungen:', err);
+        setError('Fehler beim Laden der Abteilungen.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleAddDepartment = async () => {
+    if (!newDepartment.trim()) {
+      alert('Bitte geben Sie einen Abteilungsnamen ein.');
+      return;
+    }
+
+    try {
+      const created = await departmentService.createDepartment(newDepartment);
+      setDepartments(prev => [...prev, created]);
+      setAddDialogOpen(false);
+      setNewDepartment('');
+    } catch (err) {
+      console.error('Fehler beim Erstellen der Abteilung:', err);
+      alert('Fehler beim Erstellen der Abteilung');
+    }
   };
+
+  const handleEditClick = (dept) => {
+    setEditDepartment({ id: dept.id, name: dept.name });
+    setEditDialogOpen(true);
+  };
+
+  const handleUpdateDepartment = async () => {
+    if (!editDepartment.name.trim()) {
+      alert('Bitte geben Sie einen Abteilungsnamen ein.');
+      return;
+    }
+
+    try {
+      const updated = await departmentService.updateDepartment(editDepartment.id, editDepartment.name);
+      if (updated) {
+        setDepartments(prev => prev.map(d => d.id === editDepartment.id ? updated : d));
+        setEditDialogOpen(false);
+        setEditDepartment({ id: null, name: '' });
+      }
+    } catch (err) {
+      console.error('Fehler beim Aktualisieren der Abteilung:', err);
+      alert('Fehler beim Aktualisieren der Abteilung');
+    }
+  };
+
+  const handleDeleteDepartment = async (id) => {
+    if (!window.confirm('Möchten Sie diese Abteilung wirklich löschen?')) {
+      return;
+    }
+
+    try {
+      const success = await departmentService.deleteDepartment(id);
+      if (success) {
+        setDepartments(prev => prev.filter(d => d.id !== id));
+      }
+    } catch (err) {
+      console.error('Fehler beim Löschen der Abteilung:', err);
+      alert('Fehler beim Löschen der Abteilung');
+    }
+  };
+
+  // Loading State
+  if (loading) {
+    return (
+      <div className="settings">
+        <h1 className="settings-title">Einstellungen</h1>
+        <div className="paper" style={{ padding: '40px', textAlign: 'center' }}>
+          <p>Laden...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error State
+  if (error) {
+    return (
+      <div className="settings">
+        <h1 className="settings-title">Einstellungen</h1>
+        <div className="paper" style={{ padding: '40px', textAlign: 'center', color: '#d32f2f' }}>
+          <p>{error}</p>
+          <button className="btn btn-primary" onClick={() => window.location.reload()}>
+            Erneut versuchen
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="settings">
@@ -71,15 +168,30 @@ const Settings = () => {
             >
               <span className="department-name">{dept.name}</span>
               <div className="department-actions">
-                <button className="icon-btn icon-btn-primary">
+                <button 
+                  className="icon-btn icon-btn-primary"
+                  onClick={() => handleEditClick(dept)}
+                  title="Bearbeiten"
+                >
                   <EditIcon />
                 </button>
-                <button className="icon-btn icon-btn-error">
+                <button 
+                  className="icon-btn icon-btn-error"
+                  onClick={() => handleDeleteDepartment(dept.id)}
+                  title="Löschen"
+                >
                   <DeleteIcon />
                 </button>
               </div>
             </li>
           ))}
+          {departments.length === 0 && (
+            <li className="department-item">
+              <span className="department-name" style={{ color: '#999' }}>
+                Keine Abteilungen vorhanden
+              </span>
+            </li>
+          )}
         </ul>
       </div>
 
@@ -101,6 +213,7 @@ const Settings = () => {
                   placeholder="z.B. Marketing"
                   value={newDepartment}
                   onChange={(e) => setNewDepartment(e.target.value)}
+                  autoFocus
                 />
               </div>
             </div>
@@ -110,6 +223,40 @@ const Settings = () => {
               </button>
               <button className="btn btn-primary" onClick={handleAddDepartment}>
                 Hinzufügen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Abteilung bearbeiten Dialog */}
+      {editDialogOpen && (
+        <div className="dialog-overlay" onClick={() => setEditDialogOpen(false)}>
+          <div className="dialog dialog-small" onClick={(e) => e.stopPropagation()}>
+            <div className="dialog-header">
+              <h2>Abteilung bearbeiten</h2>
+              <button className="icon-btn" onClick={() => setEditDialogOpen(false)}>
+                <CloseIcon />
+              </button>
+            </div>
+            <div className="dialog-content">
+              <div className="form-group">
+                <label>Abteilungsname *</label>
+                <input
+                  type="text"
+                  placeholder="z.B. Marketing"
+                  value={editDepartment.name}
+                  onChange={(e) => setEditDepartment({...editDepartment, name: e.target.value})}
+                  autoFocus
+                />
+              </div>
+            </div>
+            <div className="dialog-actions">
+              <button className="btn btn-text" onClick={() => setEditDialogOpen(false)}>
+                Abbrechen
+              </button>
+              <button className="btn btn-primary" onClick={handleUpdateDepartment}>
+                Speichern
               </button>
             </div>
           </div>

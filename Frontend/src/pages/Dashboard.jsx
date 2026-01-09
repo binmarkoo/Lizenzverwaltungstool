@@ -1,4 +1,3 @@
-// src/pages/Dashboard.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/Dashboard.css';
@@ -51,7 +50,7 @@ const StatCard = ({ title, value, icon, colorClass = '' }) => (
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  // Mock-Daten für die Statistik-Karten
+  // Test-Daten für die Statistik-Karten
   const stats = {
     totalLicenses: 145,
     expiringSoon: 12,
@@ -60,7 +59,7 @@ const Dashboard = () => {
     totalUsers: 23
   };
 
-  // Mock-Daten für ablaufende Lizenzen
+  // Test-Daten für ablaufende Lizenzen
   const expiringLicenses = [
     { name: 'Adobe Creative Cloud', daysLeft: 5, department: 'Marketing' },
     { name: 'Microsoft Office 365', daysLeft: 12, department: 'IT' },
@@ -79,18 +78,21 @@ const Dashboard = () => {
           value={stats.totalLicenses}
           icon={<LicenseIcon />}
         />
+
         <StatCard
           title="Läuft bald ab"
           value={stats.expiringSoon}
           icon={<WarningIcon />}
           colorClass="warning"
         />
+        
         <StatCard
           title="Abgelaufen"
           value={stats.expired}
           icon={<ErrorIcon />}
           colorClass="error"
         />
+        
         <StatCard
           title="Aktive Benutzer"
           value={stats.totalUsers}
@@ -137,10 +139,12 @@ const Dashboard = () => {
               <span className="icon gold"><LicenseIcon /></span>
               <span>Neue Lizenz hinzufügen</span>
             </li>
+
             <li className="action-item" onClick={() => navigate('/users')}>
               <span className="icon gold"><GroupIcon /></span>
               <span>Benutzer verwalten</span>
             </li>
+
             <li className="action-item" onClick={() => navigate('/licenses')}>
               <span className="icon gold"><CheckCircleIcon /></span>
               <span>Lizenzbericht erstellen</span>

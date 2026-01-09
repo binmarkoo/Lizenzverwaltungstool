@@ -357,7 +357,7 @@
   color: #fff;
 }
 
-/* Dialog */
+/* Dialog - FIXED: höherer z-index als Header (1100) und padding-top für Header-Höhe */
 .dialog-overlay {
   position: fixed;
   top: 0;
@@ -366,11 +366,13 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
+  align-items: flex-start;  /* Changed from center to flex-start */
   justify-content: center;
-  z-index: 1300;
+  z-index: 1300;  /* Höher als Header (1100) */
   padding: 20px;
+  padding-top: 84px;  /* 64px Header-Höhe + 20px Abstand */
   animation: fadeIn 0.2s ease;
+  overflow-y: auto;  /* Ermöglicht Scrollen wenn Dialog zu groß */
 }
 
 @keyframes fadeIn {
@@ -383,11 +385,12 @@
   border-radius: 12px;
   width: 100%;
   max-width: 520px;
-  max-height: calc(100vh - 40px);
+  max-height: calc(100vh - 104px);  /* Viewport minus Header und Padding */
   display: flex;
   flex-direction: column;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   animation: slideUp 0.3s ease;
+  margin-bottom: 20px;  /* Abstand unten */
 }
 
 @keyframes slideUp {
@@ -588,4 +591,10 @@
   font-size: 0.875rem;
   color: #1976d2;
   margin: 0;
+}
+
+/* Force Dialog über alles */
+.dialog-overlay {
+  position: fixed !important;
+  z-index: 9999 !important;
 }
