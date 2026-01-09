@@ -10,7 +10,7 @@ namespace LicenseManagementTool_API.Models
 
         [Required]
         [MaxLength(100)]
-        public string Name { get; set; } = string.Empty; // Username
+        public string Name { get; set; } = string.Empty; // Benutzername
 
         [Required]
         [MaxLength(200)]
@@ -19,7 +19,7 @@ namespace LicenseManagementTool_API.Models
 
         [Required]
         [MaxLength(100)]
-        public string Password { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty; // Plain text für jetzt
 
         [Required]
         public int RoleId { get; set; }
@@ -34,10 +34,5 @@ namespace LicenseManagementTool_API.Models
         public Department Department { get; set; } = null!;
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        public bool IsActive { get; set; } = true;
-
-        // Navigation Properties
-        public ICollection<License> CreatedLicenses { get; set; } = new List<License>();
     }
 }

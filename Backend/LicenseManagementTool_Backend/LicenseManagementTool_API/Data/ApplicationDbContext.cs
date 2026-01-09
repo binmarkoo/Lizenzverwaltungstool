@@ -41,8 +41,8 @@ namespace LicenseManagementTool_API.Data
                     Password = "Admin123!", // Plain for now
                     RoleId = 1,
                     DepartmentId = 1,
-                    CreatedAt = DateTime.UtcNow,
-                    IsActive = true
+                    //CreatedAt = DateTime.UtcNow
+                    CreatedAt = new DateTime(2024, 01, 01, 0, 0, 0, DateTimeKind.Utc)
                 }
             );
         }

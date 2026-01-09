@@ -41,37 +41,6 @@ namespace LicenseManagementTool_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    Password = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    RoleId = table.Column<int>(type: "integer", nullable: false),
-                    DepartmentId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Departments_DepartmentId",
-                        column: x => x.DepartmentId,
-                        principalTable: "Departments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Users_Roles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Roles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Licenses",
                 columns: table => new
                 {
@@ -89,7 +58,6 @@ namespace LicenseManagementTool_API.Migrations
                     SearchKeywords = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     Description = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: true),
                     Status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    CreatedBy = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -102,10 +70,34 @@ namespace LicenseManagementTool_API.Migrations
                         principalTable: "Departments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    Password = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    RoleId = table.Column<int>(type: "integer", nullable: false),
+                    DepartmentId = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Licenses_Users_CreatedBy",
-                        column: x => x.CreatedBy,
-                        principalTable: "Users",
+                        name: "FK_Users_Departments_DepartmentId",
+                        column: x => x.DepartmentId,
+                        principalTable: "Departments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Users_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -155,18 +147,13 @@ namespace LicenseManagementTool_API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CreatedAt", "DepartmentId", "Email", "IsActive", "Name", "Password", "RoleId" },
-                values: new object[] { 1, new DateTime(2025, 12, 20, 14, 24, 14, 844, DateTimeKind.Utc).AddTicks(6480), 1, "admin@liebherr.com", true, "Administrator", "Admin123!", 1 });
+                columns: new[] { "Id", "CreatedAt", "DepartmentId", "Email", "Name", "Password", "RoleId" },
+                values: new object[] { 1, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), 1, "admin@liebherr.com", "Administrator", "Admin123!", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_LicenseDocuments_LicenseId",
                 table: "LicenseDocuments",
                 column: "LicenseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Licenses_CreatedBy",
-                table: "Licenses",
-                column: "CreatedBy");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Licenses_DepartmentId",
@@ -191,16 +178,16 @@ namespace LicenseManagementTool_API.Migrations
                 name: "LicenseDocuments");
 
             migrationBuilder.DropTable(
-                name: "Licenses");
-
-            migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Departments");
+                name: "Licenses");
 
             migrationBuilder.DropTable(
                 name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Departments");
         }
     }
 }

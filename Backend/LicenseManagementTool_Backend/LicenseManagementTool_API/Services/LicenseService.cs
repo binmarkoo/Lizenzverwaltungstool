@@ -9,9 +9,10 @@ namespace LicenseManagementTool_API.Services
         Task<List<LicenseResponseDto>> GetAllLicensesAsync();
         Task<LicenseResponseDto?> GetLicenseByIdAsync(int id);
         Task<List<LicenseResponseDto>> GetFilteredLicensesAsync(LicenseFilterDto filter);
-        Task<LicenseResponseDto> CreateLicenseAsync(CreateLicenseDto dto, int userId);
+        Task<LicenseResponseDto> CreateLicenseAsync(CreateLicenseDto dto);
         Task<LicenseResponseDto?> UpdateLicenseAsync(int id, UpdateLicenseDto dto);
         Task<bool> DeleteLicenseAsync(int id);
+        Task UpdateLicenseStatusesAsync(); // Background Job - für später
     }
 
     public class LicenseService : ILicenseService
@@ -41,7 +42,7 @@ namespace LicenseManagementTool_API.Services
             return licenses.Select(MapToDto).ToList();
         }
 
-        public async Task<LicenseResponseDto> CreateLicenseAsync(CreateLicenseDto dto, int userId)
+        public async Task<LicenseResponseDto> CreateLicenseAsync(CreateLicenseDto dto)
         {
             // Ablaufdatum berechnen
             var expirationDate = dto.PurchaseDate.AddMonths(dto.LicenseDurationMonths);
@@ -63,7 +64,6 @@ namespace LicenseManagementTool_API.Services
                 SearchKeywords = dto.SearchKeywords,
                 Description = dto.Description,
                 Status = status,
-                CreatedBy = userId,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
@@ -109,6 +109,23 @@ namespace LicenseManagementTool_API.Services
             return await _repository.DeleteAsync(id);
         }
 
+        public async Task UpdateLicenseStatusesAsync()
+        {
+            // Background Job: Alle Lizenz-Status aktualisieren
+            var licenses = await _repository.GetAllAsync();
+
+            foreach (var license in licenses)
+            {
+                var newStatus = GetStatus(license.ExpirationDate);
+                if (license.Status != newStatus)
+                {
+                    license.Status = newStatus;
+                    license.UpdatedAt = DateTime.UtcNow;
+                    await _repository.UpdateAsync(license.Id, license);
+                }
+            }
+        }
+
         // Helper: Status berechnen
         private string GetStatus(DateTime expirationDate)
         {
@@ -138,8 +155,6 @@ namespace LicenseManagementTool_API.Services
                 SearchKeywords = license.SearchKeywords,
                 Description = license.Description,
                 Status = license.Status,
-                CreatedBy = license.CreatedBy,
-                CreatedByName = $"{license.Creator?.Email}",
                 CreatedAt = license.CreatedAt,
                 UpdatedAt = license.UpdatedAt,
                 DocumentCount = license.Documents?.Count ?? 0

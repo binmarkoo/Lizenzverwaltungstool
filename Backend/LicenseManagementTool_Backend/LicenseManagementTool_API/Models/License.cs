@@ -50,11 +50,6 @@ namespace LicenseManagementTool_API.Models
         [MaxLength(50)]
         public string Status { get; set; } = "Active"; // Active, Expired, ExpiringSoon
 
-        public int CreatedBy { get; set; }
-
-        [ForeignKey(nameof(CreatedBy))]
-        public User Creator { get; set; } = null!;
-
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;

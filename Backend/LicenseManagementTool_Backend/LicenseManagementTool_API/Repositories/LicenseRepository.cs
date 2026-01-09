@@ -29,7 +29,6 @@ namespace LicenseManagementTool_API.Repositories
         {
             return await _context.Licenses
                 .Include(l => l.Department)
-                .Include(l => l.Creator)
                 .Include(l => l.Documents)
                 .OrderByDescending(l => l.CreatedAt)
                 .ToListAsync();
@@ -39,7 +38,6 @@ namespace LicenseManagementTool_API.Repositories
         {
             return await _context.Licenses
                 .Include(l => l.Department)
-                .Include(l => l.Creator)
                 .Include(l => l.Documents)
                 .FirstOrDefaultAsync(l => l.Id == id);
         }
@@ -48,30 +46,29 @@ namespace LicenseManagementTool_API.Repositories
         {
             var query = _context.Licenses
                 .Include(l => l.Department)
-                .Include(l => l.Creator)
                 .Include(l => l.Documents)
                 .AsQueryable();
 
-            
+            // Filter nach Lizenzname
             if (!string.IsNullOrWhiteSpace(filter.LicenseName))
             {
                 query = query.Where(l => l.LicenseName.Contains(filter.LicenseName));
             }
 
-            
+            // Filter nach Abteilung
             if (filter.DepartmentId.HasValue)
             {
                 query = query.Where(l => l.DepartmentId == filter.DepartmentId.Value);
             }
 
-            
+            // Filter nach ausführbarer Datei
             if (!string.IsNullOrWhiteSpace(filter.ExecutableFile))
             {
                 query = query.Where(l => l.ExecutableFile != null &&
                                         l.ExecutableFile.Contains(filter.ExecutableFile));
             }
 
-            
+            // Filter nach Suchbegriff
             if (!string.IsNullOrWhiteSpace(filter.SearchKeyword))
             {
                 query = query.Where(l => l.SearchKeywords != null &&

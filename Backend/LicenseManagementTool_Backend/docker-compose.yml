@@ -3,16 +3,15 @@ services:
     image: postgres:15
     container_name: license_management_db
     environment:
-      POSTGRES_DB: testdb
+      POSTGRES_DB: licensemanagementdb
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres123
-      POSTGRES_HOST_AUTH_METHOD: md5
+      POSTGRES_PASSWORD: admin
     ports:
-      - "5432:5432"
+      - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     command: >
-      postgres 
+      postgres
       -c listen_addresses='*'
       -c password_encryption=scram-sha-256
 

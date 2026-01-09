@@ -30,7 +30,6 @@ namespace LicenseManagementTool_API.Repositories
             return await _context.Users
                 .Include(u => u.Role)
                 .Include(u => u.Department)
-                .Include(u => u.CreatedLicenses)
                 .OrderBy(u => u.Name)
                 .ToListAsync();
         }
@@ -40,7 +39,6 @@ namespace LicenseManagementTool_API.Repositories
             return await _context.Users
                 .Include(u => u.Role)
                 .Include(u => u.Department)
-                .Include(u => u.CreatedLicenses)
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
@@ -70,7 +68,6 @@ namespace LicenseManagementTool_API.Repositories
             existing.Password = user.Password;
             existing.RoleId = user.RoleId;
             existing.DepartmentId = user.DepartmentId;
-            existing.IsActive = user.IsActive;
 
             await _context.SaveChangesAsync();
             return existing;

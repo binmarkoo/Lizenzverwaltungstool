@@ -106,10 +106,7 @@ namespace LicenseManagementTool_API.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                // Verwende temporär den Admin User (ID = 1) bis JWT implementiert ist
-                int currentUserId = 1;
-
-                var createdLicense = await _licenseService.CreateLicenseAsync(dto, currentUserId);
+                var createdLicense = await _licenseService.CreateLicenseAsync(dto);
 
                 return CreatedAtAction(
                     nameof(GetLicenseById),
@@ -184,29 +181,22 @@ namespace LicenseManagementTool_API.Controllers
                 return StatusCode(500, new { message = "Internal server error" });
             }
         }
-
-        /// <summary>
-        /// Aktualisiert alle Lizenz-Status (Background Job Endpoint)
-        /// Requires: Admin Rolle
-        /// </summary>
-        /// <returns>Success message</returns>
-        /// 
-
-        // TODO: Add cronjob
-        /*[HttpPost("update-statuses")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> UpdateLicenseStatuses()
-        {
-            try
-            {
-                await _licenseService.UpdateLicenseStatusesAsync();
-                return Ok(new { message = "License statuses updated successfully" });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error updating license statuses");
-                return StatusCode(500, new { message = "Internal server error" });
-            }
-        }*/
     }
+
+    // TODO: Add cronjob
+    /*[HttpPost("update-statuses")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> UpdateLicenseStatuses()
+    {
+        try
+        {
+            await _licenseService.UpdateLicenseStatusesAsync();
+            return Ok(new { message = "License statuses updated successfully" });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error updating license statuses");
+            return StatusCode(500, new { message = "Internal server error" });
+        }
+    }*/
 }

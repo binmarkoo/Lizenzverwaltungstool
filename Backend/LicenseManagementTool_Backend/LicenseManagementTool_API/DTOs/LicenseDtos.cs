@@ -43,6 +43,7 @@ namespace LicenseManagementTool_API.DTOs
         public string? Description { get; set; }
     }
 
+    // Request DTO zum Aktualisieren einer Lizenz
     public class UpdateLicenseDto
     {
         [MaxLength(200)]
@@ -77,6 +78,7 @@ namespace LicenseManagementTool_API.DTOs
         public string? Status { get; set; }
     }
 
+    // Response DTO für Lizenz-Abfragen
     public class LicenseResponseDto
     {
         public int Id { get; set; }
@@ -93,13 +95,12 @@ namespace LicenseManagementTool_API.DTOs
         public string? SearchKeywords { get; set; }
         public string? Description { get; set; }
         public string Status { get; set; } = string.Empty;
-        public int CreatedBy { get; set; }
-        public string CreatedByName { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public int DocumentCount { get; set; }
     }
 
+    // DTO für Lizenz-Filter
     public class LicenseFilterDto
     {
         public string? LicenseName { get; set; }

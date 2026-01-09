@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LicenseManagementTool_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251220142415_InitialCreate")]
+    [Migration("20251220184915_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -71,9 +71,6 @@ namespace LicenseManagementTool_API.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("integer");
-
                     b.Property<int>("DepartmentId")
                         .HasColumnType("integer");
 
@@ -124,8 +121,6 @@ namespace LicenseManagementTool_API.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CreatedBy");
 
                     b.HasIndex("DepartmentId");
 
@@ -219,9 +214,6 @@ namespace LicenseManagementTool_API.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -247,10 +239,9 @@ namespace LicenseManagementTool_API.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 12, 20, 14, 24, 14, 844, DateTimeKind.Utc).AddTicks(6480),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             DepartmentId = 1,
                             Email = "admin@liebherr.com",
-                            IsActive = true,
                             Name = "Administrator",
                             Password = "Admin123!",
                             RoleId = 1
@@ -259,19 +250,11 @@ namespace LicenseManagementTool_API.Migrations
 
             modelBuilder.Entity("LicenseManagementTool_API.Models.License", b =>
                 {
-                    b.HasOne("LicenseManagementTool_API.Models.User", "Creator")
-                        .WithMany("CreatedLicenses")
-                        .HasForeignKey("CreatedBy")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("LicenseManagementTool_API.Models.Department", "Department")
                         .WithMany("Licenses")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Creator");
 
                     b.Navigation("Department");
                 });
@@ -321,11 +304,6 @@ namespace LicenseManagementTool_API.Migrations
             modelBuilder.Entity("LicenseManagementTool_API.Models.Role", b =>
                 {
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("LicenseManagementTool_API.Models.User", b =>
-                {
-                    b.Navigation("CreatedLicenses");
                 });
 #pragma warning restore 612, 618
         }

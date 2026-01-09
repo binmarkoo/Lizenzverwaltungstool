@@ -56,7 +56,6 @@ namespace LicenseManagementTool_API.Services
                 Password = dto.Password,
                 RoleId = dto.RoleId,
                 DepartmentId = dto.DepartmentId,
-                IsActive = true,
                 CreatedAt = DateTime.UtcNow
             };
 
@@ -85,7 +84,6 @@ namespace LicenseManagementTool_API.Services
             if (dto.Password != null) user.Password = dto.Password;
             if (dto.RoleId.HasValue) user.RoleId = dto.RoleId.Value;
             if (dto.DepartmentId.HasValue) user.DepartmentId = dto.DepartmentId.Value;
-            if (dto.IsActive.HasValue) user.IsActive = dto.IsActive.Value;
 
             var updated = await _repository.UpdateAsync(id, user);
             return updated != null ? MapToDto(updated) : null;
@@ -107,9 +105,7 @@ namespace LicenseManagementTool_API.Services
                 RoleName = user.Role?.Name ?? "Unknown",
                 DepartmentId = user.DepartmentId,
                 DepartmentName = user.Department?.Name ?? "Unknown",
-                IsActive = user.IsActive,
-                CreatedAt = user.CreatedAt,
-                CreatedLicensesCount = user.CreatedLicenses?.Count ?? 0
+                CreatedAt = user.CreatedAt
             };
         }
     }
