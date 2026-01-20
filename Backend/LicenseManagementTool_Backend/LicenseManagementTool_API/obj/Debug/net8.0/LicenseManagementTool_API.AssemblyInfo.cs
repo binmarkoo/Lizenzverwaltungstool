@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LicenseManagementTool_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7073a069922ff8f50e78278dd02ea31949ea47f5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+103f90bc5ad3d4ad43a9133878d55c9854fcbfaa")]
 [assembly: System.Reflection.AssemblyProductAttribute("LicenseManagementTool_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LicenseManagementTool_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

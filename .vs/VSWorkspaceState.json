@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Backend",
+    "\\Backend\\LicenseManagementTool_Backend",
+    "\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API",
+    "\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Models"
+  ],
+  "SelectedNode": "\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Models\\User.cs",
+  "PreviewInSolutionExplorer": false
+}

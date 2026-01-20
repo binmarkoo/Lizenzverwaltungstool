@@ -144,11 +144,6 @@ const Dashboard = () => {
               <span className="icon gold"><GroupIcon /></span>
               <span>Benutzer verwalten</span>
             </li>
-
-            <li className="action-item" onClick={() => navigate('/licenses')}>
-              <span className="icon gold"><CheckCircleIcon /></span>
-              <span>Lizenzbericht erstellen</span>
-            </li>
           </ul>
         </div>
       </div>

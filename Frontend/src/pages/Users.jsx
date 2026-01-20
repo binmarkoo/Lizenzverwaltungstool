@@ -113,8 +113,7 @@ const Users = () => {
     name: '',
     email: '',
     role: 'Viewer',
-    department: '',
-    lastActive: ''
+    department: ''
   });
 
   const handleAddUser = async () => {
@@ -140,8 +139,7 @@ const Users = () => {
       name: user.name,
       email: user.email,
       role: user.role,
-      department: user.department,
-      lastActive: user.lastActive
+      department: user.department
     });
     setEditDialogOpen(true);
   };
@@ -379,7 +377,6 @@ const Users = () => {
               <th>E-Mail</th>
               <th>Rolle</th>
               <th>Abteilung</th>
-              <th>Zuletzt aktiv</th>
               <th>Aktionen</th>
             </tr>
           </thead>
@@ -403,7 +400,6 @@ const Users = () => {
                   <td>
                     <span className="chip chip-outlined">{user.department}</span>
                   </td>
-                  <td>{user.lastActive}</td>
                   <td>
                     <div className="action-buttons">
                       <button 
@@ -426,7 +422,7 @@ const Users = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="7" className="empty-state">
+                <td colSpan="6" className="empty-state">
                   <div className="empty-state-content">
                     <SearchIcon />
                     <p>Keine Benutzer gefunden</p>
@@ -579,15 +575,6 @@ const Users = () => {
                     <option key={dept} value={dept}>{dept}</option>
                   ))}
                 </select>
-              </div>
-              <div className="form-group">
-                <label>Zuletzt aktiv</label>
-                <input
-                  type="text"
-                  value={editUser.lastActive}
-                  disabled
-                  style={{ backgroundColor: '#f0f0f0', cursor: 'not-allowed' }}
-                />
               </div>
             </div>
             <div className="dialog-actions">

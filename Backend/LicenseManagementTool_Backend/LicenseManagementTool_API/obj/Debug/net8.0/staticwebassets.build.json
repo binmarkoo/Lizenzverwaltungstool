@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "EjVALMqSKRMpupHTCqOLcDvDpmcJCn+hwaRHSlkbZcU=",
+  "Hash": "AkKLMoB5Z/lkQ533hgis7g0nryohomd/mf+8bIgDk6o=",
   "Source": "LicenseManagementTool_API",
   "BasePath": "_content/LicenseManagementTool_API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }
