@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Startklar\\Projects\\gitRepos\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\LicenseManagementTool_API.csproj": {}
+    "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\LicenseManagementTool_API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Startklar\\Projects\\gitRepos\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\LicenseManagementTool_API.csproj": {
+    "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\LicenseManagementTool_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Startklar\\Projects\\gitRepos\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\LicenseManagementTool_API.csproj",
+        "projectUniqueName": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\LicenseManagementTool_API.csproj",
         "projectName": "LicenseManagementTool_API",
-        "projectPath": "C:\\Users\\Startklar\\Projects\\gitRepos\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\LicenseManagementTool_API.csproj",
-        "packagesPath": "C:\\Users\\Startklar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Startklar\\Projects\\gitRepos\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\obj\\",
+        "projectPath": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\LicenseManagementTool_API.csproj",
+        "packagesPath": "C:\\Users\\kingl\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Startklar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kingl\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -45,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -99,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.309/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\LicenseManagementTool_API.props" />
-</Project>

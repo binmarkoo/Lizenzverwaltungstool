@@ -130,11 +130,6 @@ C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\L
 C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\LicenseManagementTool_API.sourcelink.json
 C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\staticwebassets.development.json
-C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\staticwebassets\msbuild.LicenseManagementTool_API.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\staticwebassets\msbuild.build.LicenseManagementTool_API.props
-C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.LicenseManagementTool_API.props
-C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.LicenseManagementTool_API.props
-C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\scopedcss\bundle\LicenseManagementTool_API.styles.css
 C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\LicenseM.3239710A.Up2Date
 C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\LicenseManagementTool_API.dll
@@ -290,3 +285,11 @@ C:\Users\Startklar\Projects\gitRepos\Lizenzverwaltungstool\Backend\LicenseManage
 C:\Users\Startklar\Projects\gitRepos\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\LicenseManagementTool_API.pdb
 C:\Users\Startklar\Projects\gitRepos\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\LicenseManagementTool_API.genruntimeconfig.cache
 C:\Users\Startklar\Projects\gitRepos\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\ref\LicenseManagementTool_API.dll
+C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\bin\Debug\net8.0\LicenseManagementTool_API.staticwebassets.endpoints.json
+C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\kingl\HTL\Lizenzverwaltungstool\Backend\LicenseManagementTool_Backend\LicenseManagementTool_API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
