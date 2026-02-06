@@ -236,11 +236,11 @@ namespace LicenseManagementTool_API.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             DepartmentId = 1,
                             Email = "admin@liebherr.com",
                             Name = "Administrator",
-                            Password = "Admin123!",
+                            Password = "admin",
                             RoleId = 1
                         });
                 });

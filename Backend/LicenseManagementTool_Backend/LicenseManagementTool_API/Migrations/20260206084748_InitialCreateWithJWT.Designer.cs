@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LicenseManagementTool_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251220184915_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260206084748_InitialCreateWithJWT")]
+    partial class InitialCreateWithJWT
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -239,11 +239,11 @@ namespace LicenseManagementTool_API.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             DepartmentId = 1,
                             Email = "admin@liebherr.com",
                             Name = "Administrator",
-                            Password = "Admin123!",
+                            Password = "admin",
                             RoleId = 1
                         });
                 });

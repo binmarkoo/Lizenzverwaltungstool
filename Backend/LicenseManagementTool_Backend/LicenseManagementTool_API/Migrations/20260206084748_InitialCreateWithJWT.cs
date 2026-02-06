@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LicenseManagementTool_API.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialCreateWithJWT : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -148,7 +148,7 @@ namespace LicenseManagementTool_API.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "CreatedAt", "DepartmentId", "Email", "Name", "Password", "RoleId" },
-                values: new object[] { 1, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), 1, "admin@liebherr.com", "Administrator", "Admin123!", 1 });
+                values: new object[] { 1, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), 1, "admin@liebherr.com", "Administrator", "admin", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_LicenseDocuments_LicenseId",

@@ -53,7 +53,7 @@ namespace LicenseManagementTool_API.Services
             {
                 Name = dto.Name,
                 Email = dto.Email,
-                Password = dto.Password,
+                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password), //Hashing the password on creation
                 RoleId = dto.RoleId,
                 DepartmentId = dto.DepartmentId,
                 CreatedAt = DateTime.UtcNow
@@ -81,7 +81,7 @@ namespace LicenseManagementTool_API.Services
             }
 
             if (dto.Name != null) user.Name = dto.Name;
-            if (dto.Password != null) user.Password = dto.Password;
+            if (dto.Password != null) user.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
             if (dto.RoleId.HasValue) user.RoleId = dto.RoleId.Value;
             if (dto.DepartmentId.HasValue) user.DepartmentId = dto.DepartmentId.Value;
 

@@ -1,7 +1,10 @@
-using LicenseManagementTool_API.Services;
 using LicenseManagementTool_API.Data;
 using LicenseManagementTool_API.Repositories;
+using LicenseManagementTool_API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace LicenseManagementTool_API
 {
@@ -27,6 +30,30 @@ namespace LicenseManagementTool_API
 
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+
+            builder.Services.AddScoped<IAuthService, AuthService>();
+
+            var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+            var secretKey = jwtSettings["Secret"] ?? throw new InvalidOperationException("JWT Secret not configured");
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtSettings["Issuer"],
+                    ValidAudience = jwtSettings["Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+                };
+            });
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -57,6 +84,7 @@ namespace LicenseManagementTool_API
 
             app.UseCors("AllowFrontend");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();

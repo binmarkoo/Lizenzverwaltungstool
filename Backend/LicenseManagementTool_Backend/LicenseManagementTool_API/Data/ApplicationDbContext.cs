@@ -38,11 +38,10 @@ namespace LicenseManagementTool_API.Data
                     Id = 1,
                     Name = "Administrator",
                     Email = "admin@liebherr.com",
-                    Password = "Admin123!", // Plain for now
+                    Password = "admin",
                     RoleId = 1,
                     DepartmentId = 1,
-                    //CreatedAt = DateTime.UtcNow
-                    CreatedAt = new DateTime(2024, 01, 01, 0, 0, 0, DateTimeKind.Utc)
+                    CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc)
                 }
             );
         }
