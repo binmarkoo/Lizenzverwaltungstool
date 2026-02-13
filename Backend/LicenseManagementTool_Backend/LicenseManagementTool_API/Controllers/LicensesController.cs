@@ -23,9 +23,10 @@ namespace LicenseManagementTool_API.Controllers
 
         /// <summary>
         /// Gibt alle Lizenzen zurück
+        /// Alle eingeloggten User dürfen das sehen
         /// </summary>
-        /// <returns>Liste aller Lizenzen</returns>
         [HttpGet]
+        [Authorize] // ← Muss eingeloggt sein
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<LicenseResponseDto>>> GetAllLicenses()
         {
@@ -91,13 +92,13 @@ namespace LicenseManagementTool_API.Controllers
 
         /// <summary>
         /// Erstellt eine neue Lizenz
-        /// Requires: Admin oder Editor Rolle
+        /// Nur Admin und Editor dürfen das!
         /// </summary>
-        /// <param name="dto">Lizenz Daten</param>
-        /// <returns>Erstellte Lizenz</returns>
         [HttpPost]
+        [Authorize(Roles = "Admin,Editor")] // ← Admin ODER Editor
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<LicenseResponseDto>> CreateLicense(
             [FromBody] CreateLicenseDto dto)
         {
@@ -123,15 +124,14 @@ namespace LicenseManagementTool_API.Controllers
 
         /// <summary>
         /// Aktualisiert eine bestehende Lizenz
-        /// Requires: Admin oder Editor Rolle
+        /// Nur Admin und Editor!
         /// </summary>
-        /// <param name="id">Lizenz ID</param>
-        /// <param name="dto">Aktualisierte Daten</param>
-        /// <returns>Aktualisierte Lizenz</returns>
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin,Editor")] // ← Admin ODER Editor
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<LicenseResponseDto>> UpdateLicense(
             int id,
             [FromBody] UpdateLicenseDto dto)
@@ -157,13 +157,13 @@ namespace LicenseManagementTool_API.Controllers
 
         /// <summary>
         /// Löscht eine Lizenz
-        /// Requires: Admin Rolle
+        /// Nur für Admins!
         /// </summary>
-        /// <param name="id">Lizenz ID</param>
-        /// <returns>No Content</returns>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")] // ← NUR ADMINS!
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> DeleteLicense(int id)
         {
             try
@@ -178,6 +178,27 @@ namespace LicenseManagementTool_API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error deleting license {LicenseId}", id);
+                return StatusCode(500, new { message = "Internal server error" });
+            }
+        }
+
+        /// <summary>
+        /// Aktualisiert alle Lizenz-Status (Background Job Endpoint)
+        /// Requires: Admin Rolle
+        /// </summary>
+        /// <returns>Success message</returns>
+        [HttpPost("update-statuses")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdateLicenseStatuses()
+        {
+            try
+            {
+                await _licenseService.UpdateLicenseStatusesAsync();
+                return Ok(new { message = "License statuses updated successfully" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating license statuses");
                 return StatusCode(500, new { message = "Internal server error" });
             }
         }

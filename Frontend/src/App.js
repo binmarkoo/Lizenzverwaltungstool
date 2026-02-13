@@ -1,5 +1,4 @@
-// src/App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import Login from './pages/Login';
@@ -8,26 +7,51 @@ import Dashboard from './pages/Dashboard';
 import Licenses from './pages/Licenses';
 import Users from './pages/Users';
 import Settings from './pages/Settings';
+import authService from './services/authService';
 
-// Globale Styles importieren
 import './App.css';
 
 function App() {
-  // Prüfe ob Benutzer eingeloggt ist (aus localStorage)
+  //Check if user is authenticated on app load
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user).isAuthenticated : false;
+    return authService.isAuthenticated();
   });
 
-  const handleLogin = () => {
+  const [currentUser, setCurrentUser] = useState(() => {
+    return authService.getCurrentUser();
+  });
+
+  // On reload, check if user is authenticated and get user info
+  useEffect(() => {
+    const checkAuth = () => {
+      const isAuth = authService.isAuthenticated();
+      const user = authService.getCurrentUser();
+      
+      setIsAuthenticated(isAuth);
+      setCurrentUser(user);
+      
+      if (isAuth) {
+        console.log('✅ User is authenticated:', user);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  const handleLogin = (user) => {
+    console.log('🔐 User logged in:', user);
     setIsAuthenticated(true);
+    setCurrentUser(user);
   };
 
   const handleLogout = () => {
+    console.log('🚪 User logged out');
+    authService.logout();
     setIsAuthenticated(false);
+    setCurrentUser(null);
   };
 
-  // Wenn nicht eingeloggt, zeige nur Login
+  // If not authenticated → only show login page
   if (!isAuthenticated) {
     return (
       <Router>
@@ -39,14 +63,30 @@ function App() {
     );
   }
 
-  // Wenn eingeloggt, zeige alle Seiten
+  // If authenticated → show app
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout onLogout={handleLogout}><Dashboard /></Layout>} />
-        <Route path="/licenses" element={<Layout onLogout={handleLogout}><Licenses /></Layout>} />
-        <Route path="/users" element={<Layout onLogout={handleLogout}><Users /></Layout>} />
-        <Route path="/settings" element={<Layout onLogout={handleLogout}><Settings /></Layout>} />
+        <Route path="/" element={
+          <Layout onLogout={handleLogout} currentUser={currentUser}>
+            <Dashboard />
+          </Layout>
+        } />
+        <Route path="/licenses" element={
+          <Layout onLogout={handleLogout} currentUser={currentUser}>
+            <Licenses />
+          </Layout>
+        } />
+        <Route path="/users" element={
+          <Layout onLogout={handleLogout} currentUser={currentUser}>
+            <Users />
+          </Layout>
+        } />
+        <Route path="/settings" element={
+          <Layout onLogout={handleLogout} currentUser={currentUser}>
+            <Settings />
+          </Layout>
+        } />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

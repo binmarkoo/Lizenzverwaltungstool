@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import authService from '../services/authService';
 import '../stylesheets/Login.css';
 
-// Icons als SVG-Komponenten
+// Icons (gleich wie vorher)
 const LockIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
     <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
@@ -37,38 +38,47 @@ const VisibilityOffIcon = () => (
 const Login = ({ onLogin }) => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
-    username: '',
+    email: '',
     password: ''
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
 
     // Validierung
-    if (!credentials.username.trim() || !credentials.password.trim()) {
+    if (!credentials.email.trim() || !credentials.password.trim()) {
       setError('Bitte füllen Sie alle Felder aus.');
+      setLoading(false);
       return;
     }
 
-    // Simulierter Login - speichere in localStorage
-    const userData = {
-      username: credentials.username,
-      isAuthenticated: true,
-      loginTime: new Date().toISOString()
-    };
-    
-    localStorage.setItem('user', JSON.stringify(userData));
-    
-    // Callback aufrufen falls vorhanden
-    if (onLogin) {
-      onLogin(userData);
+    try {
+      // Echter API Login!
+      const { token, user } = await authService.login(
+        credentials.email, 
+        credentials.password
+      );
+
+      console.log('✅ Login successful:', user);
+
+      // Callback aufrufen
+      if (onLogin) {
+        onLogin(user);
+      }
+
+      // Zum Dashboard navigieren
+      navigate('/');
+    } catch (err) {
+      console.error('❌ Login error:', err);
+      setError(err.message || 'Login fehlgeschlagen');
+    } finally {
+      setLoading(false);
     }
-    
-    // Zum Dashboard navigieren
-    navigate('/');
   };
 
   const handleClickShowPassword = () => {
@@ -78,7 +88,7 @@ const Login = ({ onLogin }) => {
   return (
     <div className="login-page">
       <div className="login-container">
-        {/* Neutraler Header Bereich */}
+        {/* Header */}
         <div className="login-header-card">
           <div className="header-icon">
             <AdminIcon />
@@ -87,7 +97,7 @@ const Login = ({ onLogin }) => {
           <p className="system-name">Lizenzverwaltungssystem</p>
         </div>
 
-        {/* Login Formular */}
+        {/* Login Form */}
         <div className="login-form-card">
           <div className="form-header">
             <div className="lock-avatar">
@@ -107,17 +117,18 @@ const Login = ({ onLogin }) => {
             <div className="input-group">
               <span className="input-icon"><PersonIcon /></span>
               <input
-                type="text"
-                id="username"
-                name="username"
-                placeholder="Benutzername"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email"
                 required
                 autoFocus
-                autoComplete="username"
-                value={credentials.username}
-                onChange={(e) => setCredentials({...credentials, username: e.target.value})}
+                autoComplete="email"
+                value={credentials.email}
+                onChange={(e) => setCredentials({...credentials, email: e.target.value})}
+                disabled={loading}
               />
-              <label htmlFor="username">Benutzername</label>
+              <label htmlFor="email">Email</label>
             </div>
 
             <div className="input-group">
@@ -131,6 +142,7 @@ const Login = ({ onLogin }) => {
                 autoComplete="current-password"
                 value={credentials.password}
                 onChange={(e) => setCredentials({...credentials, password: e.target.value})}
+                disabled={loading}
               />
               <label htmlFor="password">Passwort</label>
               <button
@@ -138,13 +150,14 @@ const Login = ({ onLogin }) => {
                 className="password-toggle"
                 onClick={handleClickShowPassword}
                 aria-label="Passwort anzeigen"
+                disabled={loading}
               >
                 {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
               </button>
             </div>
 
-            <button type="submit" className="login-button">
-              Anmelden
+            <button type="submit" className="login-button" disabled={loading}>
+              {loading ? 'Anmeldung läuft...' : 'Anmelden'}
             </button>
           </form>
 

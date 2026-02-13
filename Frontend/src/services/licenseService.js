@@ -1,14 +1,8 @@
 import axios from 'axios';
+import { authenticatedApi } from './authService'; // Import der Auth-API
 
-const API_BASE_URL = 'https://localhost:7023/api/';
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  timeout: 10000,
-});
+// Verwende die authenticated API statt neue axios instance
+const api = authenticatedApi;
 
 
 export const getAllLicenses = async () => {
