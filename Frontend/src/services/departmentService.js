@@ -1,25 +1,20 @@
-// Test-Daten - Diese werden später durch echte API-Aufrufe ersetzt
-const mockDepartments = [
-  { id: 1, name: 'LIS' },
-  { id: 2, name: 'IT' },
-  { id: 3, name: 'ITM' }
-];
+import { authenticatedApi } from './authService';
 
-let nextId = 4;
+// Verwende die authenticated API instance aus authService
+const api = authenticatedApi;
 
 /**
  * Holt alle Abteilungen
  * @returns {Promise<Array>} Array mit allen Abteilungen
  */
 export const getAllDepartments = async () => {
-  // TODO: Ersetze dies durch den echten API-Aufruf
-  // Beispiel: return await axios.get('/api/departments').then(res => res.data);
-  
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([...mockDepartments]);
-    }, 100);
-  });
+  try {
+    const response = await api.get('/departments');
+    return response.data;
+  } catch (error) {
+    console.error('Fehler beim Laden der Abteilungen:', error);
+    throw error;
+  }
 };
 
 /**
@@ -28,15 +23,16 @@ export const getAllDepartments = async () => {
  * @returns {Promise<Object|null>} Die Abteilung oder null
  */
 export const getDepartmentById = async (id) => {
-  // TODO: Ersetze dies durch den echten API-Aufruf
-  // Beispiel: return await axios.get(`/api/departments/${id}`).then(res => res.data);
-  
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const department = mockDepartments.find(d => d.id === id);
-      resolve(department || null);
-    }, 100);
-  });
+  try {
+    const response = await api.get(`/departments/${id}`);
+    return response.data;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return null;
+    }
+    console.error('Fehler beim Laden der Abteilung:', error);
+    throw error;
+  }
 };
 
 /**
@@ -45,19 +41,13 @@ export const getDepartmentById = async (id) => {
  * @returns {Promise<Object>} Die erstellte Abteilung
  */
 export const createDepartment = async (name) => {
-  // TODO: Ersetze dies durch den echten API-Aufruf
-  // Beispiel: return await axios.post('/api/departments', { name }).then(res => res.data);
-  
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const newDepartment = {
-        id: nextId++,
-        name: name.trim()
-      };
-      mockDepartments.push(newDepartment);
-      resolve(newDepartment);
-    }, 100);
-  });
+  try {
+    const response = await api.post('/departments', { name });
+    return response.data;
+  } catch (error) {
+    console.error('Fehler beim Erstellen der Abteilung:', error);
+    throw error;
+  }
 };
 
 /**
@@ -67,20 +57,16 @@ export const createDepartment = async (name) => {
  * @returns {Promise<Object|null>} Die aktualisierte Abteilung oder null
  */
 export const updateDepartment = async (id, name) => {
-  // TODO: Ersetze dies durch den echten API-Aufruf
-  // Beispiel: return await axios.put(`/api/departments/${id}`, { name }).then(res => res.data);
-  
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const index = mockDepartments.findIndex(d => d.id === id);
-      if (index !== -1) {
-        mockDepartments[index] = { ...mockDepartments[index], name: name.trim() };
-        resolve(mockDepartments[index]);
-      } else {
-        resolve(null);
-      }
-    }, 100);
-  });
+  try {
+    const response = await api.put(`/departments/${id}`, { name });
+    return response.data;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return null;
+    }
+    console.error('Fehler beim Aktualisieren der Abteilung:', error);
+    throw error;
+  }
 };
 
 /**
@@ -89,20 +75,16 @@ export const updateDepartment = async (id, name) => {
  * @returns {Promise<boolean>} true wenn erfolgreich gelöscht
  */
 export const deleteDepartment = async (id) => {
-  // TODO: Ersetze dies durch den echten API-Aufruf
-  // Beispiel: return await axios.delete(`/api/departments/${id}`).then(() => true);
-  
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const index = mockDepartments.findIndex(d => d.id === id);
-      if (index !== -1) {
-        mockDepartments.splice(index, 1);
-        resolve(true);
-      } else {
-        resolve(false);
-      }
-    }, 100);
-  });
+  try {
+    await api.delete(`/departments/${id}`);
+    return true;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      return false;
+    }
+    console.error('Fehler beim Löschen der Abteilung:', error);
+    throw error;
+  }
 };
 
 /**
@@ -110,14 +92,13 @@ export const deleteDepartment = async (id) => {
  * @returns {Promise<Array<string>>} Array mit Abteilungsnamen
  */
 export const getDepartmentNames = async () => {
-  // TODO: Ersetze dies durch den echten API-Aufruf
-  // Beispiel: return await axios.get('/api/departments/names').then(res => res.data);
-  
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(mockDepartments.map(d => d.name));
-    }, 50);
-  });
+  try {
+    const departments = await getAllDepartments();
+    return departments.map(d => d.name);
+  } catch (error) {
+    console.error('Fehler beim Laden der Abteilungsnamen:', error);
+    throw error;
+  }
 };
 
 // Default export für einfachen Import

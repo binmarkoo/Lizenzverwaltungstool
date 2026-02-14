@@ -1,5 +1,6 @@
 ﻿using LicenseManagementTool_API.DTOs;
 using LicenseManagementTool_API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LicenseManagementTool_API.Controllers
@@ -20,8 +21,12 @@ namespace LicenseManagementTool_API.Controllers
 
         /// <summary>
         /// Gibt alle Rollen zurück (Read-Only)
+        /// Alle eingeloggten Benutzer dürfen Rollen sehen
         /// </summary>
         [HttpGet]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<List<RoleResponseDto>>> GetAll()
         {
             try
@@ -40,6 +45,10 @@ namespace LicenseManagementTool_API.Controllers
         /// Gibt eine spezifische Rolle zurück (Read-Only)
         /// </summary>
         [HttpGet("{id}")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<RoleResponseDto>> GetById(int id)
         {
             try

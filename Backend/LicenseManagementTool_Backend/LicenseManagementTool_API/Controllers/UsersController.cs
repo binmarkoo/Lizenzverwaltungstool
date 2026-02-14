@@ -1,5 +1,6 @@
 ﻿using LicenseManagementTool_API.DTOs;
 using LicenseManagementTool_API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LicenseManagementTool_API.Controllers
@@ -22,7 +23,9 @@ namespace LicenseManagementTool_API.Controllers
         /// Gibt alle Benutzer zurück
         /// </summary>
         [HttpGet]
+        [Authorize(Roles = "Admin,Editor")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<List<UserResponseDto>>> GetAllUsers()
         {
             try
@@ -41,8 +44,10 @@ namespace LicenseManagementTool_API.Controllers
         /// Gibt einen spezifischen Benutzer anhand der ID zurück
         /// </summary>
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Editor")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<UserResponseDto>> GetUserById(int id)
         {
             try
@@ -65,8 +70,10 @@ namespace LicenseManagementTool_API.Controllers
         /// Sucht einen Benutzer anhand der Email
         /// </summary>
         [HttpGet("email/{email}")]
+        [Authorize(Roles = "Admin,Editor")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<UserResponseDto>> GetUserByEmail(string email)
         {
             try
@@ -89,8 +96,10 @@ namespace LicenseManagementTool_API.Controllers
         /// Erstellt einen neuen Benutzer
         /// </summary>
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<UserResponseDto>> CreateUser([FromBody] CreateUserDto dto)
         {
             try
@@ -121,9 +130,11 @@ namespace LicenseManagementTool_API.Controllers
         /// Aktualisiert einen bestehenden Benutzer
         /// </summary>
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<UserResponseDto>> UpdateUser(int id, [FromBody] UpdateUserDto dto)
         {
             try
@@ -153,8 +164,10 @@ namespace LicenseManagementTool_API.Controllers
         /// Löscht einen Benutzer
         /// </summary>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> DeleteUser(int id)
         {
             try

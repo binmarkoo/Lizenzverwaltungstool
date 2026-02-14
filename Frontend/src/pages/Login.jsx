@@ -64,7 +64,7 @@ const Login = ({ onLogin }) => {
         credentials.password
       );
 
-      console.log('✅ Login successful:', user);
+      console.log('Login successful:', user);
 
       // Callback aufrufen
       if (onLogin) {

@@ -1,16 +1,10 @@
 import axios from 'axios';
-
+import { authenticatedApi } from './authService';
 // API Base URL
 const API_BASE_URL = 'https://localhost:7023/api';
 
 // Axios Instance
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  timeout: 10000,
-});
+const api = authenticatedApi;
 
 // ==========================================
 // API CALLS

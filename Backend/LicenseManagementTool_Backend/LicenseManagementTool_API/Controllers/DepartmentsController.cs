@@ -1,5 +1,6 @@
 ﻿using LicenseManagementTool_API.DTOs;
 using LicenseManagementTool_API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LicenseManagementTool_API.Controllers
@@ -19,6 +20,9 @@ namespace LicenseManagementTool_API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<List<DepartmentResponseDto>>> GetAll()
         {
             try
@@ -33,7 +37,15 @@ namespace LicenseManagementTool_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Gibt eine spezifische Abteilung zurück
+        /// Alle eingeloggten Benutzer dürfen das sehen
+        /// </summary>
         [HttpGet("{id}")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<DepartmentResponseDto>> GetById(int id)
         {
             try
@@ -50,7 +62,15 @@ namespace LicenseManagementTool_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Erstellt eine neue Abteilung
+        /// Nur für Admins!
+        /// </summary>
         [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<DepartmentResponseDto>> Create([FromBody] CreateDepartmentDto dto)
         {
             try
@@ -68,7 +88,16 @@ namespace LicenseManagementTool_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Aktualisiert eine bestehende Abteilung
+        /// Nur für Admins!
+        /// </summary>
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<DepartmentResponseDto>> Update(int id, [FromBody] UpdateDepartmentDto dto)
         {
             try
@@ -88,7 +117,15 @@ namespace LicenseManagementTool_API.Controllers
             }
         }
 
+        /// <summary>
+        /// Löscht eine Abteilung
+        /// Nur für Admins!
+        /// </summary>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> Delete(int id)
         {
             try
