@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import authService from '../../services/authService';
 import '../../stylesheets/Sidebar.css';
 
 // Icons als SVG-Komponenten
@@ -30,19 +31,49 @@ const SettingsIcon = () => (
 const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  
+  // Hole aktuelle User-Daten
+  const currentUser = authService.getCurrentUser();
+  const userRole = currentUser?.roleName || 'Viewer';
 
+  // Definiere welche Menüpunkte für welche Rollen sichtbar sind
   const menuItems = [
-    { text: 'Dashboard', icon: <DashboardIcon />, path: '/' },
-    { text: 'Lizenzen', icon: <LicenseIcon />, path: '/licenses' },
-    { text: 'Benutzer', icon: <PeopleIcon />, path: '/users' },
-    { text: 'Einstellungen', icon: <SettingsIcon />, path: '/settings' },
+    { 
+      text: 'Dashboard', 
+      icon: <DashboardIcon />, 
+      path: '/',
+      roles: ['Admin', 'Editor', 'Viewer'] // Alle dürfen Dashboard sehen
+    },
+    { 
+      text: 'Lizenzen', 
+      icon: <LicenseIcon />, 
+      path: '/licenses',
+      roles: ['Admin', 'Editor', 'Viewer'] // Alle dürfen Lizenzen sehen
+    },
+    { 
+      text: 'Benutzer', 
+      icon: <PeopleIcon />, 
+      path: '/users',
+      roles: ['Admin', 'Editor'] // Nur Admin und Editor dürfen Benutzer verwalten
+    },
+    { 
+      text: 'Einstellungen', 
+      icon: <SettingsIcon />, 
+      path: '/settings',
+      roles: ['Admin'] // Nur Admin darf Einstellungen sehen
+    },
   ];
+
+  // Filtere Menüpunkte basierend auf User-Rolle
+  const visibleMenuItems = menuItems.filter(item => 
+    item.roles.includes(userRole)
+  );
 
   return (
     <aside className="sidebar">
       <nav className="sidebar-nav">
         <ul className="sidebar-menu">
-          {menuItems.map((item) => (
+          {visibleMenuItems.map((item) => (
             <li key={item.text}>
               <button
                 className={`sidebar-item ${location.pathname === item.path ? 'active' : ''}`}
@@ -59,6 +90,14 @@ const Sidebar = () => {
           ))}
         </ul>
       </nav>
+      
+      {/* User-Info am unteren Rand der Sidebar */}
+      <div className="sidebar-footer">
+        <div className="sidebar-user-info">
+          <span className="sidebar-user-name">{currentUser?.name || 'Benutzer'}</span>
+          <span className="sidebar-user-role">{userRole}</span>
+        </div>
+      </div>
     </aside>
   );
 };

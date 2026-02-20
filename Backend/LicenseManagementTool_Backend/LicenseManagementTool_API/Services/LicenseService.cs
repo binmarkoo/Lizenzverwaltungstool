@@ -12,7 +12,7 @@ namespace LicenseManagementTool_API.Services
         Task<LicenseResponseDto> CreateLicenseAsync(CreateLicenseDto dto);
         Task<LicenseResponseDto?> UpdateLicenseAsync(int id, UpdateLicenseDto dto);
         Task<bool> DeleteLicenseAsync(int id);
-        Task UpdateLicenseStatusesAsync(); // Background Job - für später
+        Task UpdateLicenseStatusesAsync(); // Background Job for later (if Time)
     }
 
     public class LicenseService : ILicenseService
@@ -111,7 +111,7 @@ namespace LicenseManagementTool_API.Services
 
         public async Task UpdateLicenseStatusesAsync()
         {
-            // Background Job: Alle Lizenz-Status aktualisieren
+            // Background Job alle Lizenz-Status aktualisieren
             var licenses = await _repository.GetAllAsync();
 
             foreach (var license in licenses)
@@ -126,7 +126,7 @@ namespace LicenseManagementTool_API.Services
             }
         }
 
-        // Helper: Status berechnen
+        //Helper für Status berechnen
         private string GetStatus(DateTime expirationDate)
         {
             var daysUntil = (expirationDate - DateTime.UtcNow).TotalDays;
@@ -136,7 +136,7 @@ namespace LicenseManagementTool_API.Services
             return "Active";
         }
 
-        // Helper: Entity zu DTO
+        //Helper Entity zu DTO
         private LicenseResponseDto MapToDto(License license)
         {
             return new LicenseResponseDto

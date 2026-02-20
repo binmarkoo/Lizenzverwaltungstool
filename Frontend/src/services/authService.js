@@ -130,7 +130,7 @@ api.interceptors.request.use(
     
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      console.log('🔑 Added token to request:', config.url);
+      console.log('Added token to request:', config.url);
     }
     
     return config;
@@ -149,7 +149,7 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       console.warn('Unauthorized! Logging out...');
       
-      // Tokeen invalid
+      // Token invalid
       logout();
       
       // Redirect to login page if not already there

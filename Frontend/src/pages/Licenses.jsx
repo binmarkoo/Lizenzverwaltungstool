@@ -98,10 +98,11 @@ const Licenses = () => {
 
   const [newLicense, setNewLicense] = useState({
     name: '',
+    key: '',
     count: '',
     department: '',
     purchaseDate: '',
-    duration: '',
+    duration: 12,
     renewalType: 'Normal',
     file: '',
     searchTerm: '',
@@ -374,10 +375,11 @@ const Licenses = () => {
             <tr>
               <th>ID</th>
               <th>Name</th>
+              <th>Licensekey</th>
               <th>Anzahl</th>
               <th>Abteilung</th>
               <th>Kaufdatum</th>
-              <th>Dauer (Tage)</th>
+              <th>Dauer (Monate)</th>
               <th>Typ</th>
               <th>Status</th>
               <th>Datei</th>
@@ -394,6 +396,9 @@ const Licenses = () => {
                   <td>{license.id}</td>
                   <td>
                     <span className="license-name">{license.name}</span>
+                  </td>
+                  <td>
+                    <span className="license-key">{license.licenseKey}</span>
                   </td>
                   <td>{license.count}</td>
                   <td>
@@ -484,6 +489,16 @@ const Licenses = () => {
                   onChange={(e) => setNewLicense({...newLicense, name: e.target.value})}
                 />
               </div>
+              <div className="form-group">
+                <label>Lizenzschlüssel</label>
+                <input
+                  type="text"
+                  name="licenseKey"
+                  value={newLicense.licenseKey}
+                  onChange={(e) => setNewLicense({...newLicense, licenseKey: e.target.value})}
+                  placeholder="z.B. XXXX-XXXX-XXXX-XXXX"
+                />
+              </div>
               <div className="form-row">
                 <div className="form-group">
                   <label>Anzahl *</label>
@@ -519,7 +534,7 @@ const Licenses = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Dauer (Tage) *</label>
+                  <label>Dauer (Monate) *</label>
                   <input
                     type="number"
                     placeholder="365"

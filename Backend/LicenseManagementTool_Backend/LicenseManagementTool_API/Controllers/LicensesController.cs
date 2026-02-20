@@ -25,8 +25,9 @@ namespace LicenseManagementTool_API.Controllers
         /// Gibt alle Lizenzen zurück
         /// Alle eingeloggten User dürfen das sehen
         /// </summary>
+
         [HttpGet]
-        [Authorize] // ← Muss eingeloggt sein
+        [Authorize] //Needs to be logged in
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<LicenseResponseDto>>> GetAllLicenses()
         {
@@ -92,10 +93,11 @@ namespace LicenseManagementTool_API.Controllers
 
         /// <summary>
         /// Erstellt eine neue Lizenz
-        /// Nur Admin und Editor dürfen das!
+        /// Only Admin and Editor
         /// </summary>
         [HttpPost]
-        [Authorize(Roles = "Admin,Editor")] // ← Admin ODER Editor
+        [Authorize(Roles = "Admin,Editor")]
+
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
