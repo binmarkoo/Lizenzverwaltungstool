@@ -9,11 +9,11 @@ import Users from './pages/Users';
 import Settings from './pages/Settings';
 import authService from './services/authService';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
+import { FilterProvider } from './context/FilterContext'; // NEU
 
 import './App.css';
 
 function App() {
-  //Check if user is authenticated on app load
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return authService.isAuthenticated();
   });
@@ -22,7 +22,6 @@ function App() {
     return authService.getCurrentUser();
   });
 
-  // On reload, check if user is authenticated and get user info
   useEffect(() => {
     const checkAuth = () => {
       const isAuth = authService.isAuthenticated();
@@ -52,7 +51,6 @@ function App() {
     setCurrentUser(null);
   };
 
-  // If not authenticated → only show login page
   if (!isAuthenticated) {
     return (
       <Router>
@@ -64,49 +62,45 @@ function App() {
     );
   }
 
-  // If authenticated → show app with protected routes
   return (
     <Router>
-      <Routes>
-        {/* Dashboard - Alle Rollen */}
-        <Route path="/" element={
-          <ProtectedRoute>
-            <Layout onLogout={handleLogout} currentUser={currentUser}>
-              <Dashboard />
-            </Layout>
-          </ProtectedRoute>
-        } />
-        
-        {/* Lizenzen - Alle Rollen */}
-        <Route path="/licenses" element={
-          <ProtectedRoute>
-            <Layout onLogout={handleLogout} currentUser={currentUser}>
-              <Licenses />
-            </Layout>
-          </ProtectedRoute>
-        } />
-        
-        {/* Benutzer - Nur Admin und Editor */}
-        <Route path="/users" element={
-          <ProtectedRoute requiredRole={['Admin', 'Editor']}>
-            <Layout onLogout={handleLogout} currentUser={currentUser}>
-              <Users />
-            </Layout>
-          </ProtectedRoute>
-        } />
-        
-        {/* Einstellungen - Nur Admin */}
-        <Route path="/settings" element={
-          <ProtectedRoute requiredRole="Admin">
-            <Layout onLogout={handleLogout} currentUser={currentUser}>
-              <Settings />
-            </Layout>
-          </ProtectedRoute>
-        } />
-        
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+      <FilterProvider> {/* NEU */}
+        <Routes>
+          <Route path="/" element={
+            <ProtectedRoute>
+              <Layout onLogout={handleLogout} currentUser={currentUser}>
+                <Dashboard />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/licenses" element={
+            <ProtectedRoute>
+              <Layout onLogout={handleLogout} currentUser={currentUser}>
+                <Licenses />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/users" element={
+            <ProtectedRoute requiredRole={['Admin', 'Editor']}>
+              <Layout onLogout={handleLogout} currentUser={currentUser}>
+                <Users />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/settings" element={
+            <ProtectedRoute requiredRole="Admin">
+              <Layout onLogout={handleLogout} currentUser={currentUser}>
+                <Settings />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </FilterProvider>
     </Router>
   );
 }

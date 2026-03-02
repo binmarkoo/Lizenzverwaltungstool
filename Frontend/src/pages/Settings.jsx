@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import departmentService from '../services/departmentService';
+import { useFilters } from '../context/FilterContext';
 import '../stylesheets/Settings.css';
 
 // Icons als SVG-Komponenten
@@ -28,17 +29,15 @@ const CloseIcon = () => (
 );
 
 const Settings = () => {
+  const { refreshDepartments } = useFilters();
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [newDepartment, setNewDepartment] = useState('');
   const [editDepartment, setEditDepartment] = useState({ id: null, name: '' });
-
-  // State für Daten vom Service
   const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Lade Abteilungen beim Mount
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,7 +46,6 @@ const Settings = () => {
         const data = await departmentService.getAllDepartments();
         setDepartments(data);
       } catch (err) {
-        console.error('Fehler beim Laden der Abteilungen:', err);
         setError('Fehler beim Laden der Abteilungen.');
       } finally {
         setLoading(false);
@@ -66,10 +64,10 @@ const Settings = () => {
     try {
       const created = await departmentService.createDepartment(newDepartment);
       setDepartments(prev => [...prev, created]);
+      refreshDepartments();
       setAddDialogOpen(false);
       setNewDepartment('');
     } catch (err) {
-      console.error('Fehler beim Erstellen der Abteilung:', err);
       alert('Fehler beim Erstellen der Abteilung');
     }
   };
@@ -89,11 +87,11 @@ const Settings = () => {
       const updated = await departmentService.updateDepartment(editDepartment.id, editDepartment.name);
       if (updated) {
         setDepartments(prev => prev.map(d => d.id === editDepartment.id ? updated : d));
+        refreshDepartments(); // NEU: Context aktualisieren
         setEditDialogOpen(false);
         setEditDepartment({ id: null, name: '' });
       }
     } catch (err) {
-      console.error('Fehler beim Aktualisieren der Abteilung:', err);
       alert('Fehler beim Aktualisieren der Abteilung');
     }
   };
@@ -107,9 +105,9 @@ const Settings = () => {
       const success = await departmentService.deleteDepartment(id);
       if (success) {
         setDepartments(prev => prev.filter(d => d.id !== id));
+        refreshDepartments(); // NEU: Context aktualisieren
       }
     } catch (err) {
-      console.error('Fehler beim Löschen der Abteilung:', err);
       alert('Fehler beim Löschen der Abteilung');
     }
   };

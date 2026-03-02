@@ -24,6 +24,9 @@ namespace LicenseManagementTool_API
             builder.Services.AddScoped<ILicenseRepository, LicenseRepository>();
             builder.Services.AddScoped<ILicenseService, LicenseService>();
 
+            builder.Services.AddScoped<ILicenseDocumentRepository, LicenseDocumentRepository>();
+            builder.Services.AddScoped<ILicenseDocumentService, LicenseDocumentService>();
+
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IUserService, UserService>();
 

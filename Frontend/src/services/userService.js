@@ -6,14 +6,6 @@ const API_BASE_URL = 'https://localhost:7023/api';
 // Axios Instance
 const api = authenticatedApi;
 
-// ==========================================
-// API CALLS
-// ==========================================
-
-/**
- * Holt alle Benutzer
- * @returns {Promise<Array>} Array mit allen Benutzern
- */
 export const getAllUsers = async () => {
   try {
     const response = await api.get('/users');
@@ -42,11 +34,6 @@ export const getUserById = async (id) => {
   }
 };
 
-/**
- * Erstellt einen neuen Benutzer
- * @param {Object} userData - Die Benutzerdaten
- * @returns {Promise<Object>} Der erstellte Benutzer
- */
 export const createUser = async (userData) => {
   try {
     const apiData = mapUserToApi(userData);
@@ -62,17 +49,11 @@ export const createUser = async (userData) => {
     return mapUserFromApi(response.data);
   } catch (error) {
     // Zeige detaillierte Fehlerinfo
-    console.error('❌ Error creating user:', error.response?.data);
+    console.error('Error creating user:', error.response?.data);
     throw error;
   }
 };
 
-/**
- * Aktualisiert einen bestehenden Benutzer
- * @param {number} id - Die Benutzer-ID
- * @param {Object} userData - Die aktualisierten Benutzerdaten
- * @returns {Promise<Object|null>} Der aktualisierte Benutzer oder null
- */
 export const updateUser = async (id, userData) => {
   try {
     const apiData = mapUserToApi(userData);
@@ -87,11 +68,6 @@ export const updateUser = async (id, userData) => {
   }
 };
 
-/**
- * Löscht einen Benutzer
- * @param {number} id - Die Benutzer-ID
- * @returns {Promise<boolean>} true wenn erfolgreich gelöscht
- */
 export const deleteUser = async (id) => {
   try {
     await api.delete(`/users/${id}`);
@@ -105,10 +81,6 @@ export const deleteUser = async (id) => {
   }
 };
 
-/**
- * Holt die verfügbaren Filter-Optionen
- * @returns {Promise<Object>} Objekt mit roles und departments
- */
 export const getFilterOptions = async () => {
   try {
     // Departments dynamisch von API holen
@@ -117,40 +89,32 @@ export const getFilterOptions = async () => {
     
     return {
       roles: [
-        { value: 'Admin', label: 'Admin - Volle Verwaltung', color: 'error' },
-        { value: 'Editor', label: 'Editor - Lizenzen bearbeiten', color: 'primary' },
-        { value: 'Viewer', label: 'Viewer - Nur Anzeige', color: 'default' },
-        { value: 'Lizenzuser', label: 'Lizenzuser - Lizenznutzer', color: 'success' }
+        { value: 'Admin', label: 'Admin - Full access', color: 'error' },
+        { value: 'Editor', label: 'Editor - Edit licenses', color: 'primary' },
+        { value: 'Viewer', label: 'Viewer - Only view', color: 'default' },
+        { value: 'Licenseuser', label: 'Licenseuser - License user', color: 'success' }
       ],
-      departments: departments, // Dynamisch von API!
-      roleFilters: ['Alle Rollen', 'Admin', 'Editor', 'Viewer', 'Lizenzuser'],
-      departmentFilters: ['Alle Abteilungen', ...departments] // Auch hier!
+      departments: departments,
+      roleFilters: ['All Roles', 'Admin', 'Editor', 'Viewer', 'Licenseuser'],
+      departmentFilters: ['All Departments', ...departments]
     };
   } catch (error) {
     // Fallback bei Fehler
     console.error('Fehler beim Laden der Filter-Optionen:', error);
     return {
       roles: [
-        { value: 'Admin', label: 'Admin - Volle Verwaltung', color: 'error' },
-        { value: 'Editor', label: 'Editor - Lizenzen bearbeiten', color: 'primary' },
-        { value: 'Viewer', label: 'Viewer - Nur Anzeige', color: 'default' },
-        { value: 'Lizenzuser', label: 'Lizenzuser - Lizenznutzer', color: 'success' }
+        { value: 'Admin', label: 'Admin - Full access', color: 'error' },
+        { value: 'Editor', label: 'Editor - Edit licenses', color: 'primary' },
+        { value: 'Viewer', label: 'Viewer - Only view', color: 'default' },
+        { value: 'Licenseuser', label: 'Licenseuser - License user', color: 'success' }
       ],
-      departments: ['IT', 'HR', 'Finance', 'Marketing'],
-      roleFilters: ['Alle Rollen', 'Admin', 'Editor', 'Viewer', 'Lizenzuser'],
-      departmentFilters: ['Alle Abteilungen', 'IT', 'HR', 'Finance', 'Marketing']
+      departments: ['IT', 'ITM', 'LIS'],
+      roleFilters: ['All Roles', 'Admin', 'Editor', 'Viewer', 'Licenseuser'],
+      departmentFilters: ['All Departments', 'IT', 'ITM', 'LIS']
     };
   }
 };
 
-// ==========================================
-// MAPPING FUNCTIONS
-// ==========================================
-
-/**
- * Mapped API Response zu Frontend Format
- * Backend (C# DTO) → Frontend (JavaScript)
- */
 const mapUserFromApi = (apiUser) => {
   return {
     id: apiUser.id?.toString() || '',
@@ -164,18 +128,11 @@ const mapUserFromApi = (apiUser) => {
   };
 };
 
-/**
- * Mapped mehrere API Responses
- */
 const mapUsersFromApi = (apiUsers) => {
   if (!Array.isArray(apiUsers)) return [];
   return apiUsers.map(mapUserFromApi);
 };
 
-/**
- * Mapped Frontend Daten zu API Format
- * Frontend (JavaScript) → Backend (C# DTO)
- */
 const mapUserToApi = (frontendUser) => {
   console.log('🔄 Mapping Frontend User:', frontendUser);
   
@@ -216,9 +173,7 @@ const mapUserToApi = (frontendUser) => {
   return apiData;
 };
 
-/*
- * Formatiert Datum von API (ISO) zu Frontend (DD.MM.YYYY)
- */
+
 const formatDateFromApi = (isoDate) => {
   if (!isoDate) return '';
   

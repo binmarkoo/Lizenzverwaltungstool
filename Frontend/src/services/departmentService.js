@@ -1,12 +1,8 @@
 import { authenticatedApi } from './authService';
 
-// Verwende die authenticated API instance aus authService
+//Verwende dauthenticated API instance aus authService
 const api = authenticatedApi;
 
-/**
- * Holt alle Abteilungen
- * @returns {Promise<Array>} Array mit allen Abteilungen
- */
 export const getAllDepartments = async () => {
   try {
     const response = await api.get('/departments');
@@ -35,11 +31,6 @@ export const getDepartmentById = async (id) => {
   }
 };
 
-/**
- * Erstellt eine neue Abteilung
- * @param {string} name - Der Abteilungsname
- * @returns {Promise<Object>} Die erstellte Abteilung
- */
 export const createDepartment = async (name) => {
   try {
     const response = await api.post('/departments', { name });
@@ -50,12 +41,6 @@ export const createDepartment = async (name) => {
   }
 };
 
-/**
- * Aktualisiert eine bestehende Abteilung
- * @param {number} id - Die Abteilungs-ID
- * @param {string} name - Der neue Abteilungsname
- * @returns {Promise<Object|null>} Die aktualisierte Abteilung oder null
- */
 export const updateDepartment = async (id, name) => {
   try {
     const response = await api.put(`/departments/${id}`, { name });
@@ -69,11 +54,6 @@ export const updateDepartment = async (id, name) => {
   }
 };
 
-/**
- * Löscht eine Abteilung
- * @param {number} id - Die Abteilungs-ID
- * @returns {Promise<boolean>} true wenn erfolgreich gelöscht
- */
 export const deleteDepartment = async (id) => {
   try {
     await api.delete(`/departments/${id}`);
@@ -87,10 +67,6 @@ export const deleteDepartment = async (id) => {
   }
 };
 
-/**
- * Holt die Abteilungsnamen als einfaches Array (für Dropdowns)
- * @returns {Promise<Array<string>>} Array mit Abteilungsnamen
- */
 export const getDepartmentNames = async () => {
   try {
     const departments = await getAllDepartments();

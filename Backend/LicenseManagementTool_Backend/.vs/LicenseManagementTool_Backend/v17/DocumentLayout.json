@@ -3,44 +3,80 @@
   "WorkspaceRootPath": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\controllers\\licensescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\controllers\\licensescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\models\\license.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\models\\license.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\services\\licensedocumentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\services\\licensedocumentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\dtos\\licensedocumentdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\dtos\\licensedocumentdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\controllers\\licensedocumentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\controllers\\licensedocumentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\repositories\\licensedocumentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\repositories\\licensedocumentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\models\\licensedocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\models\\licensedocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\repositories\\licenserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\repositories\\licenserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\controllers\\licensescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\controllers\\licensescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\dtos\\licensedtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\dtos\\licensedtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\dtos\\userdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\dtos\\userdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -55,24 +91,12 @@
       "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\services\\licenseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\repositories\\licenserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\repositories\\licenserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\repositories\\departmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\repositories\\departmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\models\\licensedocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\models\\licensedocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\dtos\\roledtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -85,14 +109,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\services\\roleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\services\\roleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\dtos\\userdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|solutionrelative:licensemanagementtool_api\\dtos\\userdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FB3D3BE4-C178-43B4-AC1C-39345AF9E946}|LicenseManagementTool_API\\LicenseManagementTool_API.csproj|c:\\users\\kingl\\htl\\lizenzverwaltungstool\\backend\\licensemanagementtool_backend\\licensemanagementtool_api\\dtos\\authdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -157,16 +173,8 @@
           "SelectedChildIndex": 7,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 9,
               "Title": "RoleController.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\RoleController.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Controllers\\RoleController.cs",
@@ -178,69 +186,57 @@
               "IsPinned": true
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Services\\AuthService.cs",
-              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Services\\AuthService.cs",
-              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Services\\AuthService.cs",
-              "RelativeToolTip": "LicenseManagementTool_API\\Services\\AuthService.cs",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAAABsAAABRAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "LicenseDocumentDtos.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\DTOs\\LicenseDocumentDtos.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\DTOs\\LicenseDocumentDtos.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\DTOs\\LicenseDocumentDtos.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\DTOs\\LicenseDocumentDtos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-04T10:17:31.311Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-27T10:21:29.663Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAmwJAAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T15:19:12.494Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "LicenseManagementTool_API\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAA4AAAA2AAAAAAAAAA==",
+              "Title": "License.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Models\\License.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Models\\License.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Models\\License.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\Models\\License.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-04T10:42:41.128Z",
+              "WhenOpened": "2025-12-04T21:07:36.613Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\appsettings.json",
-              "RelativeDocumentMoniker": "LicenseManagementTool_API\\appsettings.json",
-              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\appsettings.json",
-              "RelativeToolTip": "LicenseManagementTool_API\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-12-18T17:17:52.568Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "LicenseDtos.cs",
-              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\DTOs\\LicenseDtos.cs",
-              "RelativeDocumentMoniker": "LicenseManagementTool_API\\DTOs\\LicenseDtos.cs",
-              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\DTOs\\LicenseDtos.cs",
-              "RelativeToolTip": "LicenseManagementTool_API\\DTOs\\LicenseDtos.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAxAAAAAAAAAA==",
+              "DocumentIndex": 11,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Services\\UserService.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\Services\\UserService.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAmwHAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T21:35:17.926Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LicensesController.cs",
-              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\LicensesController.cs",
-              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Controllers\\LicensesController.cs",
-              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\LicensesController.cs",
-              "RelativeToolTip": "LicenseManagementTool_API\\Controllers\\LicensesController.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAGIAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T17:22:13.409Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-20T13:10:16.143Z"
             },
             {
               "$type": "Document",
@@ -250,14 +246,146 @@
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Program.cs",
               "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Program.cs",
               "RelativeToolTip": "LicenseManagementTool_API\\Program.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAUwEAAAABRAAAAAAAAAA==",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAmwHUAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T16:40:17.7Z",
+              "WhenOpened": "2025-12-04T16:40:17.7Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAA0AAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T21:19:09.069Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "LicenseDocumentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Repositories\\LicenseDocumentRepository.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Repositories\\LicenseDocumentRepository.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Repositories\\LicenseDocumentRepository.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\Repositories\\LicenseDocumentRepository.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-27T10:23:47Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LicenseDocumentService.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Services\\LicenseDocumentService.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Services\\LicenseDocumentService.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Services\\LicenseDocumentService.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\Services\\LicenseDocumentService.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAmwCkAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-27T10:26:34.637Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LicenseDocumentsController.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\LicenseDocumentsController.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Controllers\\LicenseDocumentsController.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\LicenseDocumentsController.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\Controllers\\LicenseDocumentsController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAIoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-27T10:27:51.015Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UserDtos.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\DTOs\\UserDtos.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\DTOs\\UserDtos.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\DTOs\\UserDtos.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\DTOs\\UserDtos.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAmwD4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T14:33:11.502Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LicenseDocument.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Models\\LicenseDocument.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Models\\LicenseDocument.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Models\\LicenseDocument.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\Models\\LicenseDocument.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAmwB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T21:32:15.77Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "LicenseRepository.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Repositories\\LicenseRepository.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Repositories\\LicenseRepository.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Repositories\\LicenseRepository.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\Repositories\\LicenseRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T17:08:35.891Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "LicensesController.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\LicensesController.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Controllers\\LicensesController.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\LicensesController.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\Controllers\\LicensesController.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAANcAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T17:22:13.409Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "LicenseDtos.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\DTOs\\LicenseDtos.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\DTOs\\LicenseDtos.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\DTOs\\LicenseDtos.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\DTOs\\LicenseDtos.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAmwHMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T21:35:17.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAA4AAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T10:42:41.128Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Services\\AuthService.cs",
+              "RelativeToolTip": "LicenseManagementTool_API\\Services\\AuthService.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAABsAAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T10:17:31.311Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Models\\User.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Models\\User.cs",
@@ -265,77 +393,23 @@
               "RelativeToolTip": "LicenseManagementTool_API\\Models\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T21:17:54.174Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-04T21:17:54.174Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Controllers\\UsersController.cs",
-              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "LicenseManagementTool_API\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAAC4AAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T15:19:12.494Z",
-              "EditorCaption": ""
+              "DocumentIndex": 16,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\appsettings.json",
+              "RelativeDocumentMoniker": "LicenseManagementTool_API\\appsettings.json",
+              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\appsettings.json",
+              "RelativeToolTip": "LicenseManagementTool_API\\appsettings.json",
+              "ViewState": "AgIAAAQAAAAAAAAAAADwvw8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-18T17:17:52.568Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "License.cs",
-              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Models\\License.cs",
-              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Models\\License.cs",
-              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Models\\License.cs",
-              "RelativeToolTip": "LicenseManagementTool_API\\Models\\License.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAuwC0AAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T21:07:36.613Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "LicenseManagementTool_API\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAA0AAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T21:19:09.069Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "LicenseRepository.cs",
-              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Repositories\\LicenseRepository.cs",
-              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Repositories\\LicenseRepository.cs",
-              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Repositories\\LicenseRepository.cs",
-              "RelativeToolTip": "LicenseManagementTool_API\\Repositories\\LicenseRepository.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABsAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T17:08:35.891Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Services\\UserService.cs",
-              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Services\\UserService.cs",
-              "RelativeToolTip": "LicenseManagementTool_API\\Services\\UserService.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAFgAAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T13:10:16.143Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 19,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Repositories\\UserRepository.cs",
@@ -343,12 +417,11 @@
               "RelativeToolTip": "LicenseManagementTool_API\\Repositories\\UserRepository.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAAACoAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T13:09:00.397Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-20T13:09:00.397Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 20,
               "Title": "RoleRepository.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Repositories\\RoleRepository.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Repositories\\RoleRepository.cs",
@@ -356,12 +429,11 @@
               "RelativeToolTip": "LicenseManagementTool_API\\Repositories\\RoleRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T17:47:12.409Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-20T17:47:12.409Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 21,
               "Title": "LicenseService.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Services\\LicenseService.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Services\\LicenseService.cs",
@@ -369,12 +441,11 @@
               "RelativeToolTip": "LicenseManagementTool_API\\Services\\LicenseService.cs",
               "ViewState": "AgIAADkAAAAAAAAAAAAAAIoAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T17:18:52.259Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-18T17:18:52.259Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 22,
               "Title": "DepartmentRepository.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Repositories\\DepartmentRepository.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Repositories\\DepartmentRepository.cs",
@@ -382,12 +453,11 @@
               "RelativeToolTip": "LicenseManagementTool_API\\Repositories\\DepartmentRepository.cs",
               "ViewState": "AgIAADMAAAAAAAAAAAAAADwAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T15:55:36.957Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-20T15:55:36.957Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 23,
               "Title": "Department.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Models\\Department.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Models\\Department.cs",
@@ -395,25 +465,11 @@
               "RelativeToolTip": "LicenseManagementTool_API\\Models\\Department.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T21:18:20.556Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-04T21:18:20.556Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "LicenseDocument.cs",
-              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Models\\LicenseDocument.cs",
-              "RelativeDocumentMoniker": "LicenseManagementTool_API\\Models\\LicenseDocument.cs",
-              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Models\\LicenseDocument.cs",
-              "RelativeToolTip": "LicenseManagementTool_API\\Models\\LicenseDocument.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T21:32:15.77Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 24,
               "Title": "RoleDtos.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\DTOs\\RoleDtos.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\DTOs\\RoleDtos.cs",
@@ -421,12 +477,11 @@
               "RelativeToolTip": "LicenseManagementTool_API\\DTOs\\RoleDtos.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T17:46:31.595Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-20T17:46:31.595Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 25,
               "Title": "DepartmentDtos.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\DTOs\\DepartmentDtos.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\DTOs\\DepartmentDtos.cs",
@@ -434,12 +489,11 @@
               "RelativeToolTip": "LicenseManagementTool_API\\DTOs\\DepartmentDtos.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T15:47:58.231Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-20T15:47:58.231Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 26,
               "Title": "RoleService.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Services\\RoleService.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Services\\RoleService.cs",
@@ -447,24 +501,11 @@
               "RelativeToolTip": "LicenseManagementTool_API\\Services\\RoleService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T17:48:41.291Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-20T17:48:41.291Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "UserDtos.cs",
-              "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\DTOs\\UserDtos.cs",
-              "RelativeDocumentMoniker": "LicenseManagementTool_API\\DTOs\\UserDtos.cs",
-              "ToolTip": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\DTOs\\UserDtos.cs",
-              "RelativeToolTip": "LicenseManagementTool_API\\DTOs\\UserDtos.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-19T14:33:11.502Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 27,
               "Title": "AuthDtos.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\DTOs\\AuthDtos.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\DTOs\\AuthDtos.cs",
@@ -476,7 +517,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 28,
               "Title": "Role.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Models\\Role.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Models\\Role.cs",
@@ -488,7 +529,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 29,
               "Title": "DepartmentsController.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Controllers\\DepartmentsController.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Controllers\\DepartmentsController.cs",
@@ -500,7 +541,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 39,
               "Title": "20260206084748_InitialCreateWithJWT.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Migrations\\20260206084748_InitialCreateWithJWT.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Migrations\\20260206084748_InitialCreateWithJWT.cs",
@@ -512,7 +553,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 31,
               "Title": "20260206083549_InitialCreateWithJWT.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Migrations\\20260206083549_InitialCreateWithJWT.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Migrations\\20260206083549_InitialCreateWithJWT.cs",
@@ -524,7 +565,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 30,
               "Title": "20260206084347_InitialCreateWithJWT.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Migrations\\20260206084347_InitialCreateWithJWT.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Migrations\\20260206084347_InitialCreateWithJWT.cs",
@@ -536,7 +577,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 32,
               "Title": "DepartmentService.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Services\\DepartmentService.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Services\\DepartmentService.cs",
@@ -548,7 +589,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 33,
               "Title": "docker-compose.yml",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\docker-compose.yml",
               "RelativeDocumentMoniker": "docker-compose.yml",
@@ -560,7 +601,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 34,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Properties\\launchSettings.json",
@@ -572,7 +613,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 35,
               "Title": "20251220142415_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Migrations\\20251220142415_InitialCreate.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Migrations\\20251220142415_InitialCreate.cs",
@@ -583,7 +624,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 36,
               "Title": "20251220142153_SecondMigration.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Migrations\\20251220142153_SecondMigration.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Migrations\\20251220142153_SecondMigration.cs",
@@ -594,7 +635,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 38,
               "Title": "20251218195541_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Migrations\\20251218195541_InitialCreate.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Migrations\\20251218195541_InitialCreate.cs",
@@ -605,7 +646,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 37,
               "Title": "20251218195836_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\kingl\\HTL\\Lizenzverwaltungstool\\Backend\\LicenseManagementTool_Backend\\LicenseManagementTool_API\\Migrations\\20251218195836_InitialCreate.cs",
               "RelativeDocumentMoniker": "LicenseManagementTool_API\\Migrations\\20251218195836_InitialCreate.cs",
@@ -613,6 +654,10 @@
               "RelativeToolTip": "LicenseManagementTool_API\\Migrations\\20251218195836_InitialCreate.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-18T19:58:36.968Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }

@@ -10,10 +10,6 @@ const api = axios.create({
   timeout: 10000,
 });
 
-// ==========================================
-// TOKEN MANAGEMENT
-// ==========================================
-
 //Saves Token in localStorage
 const setToken = (token) => {
   localStorage.setItem('token', token);
@@ -52,16 +48,6 @@ const isAuthenticated = () => {
   return token !== null && user !== null;
 };
 
-// ==========================================
-// API CALLS
-// ==========================================
-
-/**
- * Login - Gibt Token und User zurück
- * @param {string} email 
- * @param {string} password 
- * @returns {Promise<Object>} { token, user }
- */
 export const login = async (email, password) => {
   try {
     console.log('Attempting login for:', email);
@@ -119,9 +105,6 @@ export const isEditor = () => {
   return hasRole('Editor') || hasRole('Admin'); // Admin kann auch editieren
 };
 
-// ==========================================
-// AXIOS INTERCEPTOR - Token automatically added to headers, and auto-logout on 401
-// ==========================================
 
 // Request Interceptor - Add token to headers if exists
 api.interceptors.request.use(

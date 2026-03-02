@@ -45,19 +45,19 @@ const Sidebar = () => {
       roles: ['Admin', 'Editor', 'Viewer'] // Alle dürfen Dashboard sehen
     },
     { 
-      text: 'Lizenzen', 
+      text: 'Licenses', 
       icon: <LicenseIcon />, 
       path: '/licenses',
       roles: ['Admin', 'Editor', 'Viewer'] // Alle dürfen Lizenzen sehen
     },
     { 
-      text: 'Benutzer', 
+      text: 'User', 
       icon: <PeopleIcon />, 
       path: '/users',
       roles: ['Admin', 'Editor'] // Nur Admin und Editor dürfen Benutzer verwalten
     },
     { 
-      text: 'Einstellungen', 
+      text: 'Settings', 
       icon: <SettingsIcon />, 
       path: '/settings',
       roles: ['Admin'] // Nur Admin darf Einstellungen sehen

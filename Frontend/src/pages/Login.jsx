@@ -58,7 +58,6 @@ const Login = ({ onLogin }) => {
     }
 
     try {
-      // Echter API Login!
       const { token, user } = await authService.login(
         credentials.email, 
         credentials.password

@@ -1,5 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import userService from '../services/userService';
+import authService from '../services/authService';
+import { useFilters } from '../context/FilterContext';
 import '../stylesheets/Users.css';
 
 // Icons als SVG-Komponenten
@@ -59,37 +61,22 @@ const PersonIcon = () => (
 );
 
 const Users = () => {
+  const { departmentFilters, roles } = useFilters();
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterRole, setFilterRole] = useState('Alle Rollen');
-  const [filterDepartment, setFilterDepartment] = useState('Alle Abteilungen');
+  const [filterRole, setFilterRole] = useState('All Roles');
+  const [filterDepartment, setFilterDepartment] = useState('All Departments');
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
-
-  // State für Daten vom Service
   const [users, setUsers] = useState([]);
-  const [filterOptions, setFilterOptions] = useState({
-    roles: [],
-    departments: [],
-    roleFilters: ['Alle Rollen'],
-    departmentFilters: ['Alle Abteilungen']
-  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Lade Benutzer beim Mount
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchUsers = async () => {
       try {
         setLoading(true);
-        setError(null);
-        
-        const [usersData, filterOptionsData] = await Promise.all([
-          userService.getAllUsers(),
-          userService.getFilterOptions()
-        ]);
-        
-        setUsers(usersData);
-        setFilterOptions(filterOptionsData);
+        const data = await userService.getAllUsers();
+        setUsers(data);
       } catch (err) {
         console.error('Fehler beim Laden der Benutzer:', err);
         setError('Fehler beim Laden der Benutzer. Bitte versuchen Sie es erneut.');
@@ -98,12 +85,14 @@ const Users = () => {
       }
     };
 
-    fetchData();
+    fetchUsers();
   }, []);
 
   const [newUser, setNewUser] = useState({
     name: '',
     email: '',
+    password: '',
+    confirmPassword: '',
     role: 'Viewer',
     department: ''
   });
@@ -112,17 +101,60 @@ const Users = () => {
     id: '',
     name: '',
     email: '',
+    password: '',
+    confirmPassword: '',
     role: 'Viewer',
     department: ''
   });
 
+  const convertRoleForService = (role) => {
+    return role === 'Licenseuser' ? 'Lizenzuser' : role;
+  };
+
+  const validatePassword = (isEdit = false) => {
+    if (!isEdit) {
+      if (!newUser.password || newUser.password.length < 6) {
+        alert('Passwort muss mindestens 6 Zeichen haben');
+        return false;
+      }
+      if (newUser.password !== newUser.confirmPassword) {
+        alert('Passwörter stimmen nicht überein');
+        return false;
+      }
+      return true;
+    }
+    
+    if (editUser.password) {
+      if (editUser.password.length < 6) {
+        alert('Passwort muss mindestens 6 Zeichen haben');
+        return false;
+      }
+      if (editUser.password !== editUser.confirmPassword) {
+        alert('Passwörter stimmen nicht überein');
+        return false;
+      }
+    }
+    
+    return true;
+  };
+
   const handleAddUser = async () => {
+    if (!validatePassword(false)) {
+      return;
+    }
+
     try {
-      const createdUser = await userService.createUser(newUser);
+      const userToCreate = {
+        ...newUser,
+        role: convertRoleForService(newUser.role)
+      };
+      const createdUser = await userService.createUser(userToCreate);
       setUsers(prev => [...prev, createdUser]);
       setNewUser({
         name: '',
         email: '',
+        password: '',
+        confirmPassword: '',
         role: 'Viewer',
         department: ''
       });
@@ -138,6 +170,8 @@ const Users = () => {
       id: user.id,
       name: user.name,
       email: user.email,
+      password: '',
+      confirmPassword: '',
       role: user.role,
       department: user.department
     });
@@ -145,8 +179,22 @@ const Users = () => {
   };
 
   const handleUpdateUser = async () => {
+    if (!validatePassword(true)) {
+      return;
+    }
+
     try {
-      const updatedUser = await userService.updateUser(editUser.id, editUser);
+      const userToUpdate = {
+        ...editUser,
+        role: convertRoleForService(editUser.role)
+      };
+
+      if (!editUser.password) {
+        delete userToUpdate.password;
+        delete userToUpdate.confirmPassword;
+      }
+
+      const updatedUser = await userService.updateUser(editUser.id, userToUpdate);
       if (updatedUser) {
         setUsers(prev => prev.map(u => u.id === editUser.id ? updatedUser : u));
         setEditDialogOpen(false);
@@ -158,6 +206,12 @@ const Users = () => {
   };
 
   const handleDeleteUser = async (id) => {
+    const currentUser = authService.getCurrentUser();
+    if (currentUser && parseInt(id) === parseInt(currentUser.id)) {
+      alert('Sie können sich nicht selbst löschen!');
+      return;
+    }
+
     if (!window.confirm('Möchten Sie diesen Benutzer wirklich löschen?')) {
       return;
     }
@@ -181,7 +235,7 @@ const Users = () => {
         return 'chip-primary';
       case 'Viewer':
         return 'chip-default';
-      case 'Lizenzuser':
+      case 'Licenseuser':
         return 'chip-success';
       default:
         return 'chip-default';
@@ -196,7 +250,7 @@ const Users = () => {
         return <EditorIcon />;
       case 'Viewer':
         return <ViewerIcon />;
-      case 'Lizenzuser':
+      case 'Licenseuser':
         return <PersonIcon />;
       default:
         return null;
@@ -211,14 +265,13 @@ const Users = () => {
         return 'role-card-primary';
       case 'Viewer':
         return 'role-card-default';
-      case 'Lizenzuser':
+      case 'Licenseuser':
         return 'role-card-success';
       default:
         return 'role-card-default';
     }
   };
 
-  // Filtering and Search Logic
   const filteredUsers = useMemo(() => {
     return users.filter(user => {
       const searchLower = searchTerm.toLowerCase().trim();
@@ -229,10 +282,10 @@ const Users = () => {
         user.role.toLowerCase().includes(searchLower) ||
         user.id.toLowerCase().includes(searchLower);
 
-      const matchesRole = filterRole === 'Alle Rollen' || 
+      const matchesRole = filterRole === 'All Roles' || 
         user.role === filterRole;
 
-      const matchesDepartment = filterDepartment === 'Alle Abteilungen' || 
+      const matchesDepartment = filterDepartment === 'All Departments' || 
         user.department === filterDepartment;
 
       return matchesSearch && matchesRole && matchesDepartment;
@@ -241,43 +294,41 @@ const Users = () => {
 
   const resetFilters = () => {
     setSearchTerm('');
-    setFilterRole('Alle Rollen');
-    setFilterDepartment('Alle Abteilungen');
+    setFilterRole('All Roles');
+    setFilterDepartment('All Departments');
   };
 
   const hasActiveFilters = searchTerm !== '' || 
-    filterRole !== 'Alle Rollen' || 
-    filterDepartment !== 'Alle Abteilungen';
+    filterRole !== 'All Roles' || 
+    filterDepartment !== 'All Departments';
 
   const getUserCountByRole = (roleValue) => {
     return users.filter(user => user.role === roleValue).length;
   };
 
-  // Loading State
   if (loading) {
     return (
       <div className="users">
         <div className="users-header">
-          <h1 className="users-title">Benutzerverwaltung</h1>
+          <h1 className="users-title">User Management</h1>
         </div>
         <div className="paper" style={{ padding: '40px', textAlign: 'center' }}>
-          <p>Laden...</p>
+          <p>Loading...</p>
         </div>
       </div>
     );
   }
 
-  // Error State
   if (error) {
     return (
       <div className="users">
         <div className="users-header">
-          <h1 className="users-title">Benutzerverwaltung</h1>
+          <h1 className="users-title">User Management</h1>
         </div>
         <div className="paper" style={{ padding: '40px', textAlign: 'center', color: '#d32f2f' }}>
           <p>{error}</p>
           <button className="btn btn-primary" onClick={() => window.location.reload()}>
-            Erneut versuchen
+            Try Again
           </button>
         </div>
       </div>
@@ -286,48 +337,46 @@ const Users = () => {
 
   return (
     <div className="users">
-      {/* Header */}
       <div className="users-header">
         <div>
-          <h1 className="users-title">Benutzerverwaltung</h1>
-          <p className="users-subtitle">Verwalten Sie Benutzer und deren Berechtigungen</p>
+          <h1 className="users-title">User Management</h1>
+          <p className="users-subtitle">Manage users and their permissions</p>
         </div>
         <button className="btn btn-primary" onClick={() => setAddDialogOpen(true)}>
           <AddIcon />
-          Neuer Benutzer
+          New User
         </button>
       </div>
 
-      {/* Such- und Filter-Leiste */}
       <div className="paper filter-bar">
         <div className="filter-grid-users">
           <div className="search-field">
             <span className="search-icon"><SearchIcon /></span>
             <input
               type="text"
-              placeholder="Suche nach Name, E-Mail, Abteilung oder Rolle..."
+              placeholder="Search by name, email, department or role..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
           <div className="filter-field">
-            <label>Rolle</label>
+            <label>Role</label>
             <select
               value={filterRole}
               onChange={(e) => setFilterRole(e.target.value)}
             >
-              {filterOptions.roleFilters.map(role => (
+              {['All Roles', ...roles.map(r => r.value)].map(role => (
                 <option key={role} value={role}>{role}</option>
               ))}
             </select>
           </div>
           <div className="filter-field">
-            <label>Abteilung</label>
+            <label>Department</label>
             <select
               value={filterDepartment}
               onChange={(e) => setFilterDepartment(e.target.value)}
             >
-              {filterOptions.departmentFilters.map(dept => (
+              {departmentFilters.map(dept => (
                 <option key={dept} value={dept}>{dept}</option>
               ))}
             </select>
@@ -335,23 +384,22 @@ const Users = () => {
         </div>
         <div className="filter-footer">
           <p className="filter-info">
-            {filteredUsers.length} von {users.length} Benutzer angezeigt
+            {filteredUsers.length} of {users.length} users shown
             {hasActiveFilters && (
               <button className="btn-reset" onClick={resetFilters}>
-                Filter zurücksetzen
+                Reset filters
               </button>
             )}
           </p>
         </div>
       </div>
 
-      {/* Rollen-Übersicht Karten */}
       <div className="roles-grid">
-        {filterOptions.roles.map((role) => (
+        {roles.map((role) => (
           <div 
             key={role.value} 
             className={`role-card ${getRoleCardClass(role.value)} ${filterRole === role.value ? 'active' : ''}`}
-            onClick={() => setFilterRole(filterRole === role.value ? 'Alle Rollen' : role.value)}
+            onClick={() => setFilterRole(filterRole === role.value ? 'All Roles' : role.value)}
           >
             <div className="role-card-header">
               <div className={`role-icon-wrapper ${getRoleCardClass(role.value)}`}>
@@ -367,17 +415,16 @@ const Users = () => {
         ))}
       </div>
 
-      {/* Benutzer Tabelle */}
       <div className="paper table-container">
         <table className="users-table">
           <thead>
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>E-Mail</th>
-              <th>Rolle</th>
-              <th>Abteilung</th>
-              <th>Aktionen</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Department</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -405,14 +452,14 @@ const Users = () => {
                       <button 
                         className="icon-btn icon-btn-primary"
                         onClick={() => handleEditClick(user)}
-                        title="Bearbeiten"
+                        title="Edit"
                       >
                         <EditIcon />
                       </button>
                       <button 
                         className="icon-btn icon-btn-error"
                         onClick={() => handleDeleteUser(user.id)}
-                        title="Löschen"
+                        title="Delete"
                       >
                         <DeleteIcon />
                       </button>
@@ -425,11 +472,11 @@ const Users = () => {
                 <td colSpan="6" className="empty-state">
                   <div className="empty-state-content">
                     <SearchIcon />
-                    <p>Keine Benutzer gefunden</p>
-                    <span>Versuchen Sie andere Suchbegriffe oder Filter</span>
+                    <p>No users found</p>
+                    <span>Try different search terms or filters</span>
                     {hasActiveFilters && (
                       <button className="btn btn-outlined" onClick={resetFilters}>
-                        Filter zurücksetzen
+                        Reset filters
                       </button>
                     )}
                   </div>
@@ -440,12 +487,12 @@ const Users = () => {
         </table>
       </div>
 
-      {/* Neuer Benutzer Dialog */}
+      {/* New User Dialog */}
       {addDialogOpen && (
         <div className="dialog-overlay" onClick={() => setAddDialogOpen(false)}>
           <div className="dialog" onClick={(e) => e.stopPropagation()}>
             <div className="dialog-header">
-              <h2>Neuer Benutzer hinzufügen</h2>
+              <h2>Add New User</h2>
               <button className="icon-btn" onClick={() => setAddDialogOpen(false)}>
                 <CloseIcon />
               </button>
@@ -455,44 +502,62 @@ const Users = () => {
                 <label>Name *</label>
                 <input
                   type="text"
-                  placeholder="z.B. Max Mustermann"
+                  placeholder="e.g. John Doe"
                   value={newUser.name}
                   onChange={(e) => setNewUser({...newUser, name: e.target.value})}
                 />
               </div>
               <div className="form-group">
-                <label>E-Mail *</label>
+                <label>Email *</label>
                 <input
                   type="email"
-                  placeholder="z.B. max.mustermann@example.com"
+                  placeholder="e.g. john.doe@example.com"
                   value={newUser.email}
                   onChange={(e) => setNewUser({...newUser, email: e.target.value})}
                 />
               </div>
               <div className="form-group">
-                <label>Rolle *</label>
+                <label>Password *</label>
+                <input
+                  type="password"
+                  placeholder="At least 6 characters"
+                  value={newUser.password}
+                  onChange={(e) => setNewUser({...newUser, password: e.target.value})}
+                />
+              </div>
+              <div className="form-group">
+                <label>Confirm Password *</label>
+                <input
+                  type="password"
+                  placeholder="Repeat password"
+                  value={newUser.confirmPassword}
+                  onChange={(e) => setNewUser({...newUser, confirmPassword: e.target.value})}
+                />
+              </div>
+              <div className="form-group">
+                <label>Role *</label>
                 <select
                   value={newUser.role}
                   onChange={(e) => setNewUser({...newUser, role: e.target.value})}
                 >
-                  {filterOptions.roles.map((role) => (
+                  {roles.map((role) => (
                     <option key={role.value} value={role.value}>
                       {role.label}
                     </option>
                   ))}
                 </select>
                 <span className="form-hint">
-                  {filterOptions.roles.find(r => r.value === newUser.role)?.label.split(' - ')[1] || ''}
+                  {roles.find(r => r.value === newUser.role)?.label.split(' - ')[1] || ''}
                 </span>
               </div>
               <div className="form-group">
-                <label>Abteilung *</label>
+                <label>Department *</label>
                 <select
                   value={newUser.department}
                   onChange={(e) => setNewUser({...newUser, department: e.target.value})}
                 >
-                  <option value="">Auswählen...</option>
-                  {filterOptions.departments.map((dept) => (
+                  <option value="">Select...</option>
+                  {departmentFilters.filter(d => d !== 'All Departments').map(dept => (
                     <option key={dept} value={dept}>{dept}</option>
                   ))}
                 </select>
@@ -500,22 +565,22 @@ const Users = () => {
             </div>
             <div className="dialog-actions">
               <button className="btn btn-text" onClick={() => setAddDialogOpen(false)}>
-                Abbrechen
+                Cancel
               </button>
               <button className="btn btn-primary" onClick={handleAddUser}>
-                Hinzufügen
+                Add
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Benutzer bearbeiten Dialog */}
+      {/* Edit User Dialog */}
       {editDialogOpen && (
         <div className="dialog-overlay" onClick={() => setEditDialogOpen(false)}>
           <div className="dialog" onClick={(e) => e.stopPropagation()}>
             <div className="dialog-header">
-              <h2>Benutzer bearbeiten</h2>
+              <h2>Edit User</h2>
               <button className="icon-btn" onClick={() => setEditDialogOpen(false)}>
                 <CloseIcon />
               </button>
@@ -534,44 +599,73 @@ const Users = () => {
                 <label>Name *</label>
                 <input
                   type="text"
-                  placeholder="z.B. Max Mustermann"
+                  placeholder="e.g. John Doe"
                   value={editUser.name}
                   onChange={(e) => setEditUser({...editUser, name: e.target.value})}
                 />
               </div>
               <div className="form-group">
-                <label>E-Mail *</label>
+                <label>Email *</label>
                 <input
                   type="email"
-                  placeholder="z.B. max.mustermann@example.com"
+                  placeholder="e.g. john.doe@example.com"
                   value={editUser.email}
                   onChange={(e) => setEditUser({...editUser, email: e.target.value})}
                 />
               </div>
+              <div style={{ 
+                background: '#e3f2fd', 
+                borderLeft: '4px solid #2196f3', 
+                padding: '12px 16px', 
+                marginBottom: '16px', 
+                borderRadius: '4px',
+                fontSize: '14px'
+              }}>
+                <strong>Change password:</strong><br/>
+                Leave fields empty to keep the password unchanged.
+              </div>
               <div className="form-group">
-                <label>Rolle *</label>
+                <label>New Password</label>
+                <input
+                  type="password"
+                  placeholder="Fill only to change"
+                  value={editUser.password}
+                  onChange={(e) => setEditUser({...editUser, password: e.target.value})}
+                />
+              </div>
+              <div className="form-group">
+                <label>Confirm Password</label>
+                <input
+                  type="password"
+                  placeholder="Repeat password"
+                  value={editUser.confirmPassword}
+                  onChange={(e) => setEditUser({...editUser, confirmPassword: e.target.value})}
+                />
+              </div>
+              <div className="form-group">
+                <label>Role *</label>
                 <select
                   value={editUser.role}
                   onChange={(e) => setEditUser({...editUser, role: e.target.value})}
                 >
-                  {filterOptions.roles.map((role) => (
+                  {roles.map((role) => (
                     <option key={role.value} value={role.value}>
                       {role.label}
                     </option>
                   ))}
                 </select>
                 <span className="form-hint">
-                  {filterOptions.roles.find(r => r.value === editUser.role)?.label.split(' - ')[1] || ''}
+                  {roles.find(r => r.value === editUser.role)?.label.split(' - ')[1] || ''}
                 </span>
               </div>
               <div className="form-group">
-                <label>Abteilung *</label>
+                <label>Department *</label>
                 <select
                   value={editUser.department}
                   onChange={(e) => setEditUser({...editUser, department: e.target.value})}
                 >
-                  <option value="">Auswählen...</option>
-                  {filterOptions.departments.map((dept) => (
+                  <option value="">Select...</option>
+                  {departmentFilters.filter(d => d !== 'All Departments').map(dept => (
                     <option key={dept} value={dept}>{dept}</option>
                   ))}
                 </select>
@@ -579,10 +673,10 @@ const Users = () => {
             </div>
             <div className="dialog-actions">
               <button className="btn btn-text" onClick={() => setEditDialogOpen(false)}>
-                Abbrechen
+                Cancel
               </button>
               <button className="btn btn-primary" onClick={handleUpdateUser}>
-                Speichern
+                Save
               </button>
             </div>
           </div>

@@ -1,16 +1,13 @@
-import axios from 'axios';
-import { authenticatedApi } from './authService'; // Import der Auth-API
+import { authenticatedApi } from './authService';
 
-// Verwende die authenticated API statt neue axios instance
 const api = authenticatedApi;
-
 
 export const getAllLicenses = async () => {
   try {
     const response = await api.get('/licenses');
     return mapLicensesFromApi(response.data);
   } catch (error) {
-    console.error('Fehler beim Laden der Lizenzen:', error);
+    console.error('Error loading licenses:', error);
     throw error;
   }
 };
@@ -23,7 +20,7 @@ export const getLicenseById = async (id) => {
     if (error.response?.status === 404) {
       return null;
     }
-    console.error('Fehler beim Laden der Lizenz:', error);
+    console.error('Error loading license:', error);
     throw error;
   }
 };
@@ -34,7 +31,7 @@ export const createLicense = async (licenseData) => {
     const response = await api.post('/licenses', apiData);
     return mapLicenseFromApi(response.data);
   } catch (error) {
-    console.error('Fehler beim Erstellen der Lizenz:', error);
+    console.error('Error creating license:', error);
     throw error;
   }
 };
@@ -48,7 +45,7 @@ export const updateLicense = async (id, licenseData) => {
     if (error.response?.status === 404) {
       return null;
     }
-    console.error('Fehler beim Aktualisieren der Lizenz:', error);
+    console.error('Error updating license:', error);
     throw error;
   }
 };
@@ -61,7 +58,7 @@ export const deleteLicense = async (id) => {
     if (error.response?.status === 404) {
       return false;
     }
-    console.error('Fehler beim Löschen der Lizenz:', error);
+    console.error('Error deleting license:', error);
     throw error;
   }
 };
@@ -71,22 +68,46 @@ export const searchLicenses = async (filterParams) => {
     const response = await api.post('/licenses/search', filterParams);
     return mapLicensesFromApi(response.data);
   } catch (error) {
-    console.error('Fehler beim Suchen der Lizenzen:', error);
+    console.error('Error searching licenses:', error);
     throw error;
   }
 };
 
-export const getFilterOptions = async () => {
-  return {
-    departments: ['Alle Abteilungen', 'IT', 'LIS', 'ITM'],
-    types: ['Alle Typen', 'Manual', 'Automatic', 'Subscription'],
-    statuses: ['Alle Status', 'Active', 'ExpiringSoon', 'Expired'],
-    renewalTypes: ['Normal', 'Subscription', 'Automatisch','Manuell']
-  };
+const fetchDepartments = async () => {
+  try {
+    const response = await authenticatedApi.get('/departments');
+    //Expected Format: [{ id: 1, name: 'IT' }, { id: 2, name: 'LIS' }, ...]
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching departments:', error);
+    return [];
+  }
 };
 
-//Mapping
+export const getFilterOptions = async () => {
+  try {
+    const departments = await fetchDepartments();
+    return {
+      departments, // Array of { id, name }
+      departmentFilters: ['All Departments', ...departments.map(d => d.name)],
+      types: ['All Types', 'Manual', 'Automatic', 'Subscription'],
+      statuses: ['All Statuses', 'Active', 'Expiring soon', 'Expired'],
+      renewalTypes: ['Normal', 'Subscription', 'Automatic', 'Manual']
+    };
+  } catch (error) {
+    console.error('Error loading filter options:', error);
+    // Fallback
+    return {
+      departments: [],
+      departmentFilters: ['All Departments'],
+      types: ['All Types', 'Manual', 'Automatic', 'Subscription'],
+      statuses: ['All Statuses', 'Active', 'Expiring soon', 'Expired'],
+      renewalTypes: ['Normal', 'Subscription', 'Automatic', 'Manual']
+    };
+  }
+};
 
+// Mapping functions
 const mapLicenseFromApi = (apiLicense) => {
   return {
     id: apiLicense.id?.toString() || '',
@@ -131,75 +152,52 @@ const mapLicenseToApi = (frontendLicense) => {
 
 const formatDateFromApi = (isoDate) => {
   if (!isoDate) return '';
-  
   const date = new Date(isoDate);
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
-  
   return `${day}.${month}.${year}`;
 };
 
 const formatDateToApi = (dateString) => {
   if (!dateString) return new Date().toISOString();
-  
-  // Format: DD.MM.YYYY oder YYYY-MM-DD
   if (dateString.includes('.')) {
     const [day, month, year] = dateString.split('.');
     return new Date(year, month - 1, day).toISOString();
   } else if (dateString.includes('-')) {
     return new Date(dateString).toISOString();
   }
-  
   return new Date(dateString).toISOString();
 };
 
 const mapStatusFromApi = (apiStatus) => {
   const statusMap = {
-    'Active': 'Aktiv',
-    'ExpiringSoon': 'Bald erneuern',
-    'Expired': 'Abgelaufen'
+    'Active': 'Active',
+    'ExpiringSoon': 'Expiring soon',
+    'Expired': 'Expired'
   };
-  
   return statusMap[apiStatus] || apiStatus;
 };
 
-/**
- * Mapped Frontend Status zu API Status
- */
-const mapStatusToApi = (frontendStatus) => {
-  const statusMap = {
-    'Aktiv': 'Active',
-    'Bald erneuern': 'ExpiringSoon',
-    'Abgelaufen': 'Expired'
-  };
-  
-  return statusMap[frontendStatus] || frontendStatus;
-};
-
-// Error Handler Helper
+// Error Handler Helper (optional, bleibt unverändert)
 export const handleApiError = (error) => {
   if (error.response) {
-    // Server hat mit Status Code geantwortet (4xx, 5xx)
     const status = error.response.status;
     const message = error.response.data?.message || error.message;
-    
     switch (status) {
       case 400:
-        return 'Ungültige Eingabe. Bitte überprüfen Sie Ihre Daten.';
+        return 'Invalid input. Please check your data.';
       case 404:
-        return 'Lizenz nicht gefunden.';
+        return 'License not found.';
       case 500:
-        return 'Serverfehler. Bitte versuchen Sie es später erneut.';
+        return 'Server error. Please try again later.';
       default:
-        return message || 'Ein Fehler ist aufgetreten.';
+        return message || 'An error occurred.';
     }
   } else if (error.request) {
-    // Request wurde gesendet, aber keine Antwort erhalten
-    return 'Keine Verbindung zum Server. Bitte überprüfen Sie Ihre Internetverbindung.';
+    return 'No connection to server. Please check your internet connection.';
   } else {
-    // Fehler beim Erstellen des Requests
-    return error.message || 'Ein unbekannter Fehler ist aufgetreten.';
+    return error.message || 'An unknown error occurred.';
   }
 };
 
