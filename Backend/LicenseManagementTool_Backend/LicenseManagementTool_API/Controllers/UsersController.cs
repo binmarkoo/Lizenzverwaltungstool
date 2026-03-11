@@ -23,7 +23,7 @@ namespace LicenseManagementTool_API.Controllers
         /// Gibt alle Benutzer zurück
         /// </summary>
         [HttpGet]
-        [Authorize(Roles = "Admin,Editor")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<List<UserResponseDto>>> GetAllUsers()
@@ -44,7 +44,7 @@ namespace LicenseManagementTool_API.Controllers
         /// Gibt einen spezifischen Benutzer anhand der ID zurück
         /// </summary>
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin,Editor")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -70,7 +70,7 @@ namespace LicenseManagementTool_API.Controllers
         /// Sucht einen Benutzer anhand der Email
         /// </summary>
         [HttpGet("email/{email}")]
-        [Authorize(Roles = "Admin,Editor")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]

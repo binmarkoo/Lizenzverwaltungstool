@@ -77,14 +77,14 @@ namespace LicenseManagementTool_API.Services
                 new Claim("DepartmentId", user.DepartmentId.ToString())
             };
 
-            // Secret Key aus appsettings.json
+            // Secret Key from appsettings.json
             var secretKey = _configuration["JwtSettings:Secret"]
                 ?? throw new InvalidOperationException("JWT Secret not configured");
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            // Token erstellen
+            // Create the Token
             var token = new JwtSecurityToken(
                 issuer: _configuration["JwtSettings:Issuer"],
                 audience: _configuration["JwtSettings:Audience"],

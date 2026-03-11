@@ -45,8 +45,10 @@ namespace LicenseManagementTool_API.Repositories
         public async Task<bool> DeleteAsync(int id)
         {
             var document = await _context.LicenseDocuments.FindAsync(id);
-            if (document == null) return false;
-
+            if (document == null)
+            {
+                return false;
+            }
             _context.LicenseDocuments.Remove(document);
             await _context.SaveChangesAsync();
             return true;

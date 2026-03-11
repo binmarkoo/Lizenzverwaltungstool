@@ -44,10 +44,9 @@ namespace LicenseManagementTool_API.Services
 
         public async Task<LicenseResponseDto> CreateLicenseAsync(CreateLicenseDto dto)
         {
-            // Ablaufdatum berechnen
+            // Calculate Expirationdate
             var expirationDate = dto.PurchaseDate.AddMonths(dto.LicenseDurationMonths);
 
-            // Status bestimmen
             var status = GetStatus(expirationDate);
 
             var license = new License
@@ -136,7 +135,7 @@ namespace LicenseManagementTool_API.Services
             return "Active";
         }
 
-        //Helper Entity zu DTO
+        //Helper Entity to DTO
         private LicenseResponseDto MapToDto(License license)
         {
             return new LicenseResponseDto

@@ -70,7 +70,7 @@ namespace LicenseManagementTool_API.Services
             if (user == null)
                 return null;
 
-            // Email-Check bei Änderung
+            // Email-Check
             if (dto.Email != null && dto.Email != user.Email)
             {
                 if (await _repository.EmailExistsAsync(dto.Email))

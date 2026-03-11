@@ -49,6 +49,7 @@ namespace LicenseManagementTool_API.Controllers
         /// <param name="id">Lizenz ID</param>
         /// <returns>Lizenz Details</returns>
         [HttpGet("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<LicenseResponseDto>> GetLicenseById(int id)
@@ -75,6 +76,7 @@ namespace LicenseManagementTool_API.Controllers
         /// <param name="filter">Filter-Parameter</param>
         /// <returns>Gefilterte Lizenzen</returns>
         [HttpPost("search")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<LicenseResponseDto>>> SearchLicenses(
             [FromBody] LicenseFilterDto filter)
@@ -97,7 +99,6 @@ namespace LicenseManagementTool_API.Controllers
         /// </summary>
         [HttpPost]
         [Authorize(Roles = "Admin,Editor")]
-
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
